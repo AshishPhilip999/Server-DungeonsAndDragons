@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+// Add name sapce Service
+
+message ClientRequest {
+    // RequestType reqType = 1   //(Include this)
+    bytes requestData = 2;
+}
+
+enum ServerResponseType {
+    CONNECTION_SUCCESS = 0;
+    CONNECTION_FAILURE = 1;
+    TILE_GENERATION = 2;
+}
+
+message ServerResponse {
+    ServerResponseType response = 1;
+    bytes responseData = 2;
+}

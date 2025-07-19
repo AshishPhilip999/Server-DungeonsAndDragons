@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package DnD.Player;
+
+option java_package = "DnD.Player";
+option java_outer_classname = "PlayerOuterClass";
+
+import "Terrain.proto";
+
+message Player {
+    float posX = 1;
+    float posY = 2;
+
+    int32 viewDistance = 3;
+
+    float currentTerrainPosX = 4;
+    float currentTerrainPosY = 5;
+
+    repeated Dnd.Terrain.Terrain terrainData = 6;
+}

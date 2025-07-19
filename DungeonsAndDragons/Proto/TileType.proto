@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package Dnd.Terrain;
+
+option java_package = "DnD.Terrain";
+option java_outer_classname = "TileTypeOuterClass";
+
+enum TileType {
+    STANDARD_GRASS = 0;
+    LIGHT_PATCH_GRASS = 1;
+    DARK_PATCH_GRASS = 2;
+    STANDARD_TREE = 3;
+    ROCK = 4;
+    GIANT_ROCK = 5;
+}

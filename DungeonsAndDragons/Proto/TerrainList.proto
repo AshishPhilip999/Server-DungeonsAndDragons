@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package DnD.Terrain;
+
+option java_package = "DnD.Terrain";
+option java_outer_classname = "TerrainListOuterClass";
+
+import "Terrain.proto";
+
+message TerrainList {
+    repeated Dnd.Terrain.Terrain terrains = 1;
+}

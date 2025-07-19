@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package Dnd.Terrain;
+
+option java_package = "DnD.Terrain";
+option java_outer_classname = "TerrainOuterClass";
+
+import "Tile.proto";
+
+message Terrain {
+    float posX = 1;
+    float posY = 2;
+
+    int32 terrainSize = 3;
+
+    repeated Tile tileData = 4;
+}
