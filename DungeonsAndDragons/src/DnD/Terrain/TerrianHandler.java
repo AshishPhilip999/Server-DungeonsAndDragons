@@ -17,6 +17,7 @@ public class TerrianHandler {
 
     public boolean needToGetTerrain() {
 
+        // adding comment
         return false;
     }
 
