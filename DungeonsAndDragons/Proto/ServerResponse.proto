@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package DnD.service;
+
+option java_package = "DnD.service";
+option java_outer_classname = "ServerResponseOuterClass";
+
+enum ServerResponseType {
+    CONNECTION_SUCCESS = 0;
+    CONNECTION_FAILURE = 1;
+    TILE_GENERATION_RESPONSE = 2;
+    PLAYER_UPDATE = 3;
+}
+
+message ServerResponse {
+    ServerResponseType response = 1;
+    bytes responseData = 2;
+}

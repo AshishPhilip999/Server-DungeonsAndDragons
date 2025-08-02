@@ -38,4 +38,8 @@ public class ServiceHandler {
         Client client = clientConnections.get(currentUUID);
         SuccessfulService.handleSuccessfullTerrainGeneration(terrain, client);
     }
+
+    public static void handleClientUpdateRequest(Client client) throws Exception {
+        SuccessfulService.handleSuccessfullPlayerUpdate(client);
+    }
 }
