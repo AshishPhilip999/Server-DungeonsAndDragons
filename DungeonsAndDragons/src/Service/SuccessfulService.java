@@ -35,4 +35,14 @@ public class SuccessfulService {
 
         ServerResponder.sendResponse(serverResponse, clientData);
     }
+
+    public static void handleSuccessfullPlayerUpdate(Client client) {
+        byte[] clientData = client.toByteArray();
+        ServerResponse serverResponse = ServerResponse.newBuilder()
+                                        .setResponse(ServerResponseType.PLAYER_UPDATE)
+                                        .setResponseData(ByteString.copyFrom(clientData))
+                                        .build();
+
+        ServerResponder.sendResponseToAllOtherClients(serverResponse, client);
+     }
 }

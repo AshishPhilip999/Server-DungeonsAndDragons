@@ -26,50 +26,49 @@ public class ServerListener {
 
         System.out.println("Server is running");
         while (true) {
-            // byte[] requestData = new byte[1024 * 5];
-            // DatagramPacket requestPacket = new DatagramPacket(requestData,
-            // requestData.length);
-
-            // serverSocket.receive(requestPacket);
-
-            // byte[] croppedData = Arrays.copyOf(requestPacket.getData(),
-            // requestPacket.getLength());
             Socket clientSocket = serverSocket.accept();
             System.out.println("[Server Listener] Recieved request");
 
-            // ClientRequest clientRequest = ClientRequest.parseFrom(croppedData);
-            handleRequest(clientSocket);
+            // Handle client in a new thread
+            new Thread(() -> {
+                try {
+                    handleRequest(clientSocket);
+                } catch (Exception e) {
+                    System.err.println("Error handling client: " + e.getMessage());
+                    e.printStackTrace();
+                }
+            }).start();
         }
     }
 
-public static void handleRequest(Socket socket) throws Exception {
-    InputStream input = socket.getInputStream();
-    OutputStream output = socket.getOutputStream();
+    public static void handleRequest(Socket socket) throws Exception {
+        InputStream input = socket.getInputStream();
+        OutputStream output = socket.getOutputStream();
 
-    while (true) {
-        // Read 4-byte length
-        byte[] lengthBytes = input.readNBytes(4);
-        if (lengthBytes.length < 4) {
-            System.out.println("[Server] Client disconnected");
-            break;
+        while (true) {
+            // Read 4-byte length
+            byte[] lengthBytes = input.readNBytes(4);
+            if (lengthBytes.length < 4) {
+                System.out.println("[Server] Client disconnected");
+                break;
+            }
+
+            int length = ByteBuffer.wrap(lengthBytes).order(ByteOrder.LITTLE_ENDIAN).getInt();
+
+            // Now read full message
+            byte[] messageBytes = input.readNBytes(length);
+            if (messageBytes.length < length) {
+                System.out.println("[Server] Incomplete message");
+                break;
+            }
+
+            ClientRequest clientRequest = ClientRequest.parseFrom(messageBytes);
+            handleClientRequest(output, clientRequest);
         }
-
-        int length = ByteBuffer.wrap(lengthBytes).order(ByteOrder.LITTLE_ENDIAN).getInt();
-
-        // Now read full message
-        byte[] messageBytes = input.readNBytes(length);
-        if (messageBytes.length < length) {
-            System.out.println("[Server] Incomplete message");
-            break;
-        }
-
-        ClientRequest clientRequest = ClientRequest.parseFrom(messageBytes);
-        handleClientRequest(output, clientRequest);
     }
-}
 
     public static void handleClientRequest(OutputStream clientStream, ClientRequest request) throws Exception {
-        ClientRequestType reqType = request.getRequestType();
+        ClientRequestType reqType = request.getReqType();
         switch (reqType) {
             case CLIENT_CONNECTION:
                 Client clientData = Client.parseFrom(request.getRequestData());
@@ -81,12 +80,18 @@ public static void handleRequest(Socket socket) throws Exception {
                 ServiceHandler.handleConnectionRequest(clientStream, clientData);
                 break;
 
-            case TILE_GENERATION_REQUEST:
+            case TILE_GENERATION:
                 System.out.println("[Server Listener] Received Tile generation request");
                 Client client = Client.parseFrom(request.getRequestData());
                 Player playerData = client.getPlayer();
                 ServiceHandler.handleTerrainGenerationRequest(playerData);
                 break;
+
+            case CLIENT_UPDATE:
+                System.out.println("[Server Listener] Received Client Update request");
+                Client clientUpdateData = Client.parseFrom(request.getRequestData());
+                ServiceHandler.handleClientUpdateRequest(clientUpdateData);
+
             default:
                 break;
         }

@@ -2,18 +2,18 @@ syntax = "proto3";
 
 // Add name sapce Service
 
+package DnD.service;
+
+option java_package = "DnD.service";
+option java_outer_classname = "ClientRequestOuterClass";
+
 message ClientRequest {
-    // RequestType reqType = 1   //(Include this)
+    ClientRequestType reqType = 1;
     bytes requestData = 2;
 }
 
-enum ServerResponseType {
-    CONNECTION_SUCCESS = 0;
-    CONNECTION_FAILURE = 1;
-    TILE_GENERATION = 2;
-}
-
-message ServerResponse {
-    ServerResponseType response = 1;
-    bytes responseData = 2;
+enum ClientRequestType {
+    CLIENT_CONNECTION = 0;
+    TILE_GENERATION = 1;
+    CLIENT_UPDATE = 2;
 }

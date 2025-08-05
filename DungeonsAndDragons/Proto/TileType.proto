@@ -12,4 +12,5 @@ enum TileType {
     STANDARD_TREE = 3;
     ROCK = 4;
     GIANT_ROCK = 5;
+    WATER_BODY = 6;
 }
