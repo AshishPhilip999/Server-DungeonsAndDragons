@@ -31,6 +31,10 @@ public final class ClientRequestOuterClass {
      * <code>CLIENT_UPDATE = 2;</code>
      */
     CLIENT_UPDATE(2),
+    /**
+     * <code>TILE_ITEM_UPDATE_REQUEST = 3;</code>
+     */
+    TILE_ITEM_UPDATE_REQUEST(3),
     UNRECOGNIZED(-1),
     ;
 
@@ -46,6 +50,10 @@ public final class ClientRequestOuterClass {
      * <code>CLIENT_UPDATE = 2;</code>
      */
     public static final int CLIENT_UPDATE_VALUE = 2;
+    /**
+     * <code>TILE_ITEM_UPDATE_REQUEST = 3;</code>
+     */
+    public static final int TILE_ITEM_UPDATE_REQUEST_VALUE = 3;
 
 
     public final int getNumber() {
@@ -75,6 +83,7 @@ public final class ClientRequestOuterClass {
         case 0: return CLIENT_CONNECTION;
         case 1: return TILE_GENERATION;
         case 2: return CLIENT_UPDATE;
+        case 3: return TILE_ITEM_UPDATE_REQUEST;
         default: return null;
       }
     }
@@ -132,18 +141,33 @@ public final class ClientRequestOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>.DnD.service.ClientRequestType reqType = 1;</code>
+     * <code>.DnD.service.Client client = 1;</code>
+     * @return Whether the client field is set.
+     */
+    boolean hasClient();
+    /**
+     * <code>.DnD.service.Client client = 1;</code>
+     * @return The client.
+     */
+    DnD.service.ClientOuterClass.Client getClient();
+    /**
+     * <code>.DnD.service.Client client = 1;</code>
+     */
+    DnD.service.ClientOuterClass.ClientOrBuilder getClientOrBuilder();
+
+    /**
+     * <code>.DnD.service.ClientRequestType reqType = 2;</code>
      * @return The enum numeric value on the wire for reqType.
      */
     int getReqTypeValue();
     /**
-     * <code>.DnD.service.ClientRequestType reqType = 1;</code>
+     * <code>.DnD.service.ClientRequestType reqType = 2;</code>
      * @return The reqType.
      */
     DnD.service.ClientRequestOuterClass.ClientRequestType getReqType();
 
     /**
-     * <code>bytes requestData = 2;</code>
+     * <code>bytes requestData = 3;</code>
      * @return The requestData.
      */
     com.google.protobuf.ByteString getRequestData();
@@ -195,13 +219,26 @@ public final class ClientRequestOuterClass {
             case 0:
               done = true;
               break;
-            case 8: {
+            case 10: {
+              DnD.service.ClientOuterClass.Client.Builder subBuilder = null;
+              if (client_ != null) {
+                subBuilder = client_.toBuilder();
+              }
+              client_ = input.readMessage(DnD.service.ClientOuterClass.Client.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(client_);
+                client_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 16: {
               int rawValue = input.readEnum();
 
               reqType_ = rawValue;
               break;
             }
-            case 18: {
+            case 26: {
 
               requestData_ = input.readBytes();
               break;
@@ -238,17 +275,40 @@ public final class ClientRequestOuterClass {
               DnD.service.ClientRequestOuterClass.ClientRequest.class, DnD.service.ClientRequestOuterClass.ClientRequest.Builder.class);
     }
 
-    public static final int REQTYPE_FIELD_NUMBER = 1;
+    public static final int CLIENT_FIELD_NUMBER = 1;
+    private DnD.service.ClientOuterClass.Client client_;
+    /**
+     * <code>.DnD.service.Client client = 1;</code>
+     * @return Whether the client field is set.
+     */
+    public boolean hasClient() {
+      return client_ != null;
+    }
+    /**
+     * <code>.DnD.service.Client client = 1;</code>
+     * @return The client.
+     */
+    public DnD.service.ClientOuterClass.Client getClient() {
+      return client_ == null ? DnD.service.ClientOuterClass.Client.getDefaultInstance() : client_;
+    }
+    /**
+     * <code>.DnD.service.Client client = 1;</code>
+     */
+    public DnD.service.ClientOuterClass.ClientOrBuilder getClientOrBuilder() {
+      return getClient();
+    }
+
+    public static final int REQTYPE_FIELD_NUMBER = 2;
     private int reqType_;
     /**
-     * <code>.DnD.service.ClientRequestType reqType = 1;</code>
+     * <code>.DnD.service.ClientRequestType reqType = 2;</code>
      * @return The enum numeric value on the wire for reqType.
      */
     public int getReqTypeValue() {
       return reqType_;
     }
     /**
-     * <code>.DnD.service.ClientRequestType reqType = 1;</code>
+     * <code>.DnD.service.ClientRequestType reqType = 2;</code>
      * @return The reqType.
      */
     public DnD.service.ClientRequestOuterClass.ClientRequestType getReqType() {
@@ -257,10 +317,10 @@ public final class ClientRequestOuterClass {
       return result == null ? DnD.service.ClientRequestOuterClass.ClientRequestType.UNRECOGNIZED : result;
     }
 
-    public static final int REQUESTDATA_FIELD_NUMBER = 2;
+    public static final int REQUESTDATA_FIELD_NUMBER = 3;
     private com.google.protobuf.ByteString requestData_;
     /**
-     * <code>bytes requestData = 2;</code>
+     * <code>bytes requestData = 3;</code>
      * @return The requestData.
      */
     public com.google.protobuf.ByteString getRequestData() {
@@ -281,11 +341,14 @@ public final class ClientRequestOuterClass {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      if (client_ != null) {
+        output.writeMessage(1, getClient());
+      }
       if (reqType_ != DnD.service.ClientRequestOuterClass.ClientRequestType.CLIENT_CONNECTION.getNumber()) {
-        output.writeEnum(1, reqType_);
+        output.writeEnum(2, reqType_);
       }
       if (!requestData_.isEmpty()) {
-        output.writeBytes(2, requestData_);
+        output.writeBytes(3, requestData_);
       }
       unknownFields.writeTo(output);
     }
@@ -296,13 +359,17 @@ public final class ClientRequestOuterClass {
       if (size != -1) return size;
 
       size = 0;
+      if (client_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getClient());
+      }
       if (reqType_ != DnD.service.ClientRequestOuterClass.ClientRequestType.CLIENT_CONNECTION.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, reqType_);
+          .computeEnumSize(2, reqType_);
       }
       if (!requestData_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, requestData_);
+          .computeBytesSize(3, requestData_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -319,6 +386,11 @@ public final class ClientRequestOuterClass {
       }
       DnD.service.ClientRequestOuterClass.ClientRequest other = (DnD.service.ClientRequestOuterClass.ClientRequest) obj;
 
+      if (hasClient() != other.hasClient()) return false;
+      if (hasClient()) {
+        if (!getClient()
+            .equals(other.getClient())) return false;
+      }
       if (reqType_ != other.reqType_) return false;
       if (!getRequestData()
           .equals(other.getRequestData())) return false;
@@ -333,6 +405,10 @@ public final class ClientRequestOuterClass {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasClient()) {
+        hash = (37 * hash) + CLIENT_FIELD_NUMBER;
+        hash = (53 * hash) + getClient().hashCode();
+      }
       hash = (37 * hash) + REQTYPE_FIELD_NUMBER;
       hash = (53 * hash) + reqType_;
       hash = (37 * hash) + REQUESTDATA_FIELD_NUMBER;
@@ -470,6 +546,12 @@ public final class ClientRequestOuterClass {
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        if (clientBuilder_ == null) {
+          client_ = null;
+        } else {
+          client_ = null;
+          clientBuilder_ = null;
+        }
         reqType_ = 0;
 
         requestData_ = com.google.protobuf.ByteString.EMPTY;
@@ -500,6 +582,11 @@ public final class ClientRequestOuterClass {
       @java.lang.Override
       public DnD.service.ClientRequestOuterClass.ClientRequest buildPartial() {
         DnD.service.ClientRequestOuterClass.ClientRequest result = new DnD.service.ClientRequestOuterClass.ClientRequest(this);
+        if (clientBuilder_ == null) {
+          result.client_ = client_;
+        } else {
+          result.client_ = clientBuilder_.build();
+        }
         result.reqType_ = reqType_;
         result.requestData_ = requestData_;
         onBuilt();
@@ -550,6 +637,9 @@ public final class ClientRequestOuterClass {
 
       public Builder mergeFrom(DnD.service.ClientRequestOuterClass.ClientRequest other) {
         if (other == DnD.service.ClientRequestOuterClass.ClientRequest.getDefaultInstance()) return this;
+        if (other.hasClient()) {
+          mergeClient(other.getClient());
+        }
         if (other.reqType_ != 0) {
           setReqTypeValue(other.getReqTypeValue());
         }
@@ -585,16 +675,135 @@ public final class ClientRequestOuterClass {
         return this;
       }
 
+      private DnD.service.ClientOuterClass.Client client_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          DnD.service.ClientOuterClass.Client, DnD.service.ClientOuterClass.Client.Builder, DnD.service.ClientOuterClass.ClientOrBuilder> clientBuilder_;
+      /**
+       * <code>.DnD.service.Client client = 1;</code>
+       * @return Whether the client field is set.
+       */
+      public boolean hasClient() {
+        return clientBuilder_ != null || client_ != null;
+      }
+      /**
+       * <code>.DnD.service.Client client = 1;</code>
+       * @return The client.
+       */
+      public DnD.service.ClientOuterClass.Client getClient() {
+        if (clientBuilder_ == null) {
+          return client_ == null ? DnD.service.ClientOuterClass.Client.getDefaultInstance() : client_;
+        } else {
+          return clientBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.DnD.service.Client client = 1;</code>
+       */
+      public Builder setClient(DnD.service.ClientOuterClass.Client value) {
+        if (clientBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          client_ = value;
+          onChanged();
+        } else {
+          clientBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.DnD.service.Client client = 1;</code>
+       */
+      public Builder setClient(
+          DnD.service.ClientOuterClass.Client.Builder builderForValue) {
+        if (clientBuilder_ == null) {
+          client_ = builderForValue.build();
+          onChanged();
+        } else {
+          clientBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.DnD.service.Client client = 1;</code>
+       */
+      public Builder mergeClient(DnD.service.ClientOuterClass.Client value) {
+        if (clientBuilder_ == null) {
+          if (client_ != null) {
+            client_ =
+              DnD.service.ClientOuterClass.Client.newBuilder(client_).mergeFrom(value).buildPartial();
+          } else {
+            client_ = value;
+          }
+          onChanged();
+        } else {
+          clientBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.DnD.service.Client client = 1;</code>
+       */
+      public Builder clearClient() {
+        if (clientBuilder_ == null) {
+          client_ = null;
+          onChanged();
+        } else {
+          client_ = null;
+          clientBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.DnD.service.Client client = 1;</code>
+       */
+      public DnD.service.ClientOuterClass.Client.Builder getClientBuilder() {
+        
+        onChanged();
+        return getClientFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.DnD.service.Client client = 1;</code>
+       */
+      public DnD.service.ClientOuterClass.ClientOrBuilder getClientOrBuilder() {
+        if (clientBuilder_ != null) {
+          return clientBuilder_.getMessageOrBuilder();
+        } else {
+          return client_ == null ?
+              DnD.service.ClientOuterClass.Client.getDefaultInstance() : client_;
+        }
+      }
+      /**
+       * <code>.DnD.service.Client client = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          DnD.service.ClientOuterClass.Client, DnD.service.ClientOuterClass.Client.Builder, DnD.service.ClientOuterClass.ClientOrBuilder> 
+          getClientFieldBuilder() {
+        if (clientBuilder_ == null) {
+          clientBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              DnD.service.ClientOuterClass.Client, DnD.service.ClientOuterClass.Client.Builder, DnD.service.ClientOuterClass.ClientOrBuilder>(
+                  getClient(),
+                  getParentForChildren(),
+                  isClean());
+          client_ = null;
+        }
+        return clientBuilder_;
+      }
+
       private int reqType_ = 0;
       /**
-       * <code>.DnD.service.ClientRequestType reqType = 1;</code>
+       * <code>.DnD.service.ClientRequestType reqType = 2;</code>
        * @return The enum numeric value on the wire for reqType.
        */
       public int getReqTypeValue() {
         return reqType_;
       }
       /**
-       * <code>.DnD.service.ClientRequestType reqType = 1;</code>
+       * <code>.DnD.service.ClientRequestType reqType = 2;</code>
        * @param value The enum numeric value on the wire for reqType to set.
        * @return This builder for chaining.
        */
@@ -604,7 +813,7 @@ public final class ClientRequestOuterClass {
         return this;
       }
       /**
-       * <code>.DnD.service.ClientRequestType reqType = 1;</code>
+       * <code>.DnD.service.ClientRequestType reqType = 2;</code>
        * @return The reqType.
        */
       public DnD.service.ClientRequestOuterClass.ClientRequestType getReqType() {
@@ -613,7 +822,7 @@ public final class ClientRequestOuterClass {
         return result == null ? DnD.service.ClientRequestOuterClass.ClientRequestType.UNRECOGNIZED : result;
       }
       /**
-       * <code>.DnD.service.ClientRequestType reqType = 1;</code>
+       * <code>.DnD.service.ClientRequestType reqType = 2;</code>
        * @param value The reqType to set.
        * @return This builder for chaining.
        */
@@ -627,7 +836,7 @@ public final class ClientRequestOuterClass {
         return this;
       }
       /**
-       * <code>.DnD.service.ClientRequestType reqType = 1;</code>
+       * <code>.DnD.service.ClientRequestType reqType = 2;</code>
        * @return This builder for chaining.
        */
       public Builder clearReqType() {
@@ -639,14 +848,14 @@ public final class ClientRequestOuterClass {
 
       private com.google.protobuf.ByteString requestData_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>bytes requestData = 2;</code>
+       * <code>bytes requestData = 3;</code>
        * @return The requestData.
        */
       public com.google.protobuf.ByteString getRequestData() {
         return requestData_;
       }
       /**
-       * <code>bytes requestData = 2;</code>
+       * <code>bytes requestData = 3;</code>
        * @param value The requestData to set.
        * @return This builder for chaining.
        */
@@ -660,7 +869,7 @@ public final class ClientRequestOuterClass {
         return this;
       }
       /**
-       * <code>bytes requestData = 2;</code>
+       * <code>bytes requestData = 3;</code>
        * @return This builder for chaining.
        */
       public Builder clearRequestData() {
@@ -736,24 +945,28 @@ public final class ClientRequestOuterClass {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\023ClientRequest.proto\022\013DnD.service\"U\n\rCl" +
-      "ientRequest\022/\n\007reqType\030\001 \001(\0162\036.DnD.servi" +
-      "ce.ClientRequestType\022\023\n\013requestData\030\002 \001(" +
-      "\014*R\n\021ClientRequestType\022\025\n\021CLIENT_CONNECT" +
-      "ION\020\000\022\023\n\017TILE_GENERATION\020\001\022\021\n\rCLIENT_UPD" +
-      "ATE\020\002B&\n\013DnD.serviceB\027ClientRequestOuter" +
-      "Classb\006proto3"
+      "\n\023ClientRequest.proto\022\013DnD.service\032\014Clie" +
+      "nt.proto\"z\n\rClientRequest\022#\n\006client\030\001 \001(" +
+      "\0132\023.DnD.service.Client\022/\n\007reqType\030\002 \001(\0162" +
+      "\036.DnD.service.ClientRequestType\022\023\n\013reque" +
+      "stData\030\003 \001(\014*p\n\021ClientRequestType\022\025\n\021CLI" +
+      "ENT_CONNECTION\020\000\022\023\n\017TILE_GENERATION\020\001\022\021\n" +
+      "\rCLIENT_UPDATE\020\002\022\034\n\030TILE_ITEM_UPDATE_REQ" +
+      "UEST\020\003B&\n\013DnD.serviceB\027ClientRequestOute" +
+      "rClassb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          DnD.service.ClientOuterClass.getDescriptor(),
         });
     internal_static_DnD_service_ClientRequest_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_DnD_service_ClientRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DnD_service_ClientRequest_descriptor,
-        new java.lang.String[] { "ReqType", "RequestData", });
+        new java.lang.String[] { "Client", "ReqType", "RequestData", });
+    DnD.service.ClientOuterClass.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

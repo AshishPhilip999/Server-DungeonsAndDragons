@@ -10,6 +10,7 @@ enum ServerResponseType {
     CONNECTION_FAILURE = 1;
     TILE_GENERATION_RESPONSE = 2;
     PLAYER_UPDATE = 3;
+    TILE_ITEM_UPDATE = 4;
 }
 
 message ServerResponse {

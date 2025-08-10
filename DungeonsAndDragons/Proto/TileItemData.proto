@@ -1,18 +1,20 @@
 syntax = "proto3";
 
-package Dnd.Terrain;
+package DnD.Terrain;
 
 option java_package = "DnD.Terrain";
-option java_outer_classname = "TileOuterClass";
 
-import "TileType.proto";
-
-message Tile {
+message TileItemData {
     float posX = 1;
     float posY = 2;
 
     float terrainPosX = 3;
     float terrainPosY = 4;
 
-    TileType type = 5;
+    TileItemDataType type = 5;
+}
+
+enum TileItemDataType {
+    DELETE = 0;
+    UPDATE = 1;
 }

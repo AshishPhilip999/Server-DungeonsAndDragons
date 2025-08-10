@@ -6,6 +6,7 @@ import java.util.List;
 import DnD.Terrain.TerrianHandler;
 import DnD.Terrain.TerrainListOuterClass.TerrainList;
 import DnD.Terrain.TerrainOuterClass.Terrain;
+import DnD.Terrain.TileItemDataOuterClass.TileItemData;
 import DnD.service.ClientOuterClass.Client;
 import DnD.service.ServerResponseOuterClass.ServerResponse;
 import DnD.service.ServerResponseOuterClass.ServerResponseType;
@@ -41,6 +42,16 @@ public class SuccessfulService {
         ServerResponse serverResponse = ServerResponse.newBuilder()
                                         .setResponse(ServerResponseType.PLAYER_UPDATE)
                                         .setResponseData(ByteString.copyFrom(clientData))
+                                        .build();
+
+        ServerResponder.sendResponseToAllOtherClients(serverResponse, client);
+     }
+
+     public static void handleSuccessfullTileItemUpdate(TileItemData tileItemData, Client client) {
+        byte[] tileItemDataBytes = tileItemData.toByteArray();
+        ServerResponse serverResponse = ServerResponse.newBuilder()
+                                        .setResponse(ServerResponseType.TILE_ITEM_UPDATE)
+                                        .setResponseData(ByteString.copyFrom(tileItemDataBytes))
                                         .build();
 
         ServerResponder.sendResponseToAllOtherClients(serverResponse, client);
