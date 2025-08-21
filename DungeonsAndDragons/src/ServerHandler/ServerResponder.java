@@ -21,7 +21,7 @@ public class ServerResponder {
         int responseLength = responseData.length;
         OutputStream clientOutputStream = ServerListener.clientConnections
                 .get(UUID.fromString(clientData.getClientID()));
-        System.out.println("[Server Responder] Sending request to clientID: " + clientData.getClientID());
+        System.out.println("[Server Responder] Sending request to clientID: " + clientData.getClientID() + " of response type: " + response.getResponse().toString());
 
         // Sending the length first (4 bytes, big-endian)
         clientOutputStream.write(ByteBuffer.allocate(4).putInt(responseLength).array());

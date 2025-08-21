@@ -24,16 +24,33 @@ public class ServiceHandler {
         clientConnections.put(clientUUID, clientData);
 
         currentUUID = clientUUID;
-        
+
         System.out.println();
-        System.out.println("[Service Handler] Connected to client of [client ID: " + clientData.getClientID() + "]" + " [port number: " + clientData.getPortNumber() + "]" + " [local address: " + clientData.getLocalAddress() + "].");
-        SuccessfulService.handleSuccessFulConnectionRequest(clientData);
+        System.out.println("[Service Handler] Connected to client of [client ID: " + clientData.getClientID() + "]"
+                + " [port number: " + clientData.getPortNumber() + "]" + " [local address: "
+                + clientData.getLocalAddress() + "].");
+        SuccessfulService.handleSuccessfullConnectionRequest(clientData);
+    }
+
+    public static void handleDisconnectionRequest(Client clientDataDisconnection) {
+        try {
+            UUID clientUUID = UUID.fromString(clientDataDisconnection.getClientID());
+            OutputStream clientStream = ServerListener.clientConnections.remove(clientUUID);
+            clientStream.close();
+            System.out.println("[Service Handler:: handleDisconnectionRequest] Client: " + clientUUID + " disconnected");
+            SuccessfulService.handleSuccessfullDisConnectionRequest(clientDataDisconnection);
+        } catch (Exception e) {
+            System.err.println("[Service Handler:: handleDiscoonectionReuqest] " + e);
+        }
     }
 
     public static void handleTerrainGenerationRequest(Player playerData) throws Exception {
-        System.out.println("[Service Handler] Player Current Position. " + "x: " +playerData.getPosX() + " y: " + playerData.getPosY());
-        List<Terrain> terrainData = playerData.getTerrainDataList();
-        List<Terrain> terrain = TerrianHandler.getTerrains(playerData.getPosX(), playerData.getPosY(), playerData.getCurrentTerrainPosX(), playerData.getCurrentTerrainPosY(), terrainData);
+        System.out.println("[Service Handler] Player Current Position. " + "x: " + playerData.getPosX() + " y: "
+                + playerData.getPosY());
+        // List<Float> terrainData = playerData.getTerrainData().getExistingTerrainPositionsList();
+        List<Float> terrainData = new ArrayList<>();
+        List<Terrain> terrain = TerrianHandler.getTerrains(playerData.getPosX(), playerData.getPosY(),
+                playerData.getCurrentTerrainPosX(), playerData.getCurrentTerrainPosY(), terrainData);
 
         Client client = clientConnections.get(currentUUID);
         SuccessfulService.handleSuccessfullTerrainGeneration(terrain, client);

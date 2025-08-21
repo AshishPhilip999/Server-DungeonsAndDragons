@@ -49,28 +49,19 @@ public final class PlayerOuterClass {
     float getCurrentTerrainPosY();
 
     /**
-     * <code>repeated .Dnd.Terrain.Terrain terrainData = 6;</code>
+     * <code>.DnD.Player.TerrainData terrainData = 6;</code>
+     * @return Whether the terrainData field is set.
      */
-    java.util.List<DnD.Terrain.TerrainOuterClass.Terrain> 
-        getTerrainDataList();
+    boolean hasTerrainData();
     /**
-     * <code>repeated .Dnd.Terrain.Terrain terrainData = 6;</code>
+     * <code>.DnD.Player.TerrainData terrainData = 6;</code>
+     * @return The terrainData.
      */
-    DnD.Terrain.TerrainOuterClass.Terrain getTerrainData(int index);
+    DnD.Player.PlayerOuterClass.TerrainData getTerrainData();
     /**
-     * <code>repeated .Dnd.Terrain.Terrain terrainData = 6;</code>
+     * <code>.DnD.Player.TerrainData terrainData = 6;</code>
      */
-    int getTerrainDataCount();
-    /**
-     * <code>repeated .Dnd.Terrain.Terrain terrainData = 6;</code>
-     */
-    java.util.List<? extends DnD.Terrain.TerrainOuterClass.TerrainOrBuilder> 
-        getTerrainDataOrBuilderList();
-    /**
-     * <code>repeated .Dnd.Terrain.Terrain terrainData = 6;</code>
-     */
-    DnD.Terrain.TerrainOuterClass.TerrainOrBuilder getTerrainDataOrBuilder(
-        int index);
+    DnD.Player.PlayerOuterClass.TerrainDataOrBuilder getTerrainDataOrBuilder();
   }
   /**
    * Protobuf type {@code DnD.Player.Player}
@@ -85,7 +76,6 @@ public final class PlayerOuterClass {
       super(builder);
     }
     private Player() {
-      terrainData_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -108,7 +98,6 @@ public final class PlayerOuterClass {
       if (extensionRegistry == null) {
         throw new java.lang.NullPointerException();
       }
-      int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -145,12 +134,16 @@ public final class PlayerOuterClass {
               break;
             }
             case 50: {
-              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                terrainData_ = new java.util.ArrayList<DnD.Terrain.TerrainOuterClass.Terrain>();
-                mutable_bitField0_ |= 0x00000001;
+              DnD.Player.PlayerOuterClass.TerrainData.Builder subBuilder = null;
+              if (terrainData_ != null) {
+                subBuilder = terrainData_.toBuilder();
               }
-              terrainData_.add(
-                  input.readMessage(DnD.Terrain.TerrainOuterClass.Terrain.parser(), extensionRegistry));
+              terrainData_ = input.readMessage(DnD.Player.PlayerOuterClass.TerrainData.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(terrainData_);
+                terrainData_ = subBuilder.buildPartial();
+              }
+
               break;
             }
             default: {
@@ -168,9 +161,6 @@ public final class PlayerOuterClass {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000001) != 0)) {
-          terrainData_ = java.util.Collections.unmodifiableList(terrainData_);
-        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -239,38 +229,26 @@ public final class PlayerOuterClass {
     }
 
     public static final int TERRAINDATA_FIELD_NUMBER = 6;
-    private java.util.List<DnD.Terrain.TerrainOuterClass.Terrain> terrainData_;
+    private DnD.Player.PlayerOuterClass.TerrainData terrainData_;
     /**
-     * <code>repeated .Dnd.Terrain.Terrain terrainData = 6;</code>
+     * <code>.DnD.Player.TerrainData terrainData = 6;</code>
+     * @return Whether the terrainData field is set.
      */
-    public java.util.List<DnD.Terrain.TerrainOuterClass.Terrain> getTerrainDataList() {
-      return terrainData_;
+    public boolean hasTerrainData() {
+      return terrainData_ != null;
     }
     /**
-     * <code>repeated .Dnd.Terrain.Terrain terrainData = 6;</code>
+     * <code>.DnD.Player.TerrainData terrainData = 6;</code>
+     * @return The terrainData.
      */
-    public java.util.List<? extends DnD.Terrain.TerrainOuterClass.TerrainOrBuilder> 
-        getTerrainDataOrBuilderList() {
-      return terrainData_;
+    public DnD.Player.PlayerOuterClass.TerrainData getTerrainData() {
+      return terrainData_ == null ? DnD.Player.PlayerOuterClass.TerrainData.getDefaultInstance() : terrainData_;
     }
     /**
-     * <code>repeated .Dnd.Terrain.Terrain terrainData = 6;</code>
+     * <code>.DnD.Player.TerrainData terrainData = 6;</code>
      */
-    public int getTerrainDataCount() {
-      return terrainData_.size();
-    }
-    /**
-     * <code>repeated .Dnd.Terrain.Terrain terrainData = 6;</code>
-     */
-    public DnD.Terrain.TerrainOuterClass.Terrain getTerrainData(int index) {
-      return terrainData_.get(index);
-    }
-    /**
-     * <code>repeated .Dnd.Terrain.Terrain terrainData = 6;</code>
-     */
-    public DnD.Terrain.TerrainOuterClass.TerrainOrBuilder getTerrainDataOrBuilder(
-        int index) {
-      return terrainData_.get(index);
+    public DnD.Player.PlayerOuterClass.TerrainDataOrBuilder getTerrainDataOrBuilder() {
+      return getTerrainData();
     }
 
     private byte memoizedIsInitialized = -1;
@@ -302,8 +280,8 @@ public final class PlayerOuterClass {
       if (currentTerrainPosY_ != 0F) {
         output.writeFloat(5, currentTerrainPosY_);
       }
-      for (int i = 0; i < terrainData_.size(); i++) {
-        output.writeMessage(6, terrainData_.get(i));
+      if (terrainData_ != null) {
+        output.writeMessage(6, getTerrainData());
       }
       unknownFields.writeTo(output);
     }
@@ -334,9 +312,9 @@ public final class PlayerOuterClass {
         size += com.google.protobuf.CodedOutputStream
           .computeFloatSize(5, currentTerrainPosY_);
       }
-      for (int i = 0; i < terrainData_.size(); i++) {
+      if (terrainData_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, terrainData_.get(i));
+          .computeMessageSize(6, getTerrainData());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -367,8 +345,11 @@ public final class PlayerOuterClass {
       if (java.lang.Float.floatToIntBits(getCurrentTerrainPosY())
           != java.lang.Float.floatToIntBits(
               other.getCurrentTerrainPosY())) return false;
-      if (!getTerrainDataList()
-          .equals(other.getTerrainDataList())) return false;
+      if (hasTerrainData() != other.hasTerrainData()) return false;
+      if (hasTerrainData()) {
+        if (!getTerrainData()
+            .equals(other.getTerrainData())) return false;
+      }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -394,9 +375,9 @@ public final class PlayerOuterClass {
       hash = (37 * hash) + CURRENTTERRAINPOSY_FIELD_NUMBER;
       hash = (53 * hash) + java.lang.Float.floatToIntBits(
           getCurrentTerrainPosY());
-      if (getTerrainDataCount() > 0) {
+      if (hasTerrainData()) {
         hash = (37 * hash) + TERRAINDATA_FIELD_NUMBER;
-        hash = (53 * hash) + getTerrainDataList().hashCode();
+        hash = (53 * hash) + getTerrainData().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -526,7 +507,6 @@ public final class PlayerOuterClass {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
-          getTerrainDataFieldBuilder();
         }
       }
       @java.lang.Override
@@ -543,10 +523,10 @@ public final class PlayerOuterClass {
         currentTerrainPosY_ = 0F;
 
         if (terrainDataBuilder_ == null) {
-          terrainData_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
+          terrainData_ = null;
         } else {
-          terrainDataBuilder_.clear();
+          terrainData_ = null;
+          terrainDataBuilder_ = null;
         }
         return this;
       }
@@ -574,17 +554,12 @@ public final class PlayerOuterClass {
       @java.lang.Override
       public DnD.Player.PlayerOuterClass.Player buildPartial() {
         DnD.Player.PlayerOuterClass.Player result = new DnD.Player.PlayerOuterClass.Player(this);
-        int from_bitField0_ = bitField0_;
         result.posX_ = posX_;
         result.posY_ = posY_;
         result.viewDistance_ = viewDistance_;
         result.currentTerrainPosX_ = currentTerrainPosX_;
         result.currentTerrainPosY_ = currentTerrainPosY_;
         if (terrainDataBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) != 0)) {
-            terrainData_ = java.util.Collections.unmodifiableList(terrainData_);
-            bitField0_ = (bitField0_ & ~0x00000001);
-          }
           result.terrainData_ = terrainData_;
         } else {
           result.terrainData_ = terrainDataBuilder_.build();
@@ -652,31 +627,8 @@ public final class PlayerOuterClass {
         if (other.getCurrentTerrainPosY() != 0F) {
           setCurrentTerrainPosY(other.getCurrentTerrainPosY());
         }
-        if (terrainDataBuilder_ == null) {
-          if (!other.terrainData_.isEmpty()) {
-            if (terrainData_.isEmpty()) {
-              terrainData_ = other.terrainData_;
-              bitField0_ = (bitField0_ & ~0x00000001);
-            } else {
-              ensureTerrainDataIsMutable();
-              terrainData_.addAll(other.terrainData_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.terrainData_.isEmpty()) {
-            if (terrainDataBuilder_.isEmpty()) {
-              terrainDataBuilder_.dispose();
-              terrainDataBuilder_ = null;
-              terrainData_ = other.terrainData_;
-              bitField0_ = (bitField0_ & ~0x00000001);
-              terrainDataBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getTerrainDataFieldBuilder() : null;
-            } else {
-              terrainDataBuilder_.addAllMessages(other.terrainData_);
-            }
-          }
+        if (other.hasTerrainData()) {
+          mergeTerrainData(other.getTerrainData());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -706,7 +658,6 @@ public final class PlayerOuterClass {
         }
         return this;
       }
-      private int bitField0_;
 
       private float posX_ ;
       /**
@@ -858,239 +809,118 @@ public final class PlayerOuterClass {
         return this;
       }
 
-      private java.util.List<DnD.Terrain.TerrainOuterClass.Terrain> terrainData_ =
-        java.util.Collections.emptyList();
-      private void ensureTerrainDataIsMutable() {
-        if (!((bitField0_ & 0x00000001) != 0)) {
-          terrainData_ = new java.util.ArrayList<DnD.Terrain.TerrainOuterClass.Terrain>(terrainData_);
-          bitField0_ |= 0x00000001;
-         }
+      private DnD.Player.PlayerOuterClass.TerrainData terrainData_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          DnD.Player.PlayerOuterClass.TerrainData, DnD.Player.PlayerOuterClass.TerrainData.Builder, DnD.Player.PlayerOuterClass.TerrainDataOrBuilder> terrainDataBuilder_;
+      /**
+       * <code>.DnD.Player.TerrainData terrainData = 6;</code>
+       * @return Whether the terrainData field is set.
+       */
+      public boolean hasTerrainData() {
+        return terrainDataBuilder_ != null || terrainData_ != null;
       }
+      /**
+       * <code>.DnD.Player.TerrainData terrainData = 6;</code>
+       * @return The terrainData.
+       */
+      public DnD.Player.PlayerOuterClass.TerrainData getTerrainData() {
+        if (terrainDataBuilder_ == null) {
+          return terrainData_ == null ? DnD.Player.PlayerOuterClass.TerrainData.getDefaultInstance() : terrainData_;
+        } else {
+          return terrainDataBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.DnD.Player.TerrainData terrainData = 6;</code>
+       */
+      public Builder setTerrainData(DnD.Player.PlayerOuterClass.TerrainData value) {
+        if (terrainDataBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          terrainData_ = value;
+          onChanged();
+        } else {
+          terrainDataBuilder_.setMessage(value);
+        }
 
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          DnD.Terrain.TerrainOuterClass.Terrain, DnD.Terrain.TerrainOuterClass.Terrain.Builder, DnD.Terrain.TerrainOuterClass.TerrainOrBuilder> terrainDataBuilder_;
-
-      /**
-       * <code>repeated .Dnd.Terrain.Terrain terrainData = 6;</code>
-       */
-      public java.util.List<DnD.Terrain.TerrainOuterClass.Terrain> getTerrainDataList() {
-        if (terrainDataBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(terrainData_);
-        } else {
-          return terrainDataBuilder_.getMessageList();
-        }
+        return this;
       }
       /**
-       * <code>repeated .Dnd.Terrain.Terrain terrainData = 6;</code>
-       */
-      public int getTerrainDataCount() {
-        if (terrainDataBuilder_ == null) {
-          return terrainData_.size();
-        } else {
-          return terrainDataBuilder_.getCount();
-        }
-      }
-      /**
-       * <code>repeated .Dnd.Terrain.Terrain terrainData = 6;</code>
-       */
-      public DnD.Terrain.TerrainOuterClass.Terrain getTerrainData(int index) {
-        if (terrainDataBuilder_ == null) {
-          return terrainData_.get(index);
-        } else {
-          return terrainDataBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <code>repeated .Dnd.Terrain.Terrain terrainData = 6;</code>
+       * <code>.DnD.Player.TerrainData terrainData = 6;</code>
        */
       public Builder setTerrainData(
-          int index, DnD.Terrain.TerrainOuterClass.Terrain value) {
+          DnD.Player.PlayerOuterClass.TerrainData.Builder builderForValue) {
         if (terrainDataBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
+          terrainData_ = builderForValue.build();
+          onChanged();
+        } else {
+          terrainDataBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.DnD.Player.TerrainData terrainData = 6;</code>
+       */
+      public Builder mergeTerrainData(DnD.Player.PlayerOuterClass.TerrainData value) {
+        if (terrainDataBuilder_ == null) {
+          if (terrainData_ != null) {
+            terrainData_ =
+              DnD.Player.PlayerOuterClass.TerrainData.newBuilder(terrainData_).mergeFrom(value).buildPartial();
+          } else {
+            terrainData_ = value;
           }
-          ensureTerrainDataIsMutable();
-          terrainData_.set(index, value);
           onChanged();
         } else {
-          terrainDataBuilder_.setMessage(index, value);
+          terrainDataBuilder_.mergeFrom(value);
         }
+
         return this;
       }
       /**
-       * <code>repeated .Dnd.Terrain.Terrain terrainData = 6;</code>
-       */
-      public Builder setTerrainData(
-          int index, DnD.Terrain.TerrainOuterClass.Terrain.Builder builderForValue) {
-        if (terrainDataBuilder_ == null) {
-          ensureTerrainDataIsMutable();
-          terrainData_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          terrainDataBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Dnd.Terrain.Terrain terrainData = 6;</code>
-       */
-      public Builder addTerrainData(DnD.Terrain.TerrainOuterClass.Terrain value) {
-        if (terrainDataBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureTerrainDataIsMutable();
-          terrainData_.add(value);
-          onChanged();
-        } else {
-          terrainDataBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Dnd.Terrain.Terrain terrainData = 6;</code>
-       */
-      public Builder addTerrainData(
-          int index, DnD.Terrain.TerrainOuterClass.Terrain value) {
-        if (terrainDataBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureTerrainDataIsMutable();
-          terrainData_.add(index, value);
-          onChanged();
-        } else {
-          terrainDataBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Dnd.Terrain.Terrain terrainData = 6;</code>
-       */
-      public Builder addTerrainData(
-          DnD.Terrain.TerrainOuterClass.Terrain.Builder builderForValue) {
-        if (terrainDataBuilder_ == null) {
-          ensureTerrainDataIsMutable();
-          terrainData_.add(builderForValue.build());
-          onChanged();
-        } else {
-          terrainDataBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Dnd.Terrain.Terrain terrainData = 6;</code>
-       */
-      public Builder addTerrainData(
-          int index, DnD.Terrain.TerrainOuterClass.Terrain.Builder builderForValue) {
-        if (terrainDataBuilder_ == null) {
-          ensureTerrainDataIsMutable();
-          terrainData_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          terrainDataBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Dnd.Terrain.Terrain terrainData = 6;</code>
-       */
-      public Builder addAllTerrainData(
-          java.lang.Iterable<? extends DnD.Terrain.TerrainOuterClass.Terrain> values) {
-        if (terrainDataBuilder_ == null) {
-          ensureTerrainDataIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, terrainData_);
-          onChanged();
-        } else {
-          terrainDataBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Dnd.Terrain.Terrain terrainData = 6;</code>
+       * <code>.DnD.Player.TerrainData terrainData = 6;</code>
        */
       public Builder clearTerrainData() {
         if (terrainDataBuilder_ == null) {
-          terrainData_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
+          terrainData_ = null;
           onChanged();
         } else {
-          terrainDataBuilder_.clear();
+          terrainData_ = null;
+          terrainDataBuilder_ = null;
         }
+
         return this;
       }
       /**
-       * <code>repeated .Dnd.Terrain.Terrain terrainData = 6;</code>
+       * <code>.DnD.Player.TerrainData terrainData = 6;</code>
        */
-      public Builder removeTerrainData(int index) {
-        if (terrainDataBuilder_ == null) {
-          ensureTerrainDataIsMutable();
-          terrainData_.remove(index);
-          onChanged();
-        } else {
-          terrainDataBuilder_.remove(index);
-        }
-        return this;
+      public DnD.Player.PlayerOuterClass.TerrainData.Builder getTerrainDataBuilder() {
+        
+        onChanged();
+        return getTerrainDataFieldBuilder().getBuilder();
       }
       /**
-       * <code>repeated .Dnd.Terrain.Terrain terrainData = 6;</code>
+       * <code>.DnD.Player.TerrainData terrainData = 6;</code>
        */
-      public DnD.Terrain.TerrainOuterClass.Terrain.Builder getTerrainDataBuilder(
-          int index) {
-        return getTerrainDataFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .Dnd.Terrain.Terrain terrainData = 6;</code>
-       */
-      public DnD.Terrain.TerrainOuterClass.TerrainOrBuilder getTerrainDataOrBuilder(
-          int index) {
-        if (terrainDataBuilder_ == null) {
-          return terrainData_.get(index);  } else {
-          return terrainDataBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .Dnd.Terrain.Terrain terrainData = 6;</code>
-       */
-      public java.util.List<? extends DnD.Terrain.TerrainOuterClass.TerrainOrBuilder> 
-           getTerrainDataOrBuilderList() {
+      public DnD.Player.PlayerOuterClass.TerrainDataOrBuilder getTerrainDataOrBuilder() {
         if (terrainDataBuilder_ != null) {
-          return terrainDataBuilder_.getMessageOrBuilderList();
+          return terrainDataBuilder_.getMessageOrBuilder();
         } else {
-          return java.util.Collections.unmodifiableList(terrainData_);
+          return terrainData_ == null ?
+              DnD.Player.PlayerOuterClass.TerrainData.getDefaultInstance() : terrainData_;
         }
       }
       /**
-       * <code>repeated .Dnd.Terrain.Terrain terrainData = 6;</code>
+       * <code>.DnD.Player.TerrainData terrainData = 6;</code>
        */
-      public DnD.Terrain.TerrainOuterClass.Terrain.Builder addTerrainDataBuilder() {
-        return getTerrainDataFieldBuilder().addBuilder(
-            DnD.Terrain.TerrainOuterClass.Terrain.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .Dnd.Terrain.Terrain terrainData = 6;</code>
-       */
-      public DnD.Terrain.TerrainOuterClass.Terrain.Builder addTerrainDataBuilder(
-          int index) {
-        return getTerrainDataFieldBuilder().addBuilder(
-            index, DnD.Terrain.TerrainOuterClass.Terrain.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .Dnd.Terrain.Terrain terrainData = 6;</code>
-       */
-      public java.util.List<DnD.Terrain.TerrainOuterClass.Terrain.Builder> 
-           getTerrainDataBuilderList() {
-        return getTerrainDataFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          DnD.Terrain.TerrainOuterClass.Terrain, DnD.Terrain.TerrainOuterClass.Terrain.Builder, DnD.Terrain.TerrainOuterClass.TerrainOrBuilder> 
+      private com.google.protobuf.SingleFieldBuilderV3<
+          DnD.Player.PlayerOuterClass.TerrainData, DnD.Player.PlayerOuterClass.TerrainData.Builder, DnD.Player.PlayerOuterClass.TerrainDataOrBuilder> 
           getTerrainDataFieldBuilder() {
         if (terrainDataBuilder_ == null) {
-          terrainDataBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              DnD.Terrain.TerrainOuterClass.Terrain, DnD.Terrain.TerrainOuterClass.Terrain.Builder, DnD.Terrain.TerrainOuterClass.TerrainOrBuilder>(
-                  terrainData_,
-                  ((bitField0_ & 0x00000001) != 0),
+          terrainDataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              DnD.Player.PlayerOuterClass.TerrainData, DnD.Player.PlayerOuterClass.TerrainData.Builder, DnD.Player.PlayerOuterClass.TerrainDataOrBuilder>(
+                  getTerrainData(),
                   getParentForChildren(),
                   isClean());
           terrainData_ = null;
@@ -1150,11 +980,695 @@ public final class PlayerOuterClass {
 
   }
 
+  public interface TerrainDataOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:DnD.Player.TerrainData)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>int32 existingTerrainCount = 1;</code>
+     * @return The existingTerrainCount.
+     */
+    int getExistingTerrainCount();
+
+    /**
+     * <code>repeated float existingTerrainPositions = 2;</code>
+     * @return A list containing the existingTerrainPositions.
+     */
+    java.util.List<java.lang.Float> getExistingTerrainPositionsList();
+    /**
+     * <code>repeated float existingTerrainPositions = 2;</code>
+     * @return The count of existingTerrainPositions.
+     */
+    int getExistingTerrainPositionsCount();
+    /**
+     * <code>repeated float existingTerrainPositions = 2;</code>
+     * @param index The index of the element to return.
+     * @return The existingTerrainPositions at the given index.
+     */
+    float getExistingTerrainPositions(int index);
+  }
+  /**
+   * Protobuf type {@code DnD.Player.TerrainData}
+   */
+  public  static final class TerrainData extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:DnD.Player.TerrainData)
+      TerrainDataOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use TerrainData.newBuilder() to construct.
+    private TerrainData(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private TerrainData() {
+      existingTerrainPositions_ = emptyFloatList();
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new TerrainData();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private TerrainData(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 8: {
+
+              existingTerrainCount_ = input.readInt32();
+              break;
+            }
+            case 21: {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+                existingTerrainPositions_ = newFloatList();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              existingTerrainPositions_.addFloat(input.readFloat());
+              break;
+            }
+            case 18: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000001) != 0) && input.getBytesUntilLimit() > 0) {
+                existingTerrainPositions_ = newFloatList();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                existingTerrainPositions_.addFloat(input.readFloat());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
+          existingTerrainPositions_.makeImmutable(); // C
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return DnD.Player.PlayerOuterClass.internal_static_DnD_Player_TerrainData_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return DnD.Player.PlayerOuterClass.internal_static_DnD_Player_TerrainData_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              DnD.Player.PlayerOuterClass.TerrainData.class, DnD.Player.PlayerOuterClass.TerrainData.Builder.class);
+    }
+
+    public static final int EXISTINGTERRAINCOUNT_FIELD_NUMBER = 1;
+    private int existingTerrainCount_;
+    /**
+     * <code>int32 existingTerrainCount = 1;</code>
+     * @return The existingTerrainCount.
+     */
+    public int getExistingTerrainCount() {
+      return existingTerrainCount_;
+    }
+
+    public static final int EXISTINGTERRAINPOSITIONS_FIELD_NUMBER = 2;
+    private com.google.protobuf.Internal.FloatList existingTerrainPositions_;
+    /**
+     * <code>repeated float existingTerrainPositions = 2;</code>
+     * @return A list containing the existingTerrainPositions.
+     */
+    public java.util.List<java.lang.Float>
+        getExistingTerrainPositionsList() {
+      return existingTerrainPositions_;
+    }
+    /**
+     * <code>repeated float existingTerrainPositions = 2;</code>
+     * @return The count of existingTerrainPositions.
+     */
+    public int getExistingTerrainPositionsCount() {
+      return existingTerrainPositions_.size();
+    }
+    /**
+     * <code>repeated float existingTerrainPositions = 2;</code>
+     * @param index The index of the element to return.
+     * @return The existingTerrainPositions at the given index.
+     */
+    public float getExistingTerrainPositions(int index) {
+      return existingTerrainPositions_.getFloat(index);
+    }
+    private int existingTerrainPositionsMemoizedSerializedSize = -1;
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (existingTerrainCount_ != 0) {
+        output.writeInt32(1, existingTerrainCount_);
+      }
+      if (getExistingTerrainPositionsList().size() > 0) {
+        output.writeUInt32NoTag(18);
+        output.writeUInt32NoTag(existingTerrainPositionsMemoizedSerializedSize);
+      }
+      for (int i = 0; i < existingTerrainPositions_.size(); i++) {
+        output.writeFloatNoTag(existingTerrainPositions_.getFloat(i));
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (existingTerrainCount_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, existingTerrainCount_);
+      }
+      {
+        int dataSize = 0;
+        dataSize = 4 * getExistingTerrainPositionsList().size();
+        size += dataSize;
+        if (!getExistingTerrainPositionsList().isEmpty()) {
+          size += 1;
+          size += com.google.protobuf.CodedOutputStream
+              .computeInt32SizeNoTag(dataSize);
+        }
+        existingTerrainPositionsMemoizedSerializedSize = dataSize;
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof DnD.Player.PlayerOuterClass.TerrainData)) {
+        return super.equals(obj);
+      }
+      DnD.Player.PlayerOuterClass.TerrainData other = (DnD.Player.PlayerOuterClass.TerrainData) obj;
+
+      if (getExistingTerrainCount()
+          != other.getExistingTerrainCount()) return false;
+      if (!getExistingTerrainPositionsList()
+          .equals(other.getExistingTerrainPositionsList())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + EXISTINGTERRAINCOUNT_FIELD_NUMBER;
+      hash = (53 * hash) + getExistingTerrainCount();
+      if (getExistingTerrainPositionsCount() > 0) {
+        hash = (37 * hash) + EXISTINGTERRAINPOSITIONS_FIELD_NUMBER;
+        hash = (53 * hash) + getExistingTerrainPositionsList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static DnD.Player.PlayerOuterClass.TerrainData parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static DnD.Player.PlayerOuterClass.TerrainData parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static DnD.Player.PlayerOuterClass.TerrainData parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static DnD.Player.PlayerOuterClass.TerrainData parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static DnD.Player.PlayerOuterClass.TerrainData parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static DnD.Player.PlayerOuterClass.TerrainData parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static DnD.Player.PlayerOuterClass.TerrainData parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static DnD.Player.PlayerOuterClass.TerrainData parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static DnD.Player.PlayerOuterClass.TerrainData parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static DnD.Player.PlayerOuterClass.TerrainData parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static DnD.Player.PlayerOuterClass.TerrainData parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static DnD.Player.PlayerOuterClass.TerrainData parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(DnD.Player.PlayerOuterClass.TerrainData prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code DnD.Player.TerrainData}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:DnD.Player.TerrainData)
+        DnD.Player.PlayerOuterClass.TerrainDataOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return DnD.Player.PlayerOuterClass.internal_static_DnD_Player_TerrainData_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return DnD.Player.PlayerOuterClass.internal_static_DnD_Player_TerrainData_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                DnD.Player.PlayerOuterClass.TerrainData.class, DnD.Player.PlayerOuterClass.TerrainData.Builder.class);
+      }
+
+      // Construct using DnD.Player.PlayerOuterClass.TerrainData.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        existingTerrainCount_ = 0;
+
+        existingTerrainPositions_ = emptyFloatList();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return DnD.Player.PlayerOuterClass.internal_static_DnD_Player_TerrainData_descriptor;
+      }
+
+      @java.lang.Override
+      public DnD.Player.PlayerOuterClass.TerrainData getDefaultInstanceForType() {
+        return DnD.Player.PlayerOuterClass.TerrainData.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public DnD.Player.PlayerOuterClass.TerrainData build() {
+        DnD.Player.PlayerOuterClass.TerrainData result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public DnD.Player.PlayerOuterClass.TerrainData buildPartial() {
+        DnD.Player.PlayerOuterClass.TerrainData result = new DnD.Player.PlayerOuterClass.TerrainData(this);
+        int from_bitField0_ = bitField0_;
+        result.existingTerrainCount_ = existingTerrainCount_;
+        if (((bitField0_ & 0x00000001) != 0)) {
+          existingTerrainPositions_.makeImmutable();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        }
+        result.existingTerrainPositions_ = existingTerrainPositions_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof DnD.Player.PlayerOuterClass.TerrainData) {
+          return mergeFrom((DnD.Player.PlayerOuterClass.TerrainData)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(DnD.Player.PlayerOuterClass.TerrainData other) {
+        if (other == DnD.Player.PlayerOuterClass.TerrainData.getDefaultInstance()) return this;
+        if (other.getExistingTerrainCount() != 0) {
+          setExistingTerrainCount(other.getExistingTerrainCount());
+        }
+        if (!other.existingTerrainPositions_.isEmpty()) {
+          if (existingTerrainPositions_.isEmpty()) {
+            existingTerrainPositions_ = other.existingTerrainPositions_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+          } else {
+            ensureExistingTerrainPositionsIsMutable();
+            existingTerrainPositions_.addAll(other.existingTerrainPositions_);
+          }
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        DnD.Player.PlayerOuterClass.TerrainData parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (DnD.Player.PlayerOuterClass.TerrainData) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int existingTerrainCount_ ;
+      /**
+       * <code>int32 existingTerrainCount = 1;</code>
+       * @return The existingTerrainCount.
+       */
+      public int getExistingTerrainCount() {
+        return existingTerrainCount_;
+      }
+      /**
+       * <code>int32 existingTerrainCount = 1;</code>
+       * @param value The existingTerrainCount to set.
+       * @return This builder for chaining.
+       */
+      public Builder setExistingTerrainCount(int value) {
+        
+        existingTerrainCount_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 existingTerrainCount = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearExistingTerrainCount() {
+        
+        existingTerrainCount_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.Internal.FloatList existingTerrainPositions_ = emptyFloatList();
+      private void ensureExistingTerrainPositionsIsMutable() {
+        if (!((bitField0_ & 0x00000001) != 0)) {
+          existingTerrainPositions_ = mutableCopy(existingTerrainPositions_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+      /**
+       * <code>repeated float existingTerrainPositions = 2;</code>
+       * @return A list containing the existingTerrainPositions.
+       */
+      public java.util.List<java.lang.Float>
+          getExistingTerrainPositionsList() {
+        return ((bitField0_ & 0x00000001) != 0) ?
+                 java.util.Collections.unmodifiableList(existingTerrainPositions_) : existingTerrainPositions_;
+      }
+      /**
+       * <code>repeated float existingTerrainPositions = 2;</code>
+       * @return The count of existingTerrainPositions.
+       */
+      public int getExistingTerrainPositionsCount() {
+        return existingTerrainPositions_.size();
+      }
+      /**
+       * <code>repeated float existingTerrainPositions = 2;</code>
+       * @param index The index of the element to return.
+       * @return The existingTerrainPositions at the given index.
+       */
+      public float getExistingTerrainPositions(int index) {
+        return existingTerrainPositions_.getFloat(index);
+      }
+      /**
+       * <code>repeated float existingTerrainPositions = 2;</code>
+       * @param index The index to set the value at.
+       * @param value The existingTerrainPositions to set.
+       * @return This builder for chaining.
+       */
+      public Builder setExistingTerrainPositions(
+          int index, float value) {
+        ensureExistingTerrainPositionsIsMutable();
+        existingTerrainPositions_.setFloat(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated float existingTerrainPositions = 2;</code>
+       * @param value The existingTerrainPositions to add.
+       * @return This builder for chaining.
+       */
+      public Builder addExistingTerrainPositions(float value) {
+        ensureExistingTerrainPositionsIsMutable();
+        existingTerrainPositions_.addFloat(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated float existingTerrainPositions = 2;</code>
+       * @param values The existingTerrainPositions to add.
+       * @return This builder for chaining.
+       */
+      public Builder addAllExistingTerrainPositions(
+          java.lang.Iterable<? extends java.lang.Float> values) {
+        ensureExistingTerrainPositionsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, existingTerrainPositions_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated float existingTerrainPositions = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearExistingTerrainPositions() {
+        existingTerrainPositions_ = emptyFloatList();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:DnD.Player.TerrainData)
+    }
+
+    // @@protoc_insertion_point(class_scope:DnD.Player.TerrainData)
+    private static final DnD.Player.PlayerOuterClass.TerrainData DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new DnD.Player.PlayerOuterClass.TerrainData();
+    }
+
+    public static DnD.Player.PlayerOuterClass.TerrainData getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<TerrainData>
+        PARSER = new com.google.protobuf.AbstractParser<TerrainData>() {
+      @java.lang.Override
+      public TerrainData parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new TerrainData(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<TerrainData> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<TerrainData> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public DnD.Player.PlayerOuterClass.TerrainData getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_DnD_Player_Player_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_DnD_Player_Player_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_DnD_Player_TerrainData_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_DnD_Player_TerrainData_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1164,18 +1678,18 @@ public final class PlayerOuterClass {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\014Player.proto\022\nDnD.Player\032\rTerrain.prot" +
-      "o\"\235\001\n\006Player\022\014\n\004posX\030\001 \001(\002\022\014\n\004posY\030\002 \001(\002" +
-      "\022\024\n\014viewDistance\030\003 \001(\005\022\032\n\022currentTerrain" +
-      "PosX\030\004 \001(\002\022\032\n\022currentTerrainPosY\030\005 \001(\002\022)" +
-      "\n\013terrainData\030\006 \003(\0132\024.Dnd.Terrain.Terrai" +
-      "nB\036\n\nDnD.PlayerB\020PlayerOuterClassb\006proto" +
-      "3"
+      "\n\014Player.proto\022\nDnD.Player\"\240\001\n\006Player\022\014\n" +
+      "\004posX\030\001 \001(\002\022\014\n\004posY\030\002 \001(\002\022\024\n\014viewDistanc" +
+      "e\030\003 \001(\005\022\032\n\022currentTerrainPosX\030\004 \001(\002\022\032\n\022c" +
+      "urrentTerrainPosY\030\005 \001(\002\022,\n\013terrainData\030\006" +
+      " \001(\0132\027.DnD.Player.TerrainData\"M\n\013Terrain" +
+      "Data\022\034\n\024existingTerrainCount\030\001 \001(\005\022 \n\030ex" +
+      "istingTerrainPositions\030\002 \003(\002B\036\n\nDnD.Play" +
+      "erB\020PlayerOuterClassb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-          DnD.Terrain.TerrainOuterClass.getDescriptor(),
         });
     internal_static_DnD_Player_Player_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -1183,7 +1697,12 @@ public final class PlayerOuterClass {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DnD_Player_Player_descriptor,
         new java.lang.String[] { "PosX", "PosY", "ViewDistance", "CurrentTerrainPosX", "CurrentTerrainPosY", "TerrainData", });
-    DnD.Terrain.TerrainOuterClass.getDescriptor();
+    internal_static_DnD_Player_TerrainData_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_DnD_Player_TerrainData_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_DnD_Player_TerrainData_descriptor,
+        new java.lang.String[] { "ExistingTerrainCount", "ExistingTerrainPositions", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -13,12 +13,22 @@ import ServerHandler.ServerResponder;
 import com.google.protobuf.*;
 
 public class SuccessfulService {
-    public static void handleSuccessFulConnectionRequest(DnD.service.ClientOuterClass.Client clientData) throws Exception {
+    public static void handleSuccessfullConnectionRequest(DnD.service.ClientOuterClass.Client clientData) throws Exception {
         ServerResponse serverResponse = ServerResponse.newBuilder()
                                         .setResponse(ServerResponseType.CONNECTION_SUCCESS)
                                         .build();
         System.out.println("[Successful Service] Making response for client");
         ServerResponder.sendResponse(serverResponse, clientData);
+    }
+
+    public static void handleSuccessfullDisConnectionRequest(Client clientData) {
+        byte[] clientDataBytes = clientData.toByteArray();
+        ServerResponse serverResponse = ServerResponse.newBuilder()
+                                        .setResponse(ServerResponseType.CLIENT_DISCONNECTED)
+                                        .setResponseData(ByteString.copyFrom(clientDataBytes))
+                                        .build();
+
+        ServerResponder.sendResponseToAllOtherClients(serverResponse, clientData);
     }
 
     public static void handleSuccessfullTerrainGeneration(List<Terrain> terrains, Client clientData) throws Exception {
@@ -33,6 +43,7 @@ public class SuccessfulService {
                                         .setResponseData(ByteString.copyFrom(terrainData))
                                         .build();
 
+        System.out.println("[SuccessfulService:: handleSuccessfullTerrainGeneration] Sending terrain data to client");
         ServerResponder.sendResponse(serverResponse, clientData);
     }
 
@@ -43,6 +54,7 @@ public class SuccessfulService {
                                         .setResponseData(ByteString.copyFrom(clientData))
                                         .build();
 
+        System.out.println("[SuccessfulService:: handleSuccessfullPlayerUpdate] Sending player data to client");
         ServerResponder.sendResponseToAllOtherClients(serverResponse, client);
      }
 }

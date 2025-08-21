@@ -72,6 +72,65 @@ public class TerrianHandler {
         return (float) Math.sqrt(dx * dx + dy * dy);
     }
 
+    public static List<Float[]> getNextTerrainPositions(float posX, float posY, float currentTerrainPosX,
+            float currentTerrainPosY) {
+        float threshold = 25.0f;
+        /// Top Left threshold cordinates.
+        float topLeftThresholdX = currentTerrainPosX - threshold;
+        float topLeftThresholdY = currentTerrainPosY + threshold;
+
+        /// Bottom Right threshold cordinates.
+        float bottomLeftThresholdX = currentTerrainPosX + threshold;
+        float bottomLeftThresholdY = currentTerrainPosY - threshold;
+
+        List<Float[]> nextTerrainsToLoad = new ArrayList<>();
+
+        boolean topLeftXLimitReached = (posX <= topLeftThresholdX);
+        boolean topLeftYLimitReached = (posY >= topLeftThresholdY);
+
+        boolean bottomRightXLimitReached = (posX >= bottomLeftThresholdX);
+        boolean bottomRightYLimitReached = (posY <= bottomLeftThresholdY);
+
+        if (topLeftXLimitReached || topLeftYLimitReached) {
+            if (topLeftXLimitReached) {
+                Float[] nextTerrainCordinates = new Float[] { currentTerrainPosX - 100.0f, currentTerrainPosY };
+                nextTerrainsToLoad.add(nextTerrainCordinates);
+            }
+
+            if (topLeftYLimitReached) {
+                Float[] nextTerrainCordinates = new Float[] { currentTerrainPosX, currentTerrainPosY + 100.0f };
+                nextTerrainsToLoad.add(nextTerrainCordinates);
+            }
+
+            /// Diagonal Terrain.
+            if (topLeftXLimitReached && topLeftYLimitReached) {
+                Float[] nextTerrainCordinates = new Float[] { currentTerrainPosX - 100.0f,
+                        currentTerrainPosY + 100.0f };
+                nextTerrainsToLoad.add(nextTerrainCordinates);
+            }
+
+        } else if (bottomRightXLimitReached || bottomRightYLimitReached) {
+            if (bottomRightXLimitReached) {
+                Float[] nextTerrainCordinates = new Float[] { currentTerrainPosX + 100.0f, currentTerrainPosY };
+                nextTerrainsToLoad.add(nextTerrainCordinates);
+            }
+
+            if (bottomRightYLimitReached) {
+                Float[] nextTerrainCordinates = new Float[] { currentTerrainPosX, currentTerrainPosY - 100.0f };
+                nextTerrainsToLoad.add(nextTerrainCordinates);
+            }
+
+            /// Diagonal Terrain.
+            if (bottomRightXLimitReached && bottomRightYLimitReached) {
+                Float[] nextTerrainCordinates = new Float[] { currentTerrainPosX + 100.0f,
+                        currentTerrainPosY - 100.0f };
+                nextTerrainsToLoad.add(nextTerrainCordinates);
+            }
+        }
+
+        return nextTerrainsToLoad;
+    }
+
     public static List<Float[]> getNearestTerrainPositions(float posX, float posY, float currentTerrainPosX,
             float currentTerrainPosY) {
         float maxDistance = defaultTerrainMargin * 1.5f;
@@ -95,27 +154,35 @@ public class TerrianHandler {
         return nearestTerrains;
     }
 
-    public static float floorToMargin(float x) {
-        return (float) Math.floor(x / (defaultTerrainMargin * 2)) * (defaultTerrainMargin * 2);
+    public static float roundToMargin(float x) {
+        return Math.round(x / (defaultTerrainMargin * 2)) * (defaultTerrainMargin * 2);
     }
 
     public static Float[] getCurrentTerrainPos(float posX, float posY) {
-        float terrainPosX = floorToMargin(posX);
-        float terrainPosY = floorToMargin(posY);
+        float terrainPosX = roundToMargin(posX);
+        float terrainPosY = roundToMargin(posY);
 
         return new Float[] { terrainPosX, terrainPosY };
     }
 
     public static List<Terrain> getTerrains(float x, float y, Float currentTerrainPosX, Float currentTerrainPosY,
-            List<Terrain> terrainData) throws Exception {
+            List<Float> terrainData) throws Exception {
         Float[] terrainPos = getCurrentTerrainPos(x, y);
+        System.out.println("[TerrainHandler:: getTerrains] Current Player terrain Position. x: " + terrainPos[0]
+                + ",y: " + terrainPos[1]);
         currentTerrainPosX = terrainPos[0];
         currentTerrainPosY = terrainPos[1];
-        List<Float[]> nearestTerrainPos = getNearestTerrainPositions(x, y, currentTerrainPosX, currentTerrainPosY);
+        // List<Float[]> nearestTerrainPos = getNearestTerrainPositions(x, y,
+        // currentTerrainPosX, currentTerrainPosY);
+        List<Float[]> nearestTerrainPos = getNextTerrainPositions(x, y, currentTerrainPosX, currentTerrainPosY);
         nearestTerrainPos.add(terrainPos);
 
         List<Terrain> terrains = new ArrayList<>();
+        int terrainCount = 1;
         for (Float[] currNearestTerrainPos : nearestTerrainPos) {
+            System.out.println("[TerrainHandler:: getTerrains] " + "[" + terrainCount + "] Generating terrain at x: "
+                    + currNearestTerrainPos[0] + ", y: " + currNearestTerrainPos[1]);
+            terrainCount++;
             Float px = currNearestTerrainPos[0];
             Float py = currNearestTerrainPos[1];
 
@@ -140,9 +207,9 @@ public class TerrianHandler {
         return terrains;
     }
 
-    public static boolean terrainExistsInTerrainData(float terrainPosX, float terrainPosY, List<Terrain> terrainData) {
-        for (Terrain currTerrain : terrainData) {
-            if (terrainPosX == currTerrain.getPosX() && terrainPosY == currTerrain.getPosY()) {
+    public static boolean terrainExistsInTerrainData(float terrainPosX, float terrainPosY, List<Float> terrainData) {
+        for (int i = 0; i < terrainData.size(); i += 2) {
+            if (terrainPosX == terrainData.get(i) && terrainPosY == terrainData.get(i + 1)) {
                 return true;
             }
         }
@@ -181,39 +248,11 @@ public class TerrianHandler {
                 "[Terrain Handler] Terrain cordinatea. x:" + newTerrain.getPosX() + ", y:" + newTerrain.getPosY());
         System.out.println("+==========================================================================+");
 
-        int giantRockSize = 5; // size is count from the start point
-
-        List<Float[]> terrainObjectBoundries = new ArrayList<>();
-
-        int min = 1;
-        int max = 6;
-
         TileType[][] tilesType = ForrestBiome.generate();
 
         for (int i = 0; i < iterationLength - 1; i++) {
             for (int j = 0; j < iterationLength - 1; j++) {
-                Float[] currPoint = new Float[] { posX, posY };
-                if(isPointInsideAny(currPoint, terrainObjectBoundries)) { posX += defaultTileSize; continue; }
-
                 Tile.Builder newTile = Tile.newBuilder();
-
-                // // Generate random number between min and max(inclusive)
-                // int tileTypeIndex = (int) (Math.random() * (max - min + 1)) + min;
-                // TileType tileType = getTileType(tileTypeIndex);
-
-                if (tilesType[j][i] == TileType.GIANT_ROCK) {
-                    Float[] fullRect = getObjectRect(posX, posY, giantRockSize);
-                    if (canGenerateObject(fullRect,x, y, terrainObjectBoundries)) {
-                        generateGiantRock(giantRockSize, currPoint, newTerrain);
-                        terrainObjectBoundries.add(fullRect);
-                         posX += defaultTileSize;
-                        continue;
-                    } else {
-                        System.out.println("[Terrain Handler] Cannot create object due to overlap.");
-                        // tileTypeIndex = (int) (Math.random() * (5 - min + 1)) + min;
-                        // tileType = getTileType(tileTypeIndex);
-                    }
-                }
 
                 newTile = Tile.newBuilder()
                         .setPosX(posX)
@@ -238,14 +277,15 @@ public class TerrianHandler {
     }
 
     private static Float[] getObjectRect(float posX, float posY, int size) {
-        float posMaxX = posX + (defaultTileSize * (size-1));
-        float posMaxY = posY - (defaultTileSize * (size-1));
+        float posMaxX = posX + (defaultTileSize * (size - 1));
+        float posMaxY = posY - (defaultTileSize * (size - 1));
 
         return new Float[] { posX, posY, posMaxX, posMaxY };
     }
 
-    private static boolean canGenerateObject(Float[] arrOfSize4, float terrainX, float terrainY, List<Float[]> objectsGenerated) {
-        if(arrOfSize4[2] > terrainX + defaultTerrainMargin || arrOfSize4[3] < terrainY - defaultTerrainMargin) {
+    private static boolean canGenerateObject(Float[] arrOfSize4, float terrainX, float terrainY,
+            List<Float[]> objectsGenerated) {
+        if (arrOfSize4[2] > terrainX + defaultTerrainMargin || arrOfSize4[3] < terrainY - defaultTerrainMargin) {
             System.out.println("[Terrain Handler] Object out of terrain bounds");
             return false;
         }
@@ -257,18 +297,18 @@ public class TerrianHandler {
         float posX = position[0];
         float posY = position[1];
 
-        float posMaxX = posX + (defaultTileSize * (size-1));
-        float posMaxY = posY - (defaultTileSize * (size-1));
+        float posMaxX = posX + (defaultTileSize * (size - 1));
+        float posMaxY = posY - (defaultTileSize * (size - 1));
 
         float centrePosX = (posX + posMaxX) / 2.0f;
         float centrePosY = (posY + posMaxY) / 2.0f;
 
         System.out.println("[Terrain Handler Rock Generation begin] _______________________________________________");
-        for(int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             System.out.println("------------------------");
-            for(int j = 0; j < size; j++) {
+            for (int j = 0; j < size; j++) {
                 Tile.Builder builder = Tile.newBuilder();
-                if(posX == centrePosX && posY == centrePosY) {
+                if (posX == centrePosX && posY == centrePosY) {
                     builder = Tile.newBuilder()
                             .setPosX(posX)
                             .setPosY(posY)
@@ -294,7 +334,8 @@ public class TerrianHandler {
     public static boolean isPointInsideAny(Float[] point, List<Float[]> rectangles) {
         for (Float[] rect : rectangles) {
             if (isPointInsideRect(point, rect)) {
-                System.out.println("[Terrain Handler] Point is already generated inside an object. x:" + point[0] + " ,y:" + point[1]);
+                System.out.println("[Terrain Handler] Point is already generated inside an object. x:" + point[0]
+                        + " ,y:" + point[1]);
                 return true;
             }
         }
@@ -314,23 +355,23 @@ public class TerrianHandler {
         float x = point[0];
         float y = point[1];
 
-        float left   = Math.min(rect[0], rect[2]);
-        float right  = Math.max(rect[0], rect[2]);
-        float top    = Math.max(rect[1], rect[3]);
+        float left = Math.min(rect[0], rect[2]);
+        float right = Math.max(rect[0], rect[2]);
+        float top = Math.max(rect[1], rect[3]);
         float bottom = Math.min(rect[1], rect[3]);
 
         return (x >= left && x <= right && y <= top && y >= bottom);
     }
 
     private static boolean isOverlap(Float[] a, Float[] b) {
-        float aLeft   = Math.min(a[0], a[2]);
-        float aRight  = Math.max(a[0], a[2]);
-        float aTop    = Math.max(a[1], a[3]);
+        float aLeft = Math.min(a[0], a[2]);
+        float aRight = Math.max(a[0], a[2]);
+        float aTop = Math.max(a[1], a[3]);
         float aBottom = Math.min(a[1], a[3]);
 
-        float bLeft   = Math.min(b[0], b[2]);
-        float bRight  = Math.max(b[0], b[2]);
-        float bTop    = Math.max(b[1], b[3]);
+        float bLeft = Math.min(b[0], b[2]);
+        float bRight = Math.max(b[0], b[2]);
+        float bTop = Math.max(b[1], b[3]);
         float bBottom = Math.min(b[1], b[3]);
 
         return !(aRight <= bLeft || aLeft >= bRight || aBottom >= bTop || aTop <= bBottom);

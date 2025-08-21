@@ -24,13 +24,17 @@ public final class ClientRequestOuterClass {
      */
     CLIENT_CONNECTION(0),
     /**
-     * <code>TILE_GENERATION = 1;</code>
+     * <code>CLIENT_DISCONNECTION = 1;</code>
      */
-    TILE_GENERATION(1),
+    CLIENT_DISCONNECTION(1),
     /**
-     * <code>CLIENT_UPDATE = 2;</code>
+     * <code>TILE_GENERATION = 2;</code>
      */
-    CLIENT_UPDATE(2),
+    TILE_GENERATION(2),
+    /**
+     * <code>CLIENT_UPDATE = 3;</code>
+     */
+    CLIENT_UPDATE(3),
     UNRECOGNIZED(-1),
     ;
 
@@ -39,13 +43,17 @@ public final class ClientRequestOuterClass {
      */
     public static final int CLIENT_CONNECTION_VALUE = 0;
     /**
-     * <code>TILE_GENERATION = 1;</code>
+     * <code>CLIENT_DISCONNECTION = 1;</code>
      */
-    public static final int TILE_GENERATION_VALUE = 1;
+    public static final int CLIENT_DISCONNECTION_VALUE = 1;
     /**
-     * <code>CLIENT_UPDATE = 2;</code>
+     * <code>TILE_GENERATION = 2;</code>
      */
-    public static final int CLIENT_UPDATE_VALUE = 2;
+    public static final int TILE_GENERATION_VALUE = 2;
+    /**
+     * <code>CLIENT_UPDATE = 3;</code>
+     */
+    public static final int CLIENT_UPDATE_VALUE = 3;
 
 
     public final int getNumber() {
@@ -73,8 +81,9 @@ public final class ClientRequestOuterClass {
     public static ClientRequestType forNumber(int value) {
       switch (value) {
         case 0: return CLIENT_CONNECTION;
-        case 1: return TILE_GENERATION;
-        case 2: return CLIENT_UPDATE;
+        case 1: return CLIENT_DISCONNECTION;
+        case 2: return TILE_GENERATION;
+        case 3: return CLIENT_UPDATE;
         default: return null;
       }
     }
@@ -739,10 +748,10 @@ public final class ClientRequestOuterClass {
       "\n\023ClientRequest.proto\022\013DnD.service\"U\n\rCl" +
       "ientRequest\022/\n\007reqType\030\001 \001(\0162\036.DnD.servi" +
       "ce.ClientRequestType\022\023\n\013requestData\030\002 \001(" +
-      "\014*R\n\021ClientRequestType\022\025\n\021CLIENT_CONNECT" +
-      "ION\020\000\022\023\n\017TILE_GENERATION\020\001\022\021\n\rCLIENT_UPD" +
-      "ATE\020\002B&\n\013DnD.serviceB\027ClientRequestOuter" +
-      "Classb\006proto3"
+      "\014*l\n\021ClientRequestType\022\025\n\021CLIENT_CONNECT" +
+      "ION\020\000\022\030\n\024CLIENT_DISCONNECTION\020\001\022\023\n\017TILE_" +
+      "GENERATION\020\002\022\021\n\rCLIENT_UPDATE\020\003B&\n\013DnD.s" +
+      "erviceB\027ClientRequestOuterClassb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
