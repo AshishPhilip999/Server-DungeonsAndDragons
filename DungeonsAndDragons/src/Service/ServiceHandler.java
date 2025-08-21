@@ -6,7 +6,10 @@ import java.util.*;
 
 import DnD.Player.PlayerOuterClass.Player;
 import DnD.Terrain.TerrianHandler;
+import DnD.Terrain.TileItemHandler;
 import DnD.Terrain.TerrainOuterClass.Terrain;
+import DnD.Terrain.TileItemDataOuterClass.TileItemData;
+import DnD.Terrain.TileItemDataOuterClass.TileItemDataType;
 import DnD.service.ClientOuterClass;
 import DnD.service.ClientRequestOuterClass;
 import DnD.service.ClientOuterClass.Client;
@@ -41,5 +44,21 @@ public class ServiceHandler {
 
     public static void handleClientUpdateRequest(Client client) throws Exception {
         SuccessfulService.handleSuccessfullPlayerUpdate(client);
+    }
+
+    public static void handleTileItemUpdate(TileItemData tileItem, Client client) {
+        TileItemDataType type = tileItem.getType();
+
+        switch (type) {
+            case DELETE:
+                TileItemHandler.deleteTile(tileItem);
+                System.out.println("[ServiceHandler:: handleTileItemUpdate ] tile deleted successfully at X: " + tileItem.getPosX() + ", Y:" + tileItem.getPosY());
+                SuccessfulService.handleSuccessfullTileItemUpdate(tileItem, client);
+                break;
+            case UPDATE:
+                break;
+            default:
+                break;
+        }
     }
 }

@@ -4,16 +4,20 @@ syntax = "proto3";
 
 package DnD.service;
 
+import "Client.proto";
+
 option java_package = "DnD.service";
 option java_outer_classname = "ClientRequestOuterClass";
 
 message ClientRequest {
-    ClientRequestType reqType = 1;
-    bytes requestData = 2;
+    Client client = 1;
+    ClientRequestType reqType = 2;
+    bytes requestData = 3;
 }
 
 enum ClientRequestType {
     CLIENT_CONNECTION = 0;
     TILE_GENERATION = 1;
     CLIENT_UPDATE = 2;
+    TILE_ITEM_UPDATE_REQUEST = 3;
 }
