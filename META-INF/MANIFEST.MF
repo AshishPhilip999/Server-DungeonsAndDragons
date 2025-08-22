@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Main-Class: ServerHandler.ServerListener
+Class-Path: DungeonsAndDragons/lib/protobuf-java-3.10.0.jar
+Created-By: 17.0.16 (Homebrew)
+

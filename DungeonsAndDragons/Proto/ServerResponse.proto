@@ -8,8 +8,10 @@ option java_outer_classname = "ServerResponseOuterClass";
 enum ServerResponseType {
     CONNECTION_SUCCESS = 0;
     CONNECTION_FAILURE = 1;
-    TILE_GENERATION_RESPONSE = 2;
-    PLAYER_UPDATE = 3;
+    CLIENT_DISCONNECTED = 2;
+
+    TILE_GENERATION_RESPONSE = 3;
+    PLAYER_UPDATE = 4;
 }
 
 message ServerResponse {

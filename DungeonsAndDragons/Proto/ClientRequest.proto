@@ -14,6 +14,7 @@ message ClientRequest {
 
 enum ClientRequestType {
     CLIENT_CONNECTION = 0;
-    TILE_GENERATION = 1;
-    CLIENT_UPDATE = 2;
+    CLIENT_DISCONNECTION = 1;
+    TILE_GENERATION = 2;
+    CLIENT_UPDATE = 3;
 }

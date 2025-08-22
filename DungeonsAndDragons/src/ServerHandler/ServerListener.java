@@ -49,7 +49,16 @@ public class ServerListener {
             // Read 4-byte length
             byte[] lengthBytes = input.readNBytes(4);
             if (lengthBytes.length < 4) {
-                System.out.println("[Server] Client disconnected");
+                UUID clientToRemove = new UUID(0, 0);
+                for (Map.Entry<UUID, OutputStream> connection : clientConnections.entrySet()) {
+                    if (connection.getValue() == output) {
+                        clientToRemove = connection.getKey();
+                    }
+                }
+                clientConnections.remove(clientToRemove);
+                System.out.println("[Server Listener:: handleRequest] Removed client " + clientToRemove);
+                socket.close();
+                System.out.println("[Server Listener:: handleRequest] Client disconnected");
                 break;
             }
 
@@ -73,11 +82,18 @@ public class ServerListener {
             case CLIENT_CONNECTION:
                 Client clientData = Client.parseFrom(request.getRequestData());
                 System.out.println("[Server Listener] Client connection request received from [client ID: "
-                        + clientData.getClientID() + "]" + " [port number: " + clientData.getPortNumber() + "]"
-                        + " [local address: " + clientData.getLocalAddress() + "].");
+                        + clientData.getClientID() + "]");
                 System.out.println();
 
                 ServiceHandler.handleConnectionRequest(clientStream, clientData);
+                break;
+
+            case CLIENT_DISCONNECTION:
+                Client clientDataDisconnection = Client.parseFrom(request.getRequestData());
+                System.out.println("[Server Listener] Client Dis-Connection request received from [client ID: "
+                        + clientDataDisconnection.getClientID() + "]");
+                System.out.println();
+                ServiceHandler.handleDisconnectionRequest(clientDataDisconnection);
                 break;
 
             case TILE_GENERATION:

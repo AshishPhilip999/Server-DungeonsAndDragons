@@ -28,13 +28,17 @@ public final class ServerResponseOuterClass {
      */
     CONNECTION_FAILURE(1),
     /**
-     * <code>TILE_GENERATION_RESPONSE = 2;</code>
+     * <code>CLIENT_DISCONNECTED = 2;</code>
      */
-    TILE_GENERATION_RESPONSE(2),
+    CLIENT_DISCONNECTED(2),
     /**
-     * <code>PLAYER_UPDATE = 3;</code>
+     * <code>TILE_GENERATION_RESPONSE = 3;</code>
      */
-    PLAYER_UPDATE(3),
+    TILE_GENERATION_RESPONSE(3),
+    /**
+     * <code>PLAYER_UPDATE = 4;</code>
+     */
+    PLAYER_UPDATE(4),
     UNRECOGNIZED(-1),
     ;
 
@@ -47,13 +51,17 @@ public final class ServerResponseOuterClass {
      */
     public static final int CONNECTION_FAILURE_VALUE = 1;
     /**
-     * <code>TILE_GENERATION_RESPONSE = 2;</code>
+     * <code>CLIENT_DISCONNECTED = 2;</code>
      */
-    public static final int TILE_GENERATION_RESPONSE_VALUE = 2;
+    public static final int CLIENT_DISCONNECTED_VALUE = 2;
     /**
-     * <code>PLAYER_UPDATE = 3;</code>
+     * <code>TILE_GENERATION_RESPONSE = 3;</code>
      */
-    public static final int PLAYER_UPDATE_VALUE = 3;
+    public static final int TILE_GENERATION_RESPONSE_VALUE = 3;
+    /**
+     * <code>PLAYER_UPDATE = 4;</code>
+     */
+    public static final int PLAYER_UPDATE_VALUE = 4;
 
 
     public final int getNumber() {
@@ -82,8 +90,9 @@ public final class ServerResponseOuterClass {
       switch (value) {
         case 0: return CONNECTION_SUCCESS;
         case 1: return CONNECTION_FAILURE;
-        case 2: return TILE_GENERATION_RESPONSE;
-        case 3: return PLAYER_UPDATE;
+        case 2: return CLIENT_DISCONNECTED;
+        case 3: return TILE_GENERATION_RESPONSE;
+        case 4: return PLAYER_UPDATE;
         default: return null;
       }
     }
@@ -748,11 +757,11 @@ public final class ServerResponseOuterClass {
       "\n\024ServerResponse.proto\022\013DnD.service\"Y\n\016S" +
       "erverResponse\0221\n\010response\030\001 \001(\0162\037.DnD.se" +
       "rvice.ServerResponseType\022\024\n\014responseData" +
-      "\030\002 \001(\014*u\n\022ServerResponseType\022\026\n\022CONNECTI" +
-      "ON_SUCCESS\020\000\022\026\n\022CONNECTION_FAILURE\020\001\022\034\n\030" +
-      "TILE_GENERATION_RESPONSE\020\002\022\021\n\rPLAYER_UPD" +
-      "ATE\020\003B\'\n\013DnD.serviceB\030ServerResponseOute" +
-      "rClassb\006proto3"
+      "\030\002 \001(\014*\216\001\n\022ServerResponseType\022\026\n\022CONNECT" +
+      "ION_SUCCESS\020\000\022\026\n\022CONNECTION_FAILURE\020\001\022\027\n" +
+      "\023CLIENT_DISCONNECTED\020\002\022\034\n\030TILE_GENERATIO" +
+      "N_RESPONSE\020\003\022\021\n\rPLAYER_UPDATE\020\004B\'\n\013DnD.s" +
+      "erviceB\030ServerResponseOuterClassb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
