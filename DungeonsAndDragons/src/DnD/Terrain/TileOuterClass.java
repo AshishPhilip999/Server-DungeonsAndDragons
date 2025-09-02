@@ -40,6 +40,12 @@ public final class TileOuterClass {
      * @return The type.
      */
     DnD.Terrain.TileTypeOuterClass.TileType getType();
+
+    /**
+     * <code>int32 variant = 4;</code>
+     * @return The variant.
+     */
+    int getVariant();
   }
   /**
    * Protobuf type {@code Dnd.Terrain.Tile}
@@ -101,6 +107,11 @@ public final class TileOuterClass {
               int rawValue = input.readEnum();
 
               type_ = rawValue;
+              break;
+            }
+            case 32: {
+
+              variant_ = input.readInt32();
               break;
             }
             default: {
@@ -174,6 +185,16 @@ public final class TileOuterClass {
       return result == null ? DnD.Terrain.TileTypeOuterClass.TileType.UNRECOGNIZED : result;
     }
 
+    public static final int VARIANT_FIELD_NUMBER = 4;
+    private int variant_;
+    /**
+     * <code>int32 variant = 4;</code>
+     * @return The variant.
+     */
+    public int getVariant() {
+      return variant_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -197,6 +218,9 @@ public final class TileOuterClass {
       if (type_ != DnD.Terrain.TileTypeOuterClass.TileType.STANDARD_GRASS.getNumber()) {
         output.writeEnum(3, type_);
       }
+      if (variant_ != 0) {
+        output.writeInt32(4, variant_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -217,6 +241,10 @@ public final class TileOuterClass {
       if (type_ != DnD.Terrain.TileTypeOuterClass.TileType.STANDARD_GRASS.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(3, type_);
+      }
+      if (variant_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, variant_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -240,6 +268,8 @@ public final class TileOuterClass {
           != java.lang.Float.floatToIntBits(
               other.getPosY())) return false;
       if (type_ != other.type_) return false;
+      if (getVariant()
+          != other.getVariant()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -259,6 +289,8 @@ public final class TileOuterClass {
           getPosY());
       hash = (37 * hash) + TYPE_FIELD_NUMBER;
       hash = (53 * hash) + type_;
+      hash = (37 * hash) + VARIANT_FIELD_NUMBER;
+      hash = (53 * hash) + getVariant();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -398,6 +430,8 @@ public final class TileOuterClass {
 
         type_ = 0;
 
+        variant_ = 0;
+
         return this;
       }
 
@@ -427,6 +461,7 @@ public final class TileOuterClass {
         result.posX_ = posX_;
         result.posY_ = posY_;
         result.type_ = type_;
+        result.variant_ = variant_;
         onBuilt();
         return result;
       }
@@ -483,6 +518,9 @@ public final class TileOuterClass {
         }
         if (other.type_ != 0) {
           setTypeValue(other.getTypeValue());
+        }
+        if (other.getVariant() != 0) {
+          setVariant(other.getVariant());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -624,6 +662,36 @@ public final class TileOuterClass {
         onChanged();
         return this;
       }
+
+      private int variant_ ;
+      /**
+       * <code>int32 variant = 4;</code>
+       * @return The variant.
+       */
+      public int getVariant() {
+        return variant_;
+      }
+      /**
+       * <code>int32 variant = 4;</code>
+       * @param value The variant to set.
+       * @return This builder for chaining.
+       */
+      public Builder setVariant(int value) {
+        
+        variant_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 variant = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearVariant() {
+        
+        variant_ = 0;
+        onChanged();
+        return this;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -692,9 +760,10 @@ public final class TileOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\nTile.proto\022\013Dnd.Terrain\032\016TileType.prot" +
-      "o\"G\n\004Tile\022\014\n\004posX\030\001 \001(\002\022\014\n\004posY\030\002 \001(\002\022#\n" +
-      "\004type\030\003 \001(\0162\025.Dnd.Terrain.TileTypeB\035\n\013Dn" +
-      "D.TerrainB\016TileOuterClassb\006proto3"
+      "o\"X\n\004Tile\022\014\n\004posX\030\001 \001(\002\022\014\n\004posY\030\002 \001(\002\022#\n" +
+      "\004type\030\003 \001(\0162\025.Dnd.Terrain.TileType\022\017\n\007va" +
+      "riant\030\004 \001(\005B\035\n\013DnD.TerrainB\016TileOuterCla" +
+      "ssb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -706,7 +775,7 @@ public final class TileOuterClass {
     internal_static_Dnd_Terrain_Tile_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Dnd_Terrain_Tile_descriptor,
-        new java.lang.String[] { "PosX", "PosY", "Type", });
+        new java.lang.String[] { "PosX", "PosY", "Type", "Variant", });
     DnD.Terrain.TileTypeOuterClass.getDescriptor();
   }
 
