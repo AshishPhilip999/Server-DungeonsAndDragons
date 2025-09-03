@@ -100,7 +100,7 @@ public class ServerListener {
                 System.out.println("[Server Listener] Received Tile generation request");
                 Client client = Client.parseFrom(request.getRequestData());
                 Player playerData = client.getPlayer();
-                ServiceHandler.handleTerrainGenerationRequest(playerData);
+                ServiceHandler.handleTerrainGenerationRequest(playerData, client);
                 break;
 
             case CLIENT_UPDATE:

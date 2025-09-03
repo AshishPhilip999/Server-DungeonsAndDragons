@@ -26,9 +26,7 @@ public class ServiceHandler {
         currentUUID = clientUUID;
 
         System.out.println();
-        System.out.println("[Service Handler] Connected to client of [client ID: " + clientData.getClientID() + "]"
-                + " [port number: " + clientData.getPortNumber() + "]" + " [local address: "
-                + clientData.getLocalAddress() + "].");
+        System.out.println("[Service Handler] Connected to client of [client ID: " + clientData.getClientID() + "]");
         SuccessfulService.handleSuccessfullConnectionRequest(clientData);
     }
 
@@ -44,15 +42,15 @@ public class ServiceHandler {
         }
     }
 
-    public static void handleTerrainGenerationRequest(Player playerData) throws Exception {
+    public static void handleTerrainGenerationRequest(Player playerData, Client client) throws Exception {
         System.out.println("[Service Handler] Player Current Position. " + "x: " + playerData.getPosX() + " y: "
                 + playerData.getPosY());
         // List<Float> terrainData = playerData.getTerrainData().getExistingTerrainPositionsList();
-        List<Float> terrainData = new ArrayList<>();
+        List<Float> terrainData = playerData.getTerrainData().getExistingTerrainPositionsList();
         List<Terrain> terrain = TerrianHandler.getTerrains(playerData.getPosX(), playerData.getPosY(),
                 playerData.getCurrentTerrainPosX(), playerData.getCurrentTerrainPosY(), terrainData);
 
-        Client client = clientConnections.get(currentUUID);
+        System.out.println("[ServiceHandler:: handleTerrainGenerationRequest] Sending terrains count: " + terrain.size());
         SuccessfulService.handleSuccessfullTerrainGeneration(terrain, client);
     }
 

@@ -12,4 +12,5 @@ message Tile {
     float posY = 2;
 
     TileType type = 3;
+    int32 variant = 4;
 }

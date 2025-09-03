@@ -19,24 +19,6 @@ public final class ClientOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>int32 portNumber = 1;</code>
-     * @return The portNumber.
-     */
-    int getPortNumber();
-
-    /**
-     * <code>string localAddress = 2;</code>
-     * @return The localAddress.
-     */
-    java.lang.String getLocalAddress();
-    /**
-     * <code>string localAddress = 2;</code>
-     * @return The bytes for localAddress.
-     */
-    com.google.protobuf.ByteString
-        getLocalAddressBytes();
-
-    /**
      * <code>string clientID = 3;</code>
      * @return The clientID.
      */
@@ -76,7 +58,6 @@ public final class ClientOuterClass {
       super(builder);
     }
     private Client() {
-      localAddress_ = "";
       clientID_ = "";
     }
 
@@ -110,17 +91,6 @@ public final class ClientOuterClass {
             case 0:
               done = true;
               break;
-            case 8: {
-
-              portNumber_ = input.readInt32();
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              localAddress_ = s;
-              break;
-            }
             case 26: {
               java.lang.String s = input.readStringRequireUtf8();
 
@@ -170,52 +140,6 @@ public final class ClientOuterClass {
       return DnD.service.ClientOuterClass.internal_static_DnD_service_Client_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               DnD.service.ClientOuterClass.Client.class, DnD.service.ClientOuterClass.Client.Builder.class);
-    }
-
-    public static final int PORTNUMBER_FIELD_NUMBER = 1;
-    private int portNumber_;
-    /**
-     * <code>int32 portNumber = 1;</code>
-     * @return The portNumber.
-     */
-    public int getPortNumber() {
-      return portNumber_;
-    }
-
-    public static final int LOCALADDRESS_FIELD_NUMBER = 2;
-    private volatile java.lang.Object localAddress_;
-    /**
-     * <code>string localAddress = 2;</code>
-     * @return The localAddress.
-     */
-    public java.lang.String getLocalAddress() {
-      java.lang.Object ref = localAddress_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        localAddress_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string localAddress = 2;</code>
-     * @return The bytes for localAddress.
-     */
-    public com.google.protobuf.ByteString
-        getLocalAddressBytes() {
-      java.lang.Object ref = localAddress_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        localAddress_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
     }
 
     public static final int CLIENTID_FIELD_NUMBER = 3;
@@ -291,12 +215,6 @@ public final class ClientOuterClass {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (portNumber_ != 0) {
-        output.writeInt32(1, portNumber_);
-      }
-      if (!getLocalAddressBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, localAddress_);
-      }
       if (!getClientIDBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, clientID_);
       }
@@ -312,13 +230,6 @@ public final class ClientOuterClass {
       if (size != -1) return size;
 
       size = 0;
-      if (portNumber_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, portNumber_);
-      }
-      if (!getLocalAddressBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, localAddress_);
-      }
       if (!getClientIDBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, clientID_);
       }
@@ -341,10 +252,6 @@ public final class ClientOuterClass {
       }
       DnD.service.ClientOuterClass.Client other = (DnD.service.ClientOuterClass.Client) obj;
 
-      if (getPortNumber()
-          != other.getPortNumber()) return false;
-      if (!getLocalAddress()
-          .equals(other.getLocalAddress())) return false;
       if (!getClientID()
           .equals(other.getClientID())) return false;
       if (hasPlayer() != other.hasPlayer()) return false;
@@ -363,10 +270,6 @@ public final class ClientOuterClass {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + PORTNUMBER_FIELD_NUMBER;
-      hash = (53 * hash) + getPortNumber();
-      hash = (37 * hash) + LOCALADDRESS_FIELD_NUMBER;
-      hash = (53 * hash) + getLocalAddress().hashCode();
       hash = (37 * hash) + CLIENTID_FIELD_NUMBER;
       hash = (53 * hash) + getClientID().hashCode();
       if (hasPlayer()) {
@@ -506,10 +409,6 @@ public final class ClientOuterClass {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        portNumber_ = 0;
-
-        localAddress_ = "";
-
         clientID_ = "";
 
         if (playerBuilder_ == null) {
@@ -544,8 +443,6 @@ public final class ClientOuterClass {
       @java.lang.Override
       public DnD.service.ClientOuterClass.Client buildPartial() {
         DnD.service.ClientOuterClass.Client result = new DnD.service.ClientOuterClass.Client(this);
-        result.portNumber_ = portNumber_;
-        result.localAddress_ = localAddress_;
         result.clientID_ = clientID_;
         if (playerBuilder_ == null) {
           result.player_ = player_;
@@ -600,13 +497,6 @@ public final class ClientOuterClass {
 
       public Builder mergeFrom(DnD.service.ClientOuterClass.Client other) {
         if (other == DnD.service.ClientOuterClass.Client.getDefaultInstance()) return this;
-        if (other.getPortNumber() != 0) {
-          setPortNumber(other.getPortNumber());
-        }
-        if (!other.getLocalAddress().isEmpty()) {
-          localAddress_ = other.localAddress_;
-          onChanged();
-        }
         if (!other.getClientID().isEmpty()) {
           clientID_ = other.clientID_;
           onChanged();
@@ -640,112 +530,6 @@ public final class ClientOuterClass {
             mergeFrom(parsedMessage);
           }
         }
-        return this;
-      }
-
-      private int portNumber_ ;
-      /**
-       * <code>int32 portNumber = 1;</code>
-       * @return The portNumber.
-       */
-      public int getPortNumber() {
-        return portNumber_;
-      }
-      /**
-       * <code>int32 portNumber = 1;</code>
-       * @param value The portNumber to set.
-       * @return This builder for chaining.
-       */
-      public Builder setPortNumber(int value) {
-        
-        portNumber_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>int32 portNumber = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearPortNumber() {
-        
-        portNumber_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object localAddress_ = "";
-      /**
-       * <code>string localAddress = 2;</code>
-       * @return The localAddress.
-       */
-      public java.lang.String getLocalAddress() {
-        java.lang.Object ref = localAddress_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          localAddress_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string localAddress = 2;</code>
-       * @return The bytes for localAddress.
-       */
-      public com.google.protobuf.ByteString
-          getLocalAddressBytes() {
-        java.lang.Object ref = localAddress_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          localAddress_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string localAddress = 2;</code>
-       * @param value The localAddress to set.
-       * @return This builder for chaining.
-       */
-      public Builder setLocalAddress(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        localAddress_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string localAddress = 2;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearLocalAddress() {
-        
-        localAddress_ = getDefaultInstance().getLocalAddress();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string localAddress = 2;</code>
-       * @param value The bytes for localAddress to set.
-       * @return This builder for chaining.
-       */
-      public Builder setLocalAddressBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        localAddress_ = value;
-        onChanged();
         return this;
       }
 
@@ -1011,10 +795,9 @@ public final class ClientOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\014Client.proto\022\013DnD.service\032\014Player.prot" +
-      "o\"h\n\006Client\022\022\n\nportNumber\030\001 \001(\005\022\024\n\014local" +
-      "Address\030\002 \001(\t\022\020\n\010clientID\030\003 \001(\t\022\"\n\006playe" +
-      "r\030\004 \001(\0132\022.DnD.Player.PlayerB\037\n\013DnD.servi" +
-      "ceB\020ClientOuterClassb\006proto3"
+      "o\">\n\006Client\022\020\n\010clientID\030\003 \001(\t\022\"\n\006player\030" +
+      "\004 \001(\0132\022.DnD.Player.PlayerB\037\n\013DnD.service" +
+      "B\020ClientOuterClassb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -1026,7 +809,7 @@ public final class ClientOuterClass {
     internal_static_DnD_service_Client_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DnD_service_Client_descriptor,
-        new java.lang.String[] { "PortNumber", "LocalAddress", "ClientID", "Player", });
+        new java.lang.String[] { "ClientID", "Player", });
     DnD.Player.PlayerOuterClass.getDescriptor();
   }
 
