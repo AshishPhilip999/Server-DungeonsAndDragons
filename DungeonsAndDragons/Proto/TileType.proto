@@ -13,4 +13,6 @@ enum TileType {
     ROCK = 4;
     GIANT_ROCK = 5;
     WATER_BODY = 6;
+
+    WOODEN_CABIN = 7;
 }

@@ -13,4 +13,12 @@ message Tile {
 
     TileType type = 3;
     int32 variant = 4;
+
+    // Decides where to spawn.
+    repeated int32 spawnPositionIndicies = 5;
+    // Decides what to spawn.
+    repeated int32 spawnPositionObjects = 6;
+
+    float tileOffSetX = 7;
+    float tileOffSetY = 8;
 }

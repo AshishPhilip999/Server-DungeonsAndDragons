@@ -47,6 +47,10 @@ public final class TileTypeOuterClass {
      * <code>WATER_BODY = 6;</code>
      */
     WATER_BODY(6),
+    /**
+     * <code>WOODEN_CABIN = 7;</code>
+     */
+    WOODEN_CABIN(7),
     UNRECOGNIZED(-1),
     ;
 
@@ -78,6 +82,10 @@ public final class TileTypeOuterClass {
      * <code>WATER_BODY = 6;</code>
      */
     public static final int WATER_BODY_VALUE = 6;
+    /**
+     * <code>WOODEN_CABIN = 7;</code>
+     */
+    public static final int WOODEN_CABIN_VALUE = 7;
 
 
     public final int getNumber() {
@@ -111,6 +119,7 @@ public final class TileTypeOuterClass {
         case 4: return ROCK;
         case 5: return GIANT_ROCK;
         case 6: return WATER_BODY;
+        case 7: return WOODEN_CABIN;
         default: return null;
       }
     }
@@ -172,12 +181,12 @@ public final class TileTypeOuterClass {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\016TileType.proto\022\013Dnd.Terrain*\210\001\n\010TileTy" +
+      "\n\016TileType.proto\022\013Dnd.Terrain*\232\001\n\010TileTy" +
       "pe\022\022\n\016STANDARD_GRASS\020\000\022\025\n\021LIGHT_PATCH_GR" +
       "ASS\020\001\022\024\n\020DARK_PATCH_GRASS\020\002\022\021\n\rSTANDARD_" +
       "TREE\020\003\022\010\n\004ROCK\020\004\022\016\n\nGIANT_ROCK\020\005\022\016\n\nWATE" +
-      "R_BODY\020\006B!\n\013DnD.TerrainB\022TileTypeOuterCl" +
-      "assb\006proto3"
+      "R_BODY\020\006\022\020\n\014WOODEN_CABIN\020\007B!\n\013DnD.Terrai" +
+      "nB\022TileTypeOuterClassb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

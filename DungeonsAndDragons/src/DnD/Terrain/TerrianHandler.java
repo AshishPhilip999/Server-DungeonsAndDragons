@@ -3,10 +3,13 @@ package DnD.Terrain;
 import java.lang.module.ModuleDescriptor.Builder;
 import java.util.*;
 
+import DnD.Terrain.Constants.TileSpawnPositionConstants;
+import DnD.Terrain.Constants.VariantRangeConstants;
 import DnD.Terrain.TerrainOuterClass.Terrain;
 import DnD.Terrain.TileOuterClass.Tile;
 import DnD.Terrain.TileOuterClass.TileOrBuilder;
 import DnD.Terrain.TileTypeOuterClass.TileType;
+import Generic.RandomRange;
 import MapGeneration.ForrestBiome;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -46,7 +49,7 @@ public class TerrianHandler {
 
     public static List<Float[]> getNextTerrainPositions(float posX, float posY, float currentTerrainPosX,
             float currentTerrainPosY) {
-        float threshold = 25.0f;
+        float threshold = 10.0f;
         /// Top Left threshold cordinates.
         float topLeftThresholdX = currentTerrainPosX - threshold;
         float topLeftThresholdY = currentTerrainPosY + threshold;
@@ -83,7 +86,7 @@ public class TerrianHandler {
 
         /// Diagonal Terrain Right.
         if (bottomRightXLimitReached && topLeftYLimitReached) {
-            Float[] nextTerrainCordinates = new Float[] { currentTerrainPosX - 100.0f,
+            Float[] nextTerrainCordinates = new Float[] { currentTerrainPosX + 100.0f,
                     currentTerrainPosY + 100.0f };
             nextTerrainsToLoad.add(nextTerrainCordinates);
         }
@@ -132,8 +135,9 @@ public class TerrianHandler {
 
         lock.lock();
         Float[] terrainPos = getCurrentTerrainPos(x, y);
-        System.out.println("[TerrainHandler:: getTerrains] Current Player terrain Position. x: " + terrainPos[0]
-                + ",y: " + terrainPos[1]);
+        // System.out.println("[TerrainHandler:: getTerrains] Current Player terrain
+        // Position. x: " + terrainPos[0]
+        // + ",y: " + terrainPos[1]);
         currentTerrainPosX = terrainPos[0];
         currentTerrainPosY = terrainPos[1];
         // List<Float[]> nearestTerrainPos = getNearestTerrainPositions(x, y,
@@ -144,8 +148,9 @@ public class TerrianHandler {
         List<Terrain> terrains = new ArrayList<>();
         int terrainCount = 1;
         for (Float[] currNearestTerrainPos : nearestTerrainPos) {
-            System.out.println("[TerrainHandler:: getTerrains] " + "[" + terrainCount + "] Generating terrain at x: "
-                    + currNearestTerrainPos[0] + ", y: " + currNearestTerrainPos[1]);
+            // System.out.println("[TerrainHandler:: getTerrains] " + "[" + terrainCount +
+            // "] Generating terrain at x: "
+            // + currNearestTerrainPos[0] + ", y: " + currNearestTerrainPos[1]);
             terrainCount++;
             Float px = currNearestTerrainPos[0];
             Float py = currNearestTerrainPos[1];
@@ -163,7 +168,8 @@ public class TerrianHandler {
                 continue;
             }
 
-            System.out.println("[Terrain Handler] Terrain exists at" + " x:" + px + " y:" + py);
+            // System.out.println("[Terrain Handler] Terrain exists at" + " x:" + px + " y:"
+            // + py);
             Terrain terr = terrainMapY.get(py);
 
             terrains.add(terr);
@@ -172,17 +178,22 @@ public class TerrianHandler {
 
         int index = 1;
         for (Terrain t : terrainsReturnCopy) {
-            System.out.println("[" + index + "] PosX:" + t.getPosX() + ", PosY:" + t.getPosY());
+            System.out.println("[" + index++ + "] PosX:" + t.getPosX() + ", PosY:" + t.getPosY());
         }
-        System.out.println("[TerrainHandler:: getTerrains] Total terrain count: " + terrainsReturnCopy.size());
+        // System.out.println("[TerrainHandler:: getTerrains] Total terrain count: " +
+        // terrainsReturnCopy.size());
         lock.unlock();
         return terrainsReturnCopy;
     }
 
     public static boolean terrainExistsInTerrainData(float terrainPosX, float terrainPosY, List<Float> terrainData) {
         for (int i = 0; i < terrainData.size(); i += 2) {
+            // System.out.println("[TerrainHandler:: terrainExistsInTerrainData] Checking
+            // terrain at: posX: " + terrainData.get(i) + ", posY: " +terrainData.get(i +
+            // 1));
             if (terrainPosX == terrainData.get(i) && terrainPosY == terrainData.get(i + 1)) {
-                System.out.println("[TerrainHandler:: terrainExistsInTerrainData] Terrain exists on client");
+                // System.out.println("[TerrainHandler:: terrainExistsInTerrainData] Terrain
+                // exists on client");
                 return true;
             }
         }
@@ -228,16 +239,50 @@ public class TerrianHandler {
                 Tile.Builder newTile = Tile.newBuilder();
                 int variantIndex = 0;
 
-                if (tilesType[i][j] == TileType.STANDARD_TREE) {
-                    int min = 0; // lower bound (inclusive)
-                    int max = 2; // upper bound (inclusive)
-                    Random rand = new Random();
-                    // nextInt(bound) generates a number from 0 (inclusive) to bound (exclusive)
-                    variantIndex = rand.nextInt((max - min) + 1) + min;
+                TileType tileType = tilesType[i][j];
+
+                Random rand = new Random();
+                newTile = Tile.newBuilder();
+
+                int min = 0; // lower bound (inclusive)
+                int max = 0; // upper bound (inclusive)
+
+                if (tileType == TileType.STANDARD_GRASS) {
+                    max = VariantRangeConstants.standardGrassVariantRange;
+                } else if (tileType == TileType.STANDARD_TREE) {
+                    max = VariantRangeConstants.standardTreeVariantRange;
+                } else if (tileType == TileType.ROCK) {
+                    max = VariantRangeConstants.rockVariantRange;
+                } else if (tileType == TileType.WOODEN_CABIN) {
+                    max = VariantRangeConstants.woodenCabinVariantRange;
+                    int maxSpawnPositions = RandomRange.range(0, TileSpawnPositionConstants.woodenCabinSpawnPositions);
+                    List<Integer> spawnPositions = TileSpawnPositionConstants.woodenCabinSpawnPositionsList();
+                    List<Integer> spawnObjects = TileSpawnPositionConstants.woodenCabinSpawnObjectsList();
+                    for (int index = 0; index <= maxSpawnPositions; index++) {
+                        int spawnPositionIndex = RandomRange.range(0, spawnPositions.size() - 1);
+                        int currSpawnIndex = spawnPositions.get(spawnPositionIndex);
+
+                        int spawnObjectIndex = RandomRange.range(0, spawnObjects.size() - 1);
+                        int spawnObject = spawnObjects.get(spawnObjectIndex);
+
+                        newTile.addSpawnPositionIndicies(currSpawnIndex);
+                        newTile.addSpawnPositionObjects(spawnObject);
+
+                        spawnPositions.remove(spawnPositionIndex);
+                        spawnObjects.remove(spawnObjectIndex);
+                    }
                 }
 
-                newTile = Tile.newBuilder()
-                        .setPosX(posX)
+                if (tileType != TileType.WOODEN_CABIN && tileType != TileType.LIGHT_PATCH_GRASS && tileType != TileType.WATER_BODY) {
+                    float offSetX = RandomRange.range(-0.4f, 0.4f);
+                    float offSetY = RandomRange.range(-0.4f, 0.4f);
+                    newTile.setTileOffSetX(offSetX);
+                    newTile.setTileOffSetY(offSetY);
+                }
+
+                variantIndex = RandomRange.range(min, max);
+
+                newTile.setPosX(posX)
                         .setPosY(posY)
                         .setType(tilesType[i][j])
                         .setVariant(variantIndex);
@@ -304,39 +349,4 @@ public class TerrianHandler {
 
         return !(aRight <= bLeft || aLeft >= bRight || aBottom >= bTop || aTop <= bBottom);
     }
-
-    private static TileType getTileType(int tileTypeIndex) {
-        switch (tileTypeIndex) {
-            case 1:
-                return TileType.STANDARD_GRASS;
-
-            case 2:
-                return TileType.LIGHT_PATCH_GRASS;
-
-            case 3:
-                return TileType.DARK_PATCH_GRASS;
-
-            case 4:
-                return TileType.STANDARD_TREE;
-
-            case 5:
-                return TileType.ROCK;
-
-            case 6:
-                return TileType.GIANT_ROCK;
-
-            default:
-                return null;
-        }
-    }
-}
-
-class ObjectGenerator {
-    float startPosition = -1.1f;
-    float endPosition = -1.1f;
-
-    int objectSpawnSize;
-    int spawnIteration;
-
-    float[] objectPosition = new float[] { -1, 1f, -1.1f };
 }

@@ -46,6 +46,76 @@ public final class TileOuterClass {
      * @return The variant.
      */
     int getVariant();
+
+    /**
+     * <pre>
+     * Decides where to spawn.
+     * </pre>
+     *
+     * <code>repeated int32 spawnPositionIndicies = 5;</code>
+     * @return A list containing the spawnPositionIndicies.
+     */
+    java.util.List<java.lang.Integer> getSpawnPositionIndiciesList();
+    /**
+     * <pre>
+     * Decides where to spawn.
+     * </pre>
+     *
+     * <code>repeated int32 spawnPositionIndicies = 5;</code>
+     * @return The count of spawnPositionIndicies.
+     */
+    int getSpawnPositionIndiciesCount();
+    /**
+     * <pre>
+     * Decides where to spawn.
+     * </pre>
+     *
+     * <code>repeated int32 spawnPositionIndicies = 5;</code>
+     * @param index The index of the element to return.
+     * @return The spawnPositionIndicies at the given index.
+     */
+    int getSpawnPositionIndicies(int index);
+
+    /**
+     * <pre>
+     * Decides what to spawn.
+     * </pre>
+     *
+     * <code>repeated int32 spawnPositionObjects = 6;</code>
+     * @return A list containing the spawnPositionObjects.
+     */
+    java.util.List<java.lang.Integer> getSpawnPositionObjectsList();
+    /**
+     * <pre>
+     * Decides what to spawn.
+     * </pre>
+     *
+     * <code>repeated int32 spawnPositionObjects = 6;</code>
+     * @return The count of spawnPositionObjects.
+     */
+    int getSpawnPositionObjectsCount();
+    /**
+     * <pre>
+     * Decides what to spawn.
+     * </pre>
+     *
+     * <code>repeated int32 spawnPositionObjects = 6;</code>
+     * @param index The index of the element to return.
+     * @return The spawnPositionObjects at the given index.
+     */
+    int getSpawnPositionObjects(int index);
+
+    /**
+     * <code>float tileOffSetX = 7;</code>
+     * @return The tileOffSetX.
+     */
+    float getTileOffSetX();
+
+    /**
+     * <code>float tileOffSetY = 8;</code>
+     * @return The tileOffSetY.
+     */
+    float getTileOffSetY();
   }
   /**
    * Protobuf type {@code Dnd.Terrain.Tile}
@@ -61,6 +131,8 @@ public final class TileOuterClass {
     }
     private Tile() {
       type_ = 0;
+      spawnPositionIndicies_ = emptyIntList();
+      spawnPositionObjects_ = emptyIntList();
     }
 
     @java.lang.Override
@@ -83,6 +155,7 @@ public final class TileOuterClass {
       if (extensionRegistry == null) {
         throw new java.lang.NullPointerException();
       }
+      int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -114,6 +187,58 @@ public final class TileOuterClass {
               variant_ = input.readInt32();
               break;
             }
+            case 40: {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+                spawnPositionIndicies_ = newIntList();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              spawnPositionIndicies_.addInt(input.readInt32());
+              break;
+            }
+            case 42: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000001) != 0) && input.getBytesUntilLimit() > 0) {
+                spawnPositionIndicies_ = newIntList();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                spawnPositionIndicies_.addInt(input.readInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 48: {
+              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
+                spawnPositionObjects_ = newIntList();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              spawnPositionObjects_.addInt(input.readInt32());
+              break;
+            }
+            case 50: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000002) != 0) && input.getBytesUntilLimit() > 0) {
+                spawnPositionObjects_ = newIntList();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                spawnPositionObjects_.addInt(input.readInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 61: {
+
+              tileOffSetX_ = input.readFloat();
+              break;
+            }
+            case 69: {
+
+              tileOffSetY_ = input.readFloat();
+              break;
+            }
             default: {
               if (!parseUnknownField(
                   input, unknownFields, extensionRegistry, tag)) {
@@ -129,6 +254,12 @@ public final class TileOuterClass {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
+          spawnPositionIndicies_.makeImmutable(); // C
+        }
+        if (((mutable_bitField0_ & 0x00000002) != 0)) {
+          spawnPositionObjects_.makeImmutable(); // C
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -195,6 +326,104 @@ public final class TileOuterClass {
       return variant_;
     }
 
+    public static final int SPAWNPOSITIONINDICIES_FIELD_NUMBER = 5;
+    private com.google.protobuf.Internal.IntList spawnPositionIndicies_;
+    /**
+     * <pre>
+     * Decides where to spawn.
+     * </pre>
+     *
+     * <code>repeated int32 spawnPositionIndicies = 5;</code>
+     * @return A list containing the spawnPositionIndicies.
+     */
+    public java.util.List<java.lang.Integer>
+        getSpawnPositionIndiciesList() {
+      return spawnPositionIndicies_;
+    }
+    /**
+     * <pre>
+     * Decides where to spawn.
+     * </pre>
+     *
+     * <code>repeated int32 spawnPositionIndicies = 5;</code>
+     * @return The count of spawnPositionIndicies.
+     */
+    public int getSpawnPositionIndiciesCount() {
+      return spawnPositionIndicies_.size();
+    }
+    /**
+     * <pre>
+     * Decides where to spawn.
+     * </pre>
+     *
+     * <code>repeated int32 spawnPositionIndicies = 5;</code>
+     * @param index The index of the element to return.
+     * @return The spawnPositionIndicies at the given index.
+     */
+    public int getSpawnPositionIndicies(int index) {
+      return spawnPositionIndicies_.getInt(index);
+    }
+    private int spawnPositionIndiciesMemoizedSerializedSize = -1;
+
+    public static final int SPAWNPOSITIONOBJECTS_FIELD_NUMBER = 6;
+    private com.google.protobuf.Internal.IntList spawnPositionObjects_;
+    /**
+     * <pre>
+     * Decides what to spawn.
+     * </pre>
+     *
+     * <code>repeated int32 spawnPositionObjects = 6;</code>
+     * @return A list containing the spawnPositionObjects.
+     */
+    public java.util.List<java.lang.Integer>
+        getSpawnPositionObjectsList() {
+      return spawnPositionObjects_;
+    }
+    /**
+     * <pre>
+     * Decides what to spawn.
+     * </pre>
+     *
+     * <code>repeated int32 spawnPositionObjects = 6;</code>
+     * @return The count of spawnPositionObjects.
+     */
+    public int getSpawnPositionObjectsCount() {
+      return spawnPositionObjects_.size();
+    }
+    /**
+     * <pre>
+     * Decides what to spawn.
+     * </pre>
+     *
+     * <code>repeated int32 spawnPositionObjects = 6;</code>
+     * @param index The index of the element to return.
+     * @return The spawnPositionObjects at the given index.
+     */
+    public int getSpawnPositionObjects(int index) {
+      return spawnPositionObjects_.getInt(index);
+    }
+    private int spawnPositionObjectsMemoizedSerializedSize = -1;
+
+    public static final int TILEOFFSETX_FIELD_NUMBER = 7;
+    private float tileOffSetX_;
+    /**
+     * <code>float tileOffSetX = 7;</code>
+     * @return The tileOffSetX.
+     */
+    public float getTileOffSetX() {
+      return tileOffSetX_;
+    }
+
+    public static final int TILEOFFSETY_FIELD_NUMBER = 8;
+    private float tileOffSetY_;
+    /**
+     * <code>float tileOffSetY = 8;</code>
+     * @return The tileOffSetY.
+     */
+    public float getTileOffSetY() {
+      return tileOffSetY_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -209,6 +438,7 @@ public final class TileOuterClass {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      getSerializedSize();
       if (posX_ != 0F) {
         output.writeFloat(1, posX_);
       }
@@ -220,6 +450,26 @@ public final class TileOuterClass {
       }
       if (variant_ != 0) {
         output.writeInt32(4, variant_);
+      }
+      if (getSpawnPositionIndiciesList().size() > 0) {
+        output.writeUInt32NoTag(42);
+        output.writeUInt32NoTag(spawnPositionIndiciesMemoizedSerializedSize);
+      }
+      for (int i = 0; i < spawnPositionIndicies_.size(); i++) {
+        output.writeInt32NoTag(spawnPositionIndicies_.getInt(i));
+      }
+      if (getSpawnPositionObjectsList().size() > 0) {
+        output.writeUInt32NoTag(50);
+        output.writeUInt32NoTag(spawnPositionObjectsMemoizedSerializedSize);
+      }
+      for (int i = 0; i < spawnPositionObjects_.size(); i++) {
+        output.writeInt32NoTag(spawnPositionObjects_.getInt(i));
+      }
+      if (tileOffSetX_ != 0F) {
+        output.writeFloat(7, tileOffSetX_);
+      }
+      if (tileOffSetY_ != 0F) {
+        output.writeFloat(8, tileOffSetY_);
       }
       unknownFields.writeTo(output);
     }
@@ -246,6 +496,42 @@ public final class TileOuterClass {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(4, variant_);
       }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < spawnPositionIndicies_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(spawnPositionIndicies_.getInt(i));
+        }
+        size += dataSize;
+        if (!getSpawnPositionIndiciesList().isEmpty()) {
+          size += 1;
+          size += com.google.protobuf.CodedOutputStream
+              .computeInt32SizeNoTag(dataSize);
+        }
+        spawnPositionIndiciesMemoizedSerializedSize = dataSize;
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < spawnPositionObjects_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(spawnPositionObjects_.getInt(i));
+        }
+        size += dataSize;
+        if (!getSpawnPositionObjectsList().isEmpty()) {
+          size += 1;
+          size += com.google.protobuf.CodedOutputStream
+              .computeInt32SizeNoTag(dataSize);
+        }
+        spawnPositionObjectsMemoizedSerializedSize = dataSize;
+      }
+      if (tileOffSetX_ != 0F) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(7, tileOffSetX_);
+      }
+      if (tileOffSetY_ != 0F) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(8, tileOffSetY_);
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -270,6 +556,16 @@ public final class TileOuterClass {
       if (type_ != other.type_) return false;
       if (getVariant()
           != other.getVariant()) return false;
+      if (!getSpawnPositionIndiciesList()
+          .equals(other.getSpawnPositionIndiciesList())) return false;
+      if (!getSpawnPositionObjectsList()
+          .equals(other.getSpawnPositionObjectsList())) return false;
+      if (java.lang.Float.floatToIntBits(getTileOffSetX())
+          != java.lang.Float.floatToIntBits(
+              other.getTileOffSetX())) return false;
+      if (java.lang.Float.floatToIntBits(getTileOffSetY())
+          != java.lang.Float.floatToIntBits(
+              other.getTileOffSetY())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -291,6 +587,20 @@ public final class TileOuterClass {
       hash = (53 * hash) + type_;
       hash = (37 * hash) + VARIANT_FIELD_NUMBER;
       hash = (53 * hash) + getVariant();
+      if (getSpawnPositionIndiciesCount() > 0) {
+        hash = (37 * hash) + SPAWNPOSITIONINDICIES_FIELD_NUMBER;
+        hash = (53 * hash) + getSpawnPositionIndiciesList().hashCode();
+      }
+      if (getSpawnPositionObjectsCount() > 0) {
+        hash = (37 * hash) + SPAWNPOSITIONOBJECTS_FIELD_NUMBER;
+        hash = (53 * hash) + getSpawnPositionObjectsList().hashCode();
+      }
+      hash = (37 * hash) + TILEOFFSETX_FIELD_NUMBER;
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getTileOffSetX());
+      hash = (37 * hash) + TILEOFFSETY_FIELD_NUMBER;
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getTileOffSetY());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -432,6 +742,14 @@ public final class TileOuterClass {
 
         variant_ = 0;
 
+        spawnPositionIndicies_ = emptyIntList();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        spawnPositionObjects_ = emptyIntList();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        tileOffSetX_ = 0F;
+
+        tileOffSetY_ = 0F;
+
         return this;
       }
 
@@ -458,10 +776,23 @@ public final class TileOuterClass {
       @java.lang.Override
       public DnD.Terrain.TileOuterClass.Tile buildPartial() {
         DnD.Terrain.TileOuterClass.Tile result = new DnD.Terrain.TileOuterClass.Tile(this);
+        int from_bitField0_ = bitField0_;
         result.posX_ = posX_;
         result.posY_ = posY_;
         result.type_ = type_;
         result.variant_ = variant_;
+        if (((bitField0_ & 0x00000001) != 0)) {
+          spawnPositionIndicies_.makeImmutable();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        }
+        result.spawnPositionIndicies_ = spawnPositionIndicies_;
+        if (((bitField0_ & 0x00000002) != 0)) {
+          spawnPositionObjects_.makeImmutable();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.spawnPositionObjects_ = spawnPositionObjects_;
+        result.tileOffSetX_ = tileOffSetX_;
+        result.tileOffSetY_ = tileOffSetY_;
         onBuilt();
         return result;
       }
@@ -522,6 +853,32 @@ public final class TileOuterClass {
         if (other.getVariant() != 0) {
           setVariant(other.getVariant());
         }
+        if (!other.spawnPositionIndicies_.isEmpty()) {
+          if (spawnPositionIndicies_.isEmpty()) {
+            spawnPositionIndicies_ = other.spawnPositionIndicies_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+          } else {
+            ensureSpawnPositionIndiciesIsMutable();
+            spawnPositionIndicies_.addAll(other.spawnPositionIndicies_);
+          }
+          onChanged();
+        }
+        if (!other.spawnPositionObjects_.isEmpty()) {
+          if (spawnPositionObjects_.isEmpty()) {
+            spawnPositionObjects_ = other.spawnPositionObjects_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureSpawnPositionObjectsIsMutable();
+            spawnPositionObjects_.addAll(other.spawnPositionObjects_);
+          }
+          onChanged();
+        }
+        if (other.getTileOffSetX() != 0F) {
+          setTileOffSetX(other.getTileOffSetX());
+        }
+        if (other.getTileOffSetY() != 0F) {
+          setTileOffSetY(other.getTileOffSetY());
+        }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
@@ -550,6 +907,7 @@ public final class TileOuterClass {
         }
         return this;
       }
+      private int bitField0_;
 
       private float posX_ ;
       /**
@@ -692,6 +1050,280 @@ public final class TileOuterClass {
         onChanged();
         return this;
       }
+
+      private com.google.protobuf.Internal.IntList spawnPositionIndicies_ = emptyIntList();
+      private void ensureSpawnPositionIndiciesIsMutable() {
+        if (!((bitField0_ & 0x00000001) != 0)) {
+          spawnPositionIndicies_ = mutableCopy(spawnPositionIndicies_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+      /**
+       * <pre>
+       * Decides where to spawn.
+       * </pre>
+       *
+       * <code>repeated int32 spawnPositionIndicies = 5;</code>
+       * @return A list containing the spawnPositionIndicies.
+       */
+      public java.util.List<java.lang.Integer>
+          getSpawnPositionIndiciesList() {
+        return ((bitField0_ & 0x00000001) != 0) ?
+                 java.util.Collections.unmodifiableList(spawnPositionIndicies_) : spawnPositionIndicies_;
+      }
+      /**
+       * <pre>
+       * Decides where to spawn.
+       * </pre>
+       *
+       * <code>repeated int32 spawnPositionIndicies = 5;</code>
+       * @return The count of spawnPositionIndicies.
+       */
+      public int getSpawnPositionIndiciesCount() {
+        return spawnPositionIndicies_.size();
+      }
+      /**
+       * <pre>
+       * Decides where to spawn.
+       * </pre>
+       *
+       * <code>repeated int32 spawnPositionIndicies = 5;</code>
+       * @param index The index of the element to return.
+       * @return The spawnPositionIndicies at the given index.
+       */
+      public int getSpawnPositionIndicies(int index) {
+        return spawnPositionIndicies_.getInt(index);
+      }
+      /**
+       * <pre>
+       * Decides where to spawn.
+       * </pre>
+       *
+       * <code>repeated int32 spawnPositionIndicies = 5;</code>
+       * @param index The index to set the value at.
+       * @param value The spawnPositionIndicies to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSpawnPositionIndicies(
+          int index, int value) {
+        ensureSpawnPositionIndiciesIsMutable();
+        spawnPositionIndicies_.setInt(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Decides where to spawn.
+       * </pre>
+       *
+       * <code>repeated int32 spawnPositionIndicies = 5;</code>
+       * @param value The spawnPositionIndicies to add.
+       * @return This builder for chaining.
+       */
+      public Builder addSpawnPositionIndicies(int value) {
+        ensureSpawnPositionIndiciesIsMutable();
+        spawnPositionIndicies_.addInt(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Decides where to spawn.
+       * </pre>
+       *
+       * <code>repeated int32 spawnPositionIndicies = 5;</code>
+       * @param values The spawnPositionIndicies to add.
+       * @return This builder for chaining.
+       */
+      public Builder addAllSpawnPositionIndicies(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureSpawnPositionIndiciesIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, spawnPositionIndicies_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Decides where to spawn.
+       * </pre>
+       *
+       * <code>repeated int32 spawnPositionIndicies = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearSpawnPositionIndicies() {
+        spawnPositionIndicies_ = emptyIntList();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.Internal.IntList spawnPositionObjects_ = emptyIntList();
+      private void ensureSpawnPositionObjectsIsMutable() {
+        if (!((bitField0_ & 0x00000002) != 0)) {
+          spawnPositionObjects_ = mutableCopy(spawnPositionObjects_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+      /**
+       * <pre>
+       * Decides what to spawn.
+       * </pre>
+       *
+       * <code>repeated int32 spawnPositionObjects = 6;</code>
+       * @return A list containing the spawnPositionObjects.
+       */
+      public java.util.List<java.lang.Integer>
+          getSpawnPositionObjectsList() {
+        return ((bitField0_ & 0x00000002) != 0) ?
+                 java.util.Collections.unmodifiableList(spawnPositionObjects_) : spawnPositionObjects_;
+      }
+      /**
+       * <pre>
+       * Decides what to spawn.
+       * </pre>
+       *
+       * <code>repeated int32 spawnPositionObjects = 6;</code>
+       * @return The count of spawnPositionObjects.
+       */
+      public int getSpawnPositionObjectsCount() {
+        return spawnPositionObjects_.size();
+      }
+      /**
+       * <pre>
+       * Decides what to spawn.
+       * </pre>
+       *
+       * <code>repeated int32 spawnPositionObjects = 6;</code>
+       * @param index The index of the element to return.
+       * @return The spawnPositionObjects at the given index.
+       */
+      public int getSpawnPositionObjects(int index) {
+        return spawnPositionObjects_.getInt(index);
+      }
+      /**
+       * <pre>
+       * Decides what to spawn.
+       * </pre>
+       *
+       * <code>repeated int32 spawnPositionObjects = 6;</code>
+       * @param index The index to set the value at.
+       * @param value The spawnPositionObjects to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSpawnPositionObjects(
+          int index, int value) {
+        ensureSpawnPositionObjectsIsMutable();
+        spawnPositionObjects_.setInt(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Decides what to spawn.
+       * </pre>
+       *
+       * <code>repeated int32 spawnPositionObjects = 6;</code>
+       * @param value The spawnPositionObjects to add.
+       * @return This builder for chaining.
+       */
+      public Builder addSpawnPositionObjects(int value) {
+        ensureSpawnPositionObjectsIsMutable();
+        spawnPositionObjects_.addInt(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Decides what to spawn.
+       * </pre>
+       *
+       * <code>repeated int32 spawnPositionObjects = 6;</code>
+       * @param values The spawnPositionObjects to add.
+       * @return This builder for chaining.
+       */
+      public Builder addAllSpawnPositionObjects(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureSpawnPositionObjectsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, spawnPositionObjects_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Decides what to spawn.
+       * </pre>
+       *
+       * <code>repeated int32 spawnPositionObjects = 6;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearSpawnPositionObjects() {
+        spawnPositionObjects_ = emptyIntList();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+
+      private float tileOffSetX_ ;
+      /**
+       * <code>float tileOffSetX = 7;</code>
+       * @return The tileOffSetX.
+       */
+      public float getTileOffSetX() {
+        return tileOffSetX_;
+      }
+      /**
+       * <code>float tileOffSetX = 7;</code>
+       * @param value The tileOffSetX to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTileOffSetX(float value) {
+        
+        tileOffSetX_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>float tileOffSetX = 7;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearTileOffSetX() {
+        
+        tileOffSetX_ = 0F;
+        onChanged();
+        return this;
+      }
+
+      private float tileOffSetY_ ;
+      /**
+       * <code>float tileOffSetY = 8;</code>
+       * @return The tileOffSetY.
+       */
+      public float getTileOffSetY() {
+        return tileOffSetY_;
+      }
+      /**
+       * <code>float tileOffSetY = 8;</code>
+       * @param value The tileOffSetY to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTileOffSetY(float value) {
+        
+        tileOffSetY_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>float tileOffSetY = 8;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearTileOffSetY() {
+        
+        tileOffSetY_ = 0F;
+        onChanged();
+        return this;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -760,10 +1392,12 @@ public final class TileOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\nTile.proto\022\013Dnd.Terrain\032\016TileType.prot" +
-      "o\"X\n\004Tile\022\014\n\004posX\030\001 \001(\002\022\014\n\004posY\030\002 \001(\002\022#\n" +
-      "\004type\030\003 \001(\0162\025.Dnd.Terrain.TileType\022\017\n\007va" +
-      "riant\030\004 \001(\005B\035\n\013DnD.TerrainB\016TileOuterCla" +
-      "ssb\006proto3"
+      "o\"\277\001\n\004Tile\022\014\n\004posX\030\001 \001(\002\022\014\n\004posY\030\002 \001(\002\022#" +
+      "\n\004type\030\003 \001(\0162\025.Dnd.Terrain.TileType\022\017\n\007v" +
+      "ariant\030\004 \001(\005\022\035\n\025spawnPositionIndicies\030\005 " +
+      "\003(\005\022\034\n\024spawnPositionObjects\030\006 \003(\005\022\023\n\013til" +
+      "eOffSetX\030\007 \001(\002\022\023\n\013tileOffSetY\030\010 \001(\002B\035\n\013D" +
+      "nD.TerrainB\016TileOuterClassb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -775,7 +1409,7 @@ public final class TileOuterClass {
     internal_static_Dnd_Terrain_Tile_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Dnd_Terrain_Tile_descriptor,
-        new java.lang.String[] { "PosX", "PosY", "Type", "Variant", });
+        new java.lang.String[] { "PosX", "PosY", "Type", "Variant", "SpawnPositionIndicies", "SpawnPositionObjects", "TileOffSetX", "TileOffSetY", });
     DnD.Terrain.TileTypeOuterClass.getDescriptor();
   }
 
