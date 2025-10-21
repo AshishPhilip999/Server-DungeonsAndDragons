@@ -83,7 +83,7 @@ public class ServerListener {
                 Client clientData = Client.parseFrom(request.getRequestData());
                 System.out.println("[Server Listener] Client connection request received from [client ID: "
                         + clientData.getClientID() + "]");
-                System.out.println();
+                // System.out.println();
 
                 ServiceHandler.handleConnectionRequest(clientStream, clientData);
                 break;
@@ -97,14 +97,14 @@ public class ServerListener {
                 break;
 
             case TILE_GENERATION:
-                System.out.println("[Server Listener] Received Tile generation request");
+                // System.out.println("[Server Listener] Received Tile generation request");
                 Client client = Client.parseFrom(request.getRequestData());
                 Player playerData = client.getPlayer();
                 ServiceHandler.handleTerrainGenerationRequest(playerData, client);
                 break;
 
             case CLIENT_UPDATE:
-                System.out.println("[Server Listener] Received Client Update request");
+                // System.out.println("[Server Listener] Received Client Update request");
                 Client clientUpdateData = Client.parseFrom(request.getRequestData());
                 ServiceHandler.handleClientUpdateRequest(clientUpdateData);
 

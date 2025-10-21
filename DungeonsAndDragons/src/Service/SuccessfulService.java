@@ -43,18 +43,19 @@ public class SuccessfulService {
                                         .setResponseData(ByteString.copyFrom(terrainData))
                                         .build();
 
-        System.out.println("[SuccessfulService:: handleSuccessfullTerrainGeneration] Sending terrain data to client");
+        // System.out.println("[SuccessfulService:: handleSuccessfullTerrainGeneration] Sending terrain data to client");
         ServerResponder.sendResponse(serverResponse, clientData);
     }
 
     public static void handleSuccessfullPlayerUpdate(Client client) {
         byte[] clientData = client.toByteArray();
+        // System.out.println("[SuccessfulService:: handleSuccessfullPlayerUpdate] currPlayer positions posX: " + client.getPlayer().getPosX() + ", posY: " + client.getPlayer().getPosY());
         ServerResponse serverResponse = ServerResponse.newBuilder()
                                         .setResponse(ServerResponseType.PLAYER_UPDATE)
                                         .setResponseData(ByteString.copyFrom(clientData))
                                         .build();
 
-        System.out.println("[SuccessfulService:: handleSuccessfullPlayerUpdate] Sending player data to client");
+        // System.out.println("[SuccessfulService:: handleSuccessfullPlayerUpdate] Sending player data to client");
         ServerResponder.sendResponseToAllOtherClients(serverResponse, client);
      }
 }

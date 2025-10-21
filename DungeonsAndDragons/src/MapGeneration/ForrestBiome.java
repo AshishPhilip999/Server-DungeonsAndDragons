@@ -6,15 +6,21 @@ import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
+
 import DnD.Terrain.TileTypeOuterClass.TileType;
 
 public class ForrestBiome {
-    private static final int MAP_SIZE = 250;
-    private static final float TREE_THRESHOLD = 0.5f;
+    private static final int MAP_SIZE = 100;
+    private static final float TREE_THRESHOLD = 0.47f;
     private static final float ROCK_CHANCE = 0.02f;
-    private static final float GIANT_ROCK_CHANCE = 0.001f;
+    private static final float GIANT_ROCK_CHANCE = 0.003f;
     private static final int GIANT_ROCK_SIZE = 3;
-    private static final int RIVER_THICKNESS = 25;
+
+    private static final float CABIN_CHANCE = 0.001f; // Chance of a wooden cabin
+    private static final int CABIN_CLEAR_SIZE = 4; // clearing around cabin (3x3)
+
+    private static final int RIVER_THICKNESS = 20;
+    private static final int RIVER_LENGTH = 300; // how long the river can flow
 
     public static TileType[][] generateBiome() throws IOException {
         return generate();
@@ -43,10 +49,19 @@ public class ForrestBiome {
             }
         }
 
-        // Step 3: Carve river stream
+        // Step 3: Place wooden cabins
+        for (int y = CABIN_CLEAR_SIZE; y < MAP_SIZE - CABIN_CLEAR_SIZE; y++) {
+            for (int x = CABIN_CLEAR_SIZE; x < MAP_SIZE - CABIN_CLEAR_SIZE; x++) {
+                if (rand.nextFloat() < CABIN_CHANCE) {
+                    placeCabin(tileMap, x, y);
+                }
+            }
+        }
+
+        // Step 4: Carve river stream
         carveRiver(tileMap, rand);
 
-        // Step 4: Fill remaining tiles
+        // Step 5: Fill remaining tiles
         for (int y = 0; y < MAP_SIZE; y++) {
             for (int x = 0; x < MAP_SIZE; x++) {
                 TileType type;
@@ -73,6 +88,8 @@ public class ForrestBiome {
                     rgb = Color.PINK.getRGB();
                 else if (type == TileType.WATER_BODY)
                     rgb = Color.BLUE.getRGB();
+                else if (type == TileType.WOODEN_CABIN)
+                    rgb = new Color(139, 69, 19).getRGB(); // Brown
                 else
                     rgb = Color.WHITE.getRGB();
 
@@ -82,7 +99,7 @@ public class ForrestBiome {
 
         // Save image
         ImageIO.write(image, "png", new File("map_output.png"));
-        System.out.println("Map with river stream generated and saved.");
+        System.out.println("Map with cabins, rocks, and river generated and saved.");
 
         return tileMap;
     }
@@ -90,25 +107,61 @@ public class ForrestBiome {
     private static void placeGiantRock(TileType[][] tileMap, int centerX, int centerY) {
         for (int y = centerY - GIANT_ROCK_SIZE; y <= centerY + GIANT_ROCK_SIZE; y++) {
             for (int x = centerX - GIANT_ROCK_SIZE; x <= centerX + GIANT_ROCK_SIZE; x++) {
-                tileMap[y][x] = TileType.STANDARD_GRASS;
+                if (x >= 0 && x < MAP_SIZE && y >= 0 && y < MAP_SIZE) {
+                    tileMap[y][x] = TileType.STANDARD_GRASS;
+                }
             }
         }
         tileMap[centerY][centerX] = TileType.GIANT_ROCK;
     }
 
-    private static void carveRiver(TileType[][] tileMap, Random rand) {
-        int x = rand.nextInt(MAP_SIZE / 2) + MAP_SIZE / 4; // Start near middle
-        for (int y = 0; y < MAP_SIZE; y++) {
-            // Random wiggle left/right
-            x += rand.nextInt(3) - 1; // -1, 0, or +1
-            x = Math.max(RIVER_THICKNESS, Math.min(MAP_SIZE - RIVER_THICKNESS - 1, x));
-
-            // Carve river thickness
-            for (int dx = -RIVER_THICKNESS; dx <= RIVER_THICKNESS; dx++) {
-                int nx = x + dx;
-                if (nx >= 0 && nx < MAP_SIZE) {
-                    tileMap[y][nx] = TileType.WATER_BODY;
+    private static void placeCabin(TileType[][] tileMap, int centerX, int centerY) {
+        for (int y = centerY - CABIN_CLEAR_SIZE; y <= centerY + CABIN_CLEAR_SIZE; y++) {
+            for (int x = centerX - CABIN_CLEAR_SIZE; x <= centerX + CABIN_CLEAR_SIZE; x++) {
+                if (x >= 0 && x < MAP_SIZE && y >= 0 && y < MAP_SIZE) {
+                    // force overwrite everything with LIGHTPATCH_GRASS
+                    tileMap[y][x] = TileType.LIGHT_PATCH_GRASS;
                 }
+            }
+        }
+        // cabin itself overwrites the center
+        tileMap[centerY][centerX] = TileType.WOODEN_CABIN;
+    }
+
+    private static void carveRiver(TileType[][] tileMap, Random rand) {
+        int x = rand.nextInt(MAP_SIZE);
+        int y = rand.nextInt(MAP_SIZE);
+
+        int dx = 0, dy = 0;
+        while (dx == 0 && dy == 0) {
+            dx = rand.nextInt(3) - 1;
+            dy = rand.nextInt(3) - 1;
+        }
+
+        for (int step = 0; step < RIVER_LENGTH; step++) {
+            if (x <= 0 || x >= MAP_SIZE - 1 || y <= 0 || y >= MAP_SIZE - 1)
+                break;
+
+            for (int ry = -RIVER_THICKNESS; ry <= RIVER_THICKNESS; ry++) {
+                for (int rx = -RIVER_THICKNESS; rx <= RIVER_THICKNESS; rx++) {
+                    int nx = x + rx;
+                    int ny = y + ry;
+                    if (nx >= 0 && nx < MAP_SIZE && ny >= 0 && ny < MAP_SIZE) {
+                        tileMap[ny][nx] = TileType.WATER_BODY;
+                    }
+                }
+            }
+
+            x += dx;
+            y += dy;
+
+            if (rand.nextFloat() < 0.2f) {
+                dx += rand.nextInt(3) - 1;
+                dy += rand.nextInt(3) - 1;
+                if (dx == 0 && dy == 0)
+                    dx = 1;
+                dx = Math.max(-1, Math.min(1, dx));
+                dy = Math.max(-1, Math.min(1, dy));
             }
         }
     }

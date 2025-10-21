@@ -43,14 +43,14 @@ public class ServiceHandler {
     }
 
     public static void handleTerrainGenerationRequest(Player playerData, Client client) throws Exception {
-        System.out.println("[Service Handler] Player Current Position. " + "x: " + playerData.getPosX() + " y: "
-                + playerData.getPosY());
+        // System.out.println("[Service Handler] Player Current Position. " + "x: " + playerData.getPosX() + " y: "
+                // + playerData.getPosY());
         // List<Float> terrainData = playerData.getTerrainData().getExistingTerrainPositionsList();
         List<Float> terrainData = playerData.getTerrainData().getExistingTerrainPositionsList();
         List<Terrain> terrain = TerrianHandler.getTerrains(playerData.getPosX(), playerData.getPosY(),
                 playerData.getCurrentTerrainPosX(), playerData.getCurrentTerrainPosY(), terrainData);
 
-        System.out.println("[ServiceHandler:: handleTerrainGenerationRequest] Sending terrains count: " + terrain.size());
+        // System.out.println("[ServiceHandler:: handleTerrainGenerationRequest] Sending terrains count: " + terrain.size());
         SuccessfulService.handleSuccessfullTerrainGeneration(terrain, client);
     }
 
