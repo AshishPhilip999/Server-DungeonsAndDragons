@@ -17,4 +17,5 @@ enum ClientRequestType {
     CLIENT_DISCONNECTION = 1;
     TILE_GENERATION = 2;
     CLIENT_UPDATE = 3;
+    NPC_INSTANCE = 4;
 }

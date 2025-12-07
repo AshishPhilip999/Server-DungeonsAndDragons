@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package DnD.NPCs;
+
+option java_package = "DnD.NPCs";
+
+message NPCData {
+    float health = 1;
+    float posX = 2;
+    float posY = 3;
+
+    string npcID = 4;
+}

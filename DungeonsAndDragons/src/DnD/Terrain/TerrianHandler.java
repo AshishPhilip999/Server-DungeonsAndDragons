@@ -9,7 +9,7 @@ import DnD.Terrain.TerrainOuterClass.Terrain;
 import DnD.Terrain.TileOuterClass.Tile;
 import DnD.Terrain.TileOuterClass.TileOrBuilder;
 import DnD.Terrain.TileTypeOuterClass.TileType;
-import Generic.RandomRange;
+import Generic.Math.RandomRange;
 import MapGeneration.ForrestBiome;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;

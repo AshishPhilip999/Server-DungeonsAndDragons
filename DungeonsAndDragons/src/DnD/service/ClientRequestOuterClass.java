@@ -35,6 +35,10 @@ public final class ClientRequestOuterClass {
      * <code>CLIENT_UPDATE = 3;</code>
      */
     CLIENT_UPDATE(3),
+    /**
+     * <code>NPC_INSTANCE = 4;</code>
+     */
+    NPC_INSTANCE(4),
     UNRECOGNIZED(-1),
     ;
 
@@ -54,6 +58,10 @@ public final class ClientRequestOuterClass {
      * <code>CLIENT_UPDATE = 3;</code>
      */
     public static final int CLIENT_UPDATE_VALUE = 3;
+    /**
+     * <code>NPC_INSTANCE = 4;</code>
+     */
+    public static final int NPC_INSTANCE_VALUE = 4;
 
 
     public final int getNumber() {
@@ -84,6 +92,7 @@ public final class ClientRequestOuterClass {
         case 1: return CLIENT_DISCONNECTION;
         case 2: return TILE_GENERATION;
         case 3: return CLIENT_UPDATE;
+        case 4: return NPC_INSTANCE;
         default: return null;
       }
     }
@@ -748,10 +757,11 @@ public final class ClientRequestOuterClass {
       "\n\023ClientRequest.proto\022\013DnD.service\"U\n\rCl" +
       "ientRequest\022/\n\007reqType\030\001 \001(\0162\036.DnD.servi" +
       "ce.ClientRequestType\022\023\n\013requestData\030\002 \001(" +
-      "\014*l\n\021ClientRequestType\022\025\n\021CLIENT_CONNECT" +
+      "\014*~\n\021ClientRequestType\022\025\n\021CLIENT_CONNECT" +
       "ION\020\000\022\030\n\024CLIENT_DISCONNECTION\020\001\022\023\n\017TILE_" +
-      "GENERATION\020\002\022\021\n\rCLIENT_UPDATE\020\003B&\n\013DnD.s" +
-      "erviceB\027ClientRequestOuterClassb\006proto3"
+      "GENERATION\020\002\022\021\n\rCLIENT_UPDATE\020\003\022\020\n\014NPC_I" +
+      "NSTANCE\020\004B&\n\013DnD.serviceB\027ClientRequestO" +
+      "uterClassb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

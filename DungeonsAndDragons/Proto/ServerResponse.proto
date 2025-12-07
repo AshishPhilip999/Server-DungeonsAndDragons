@@ -12,6 +12,9 @@ enum ServerResponseType {
 
     TILE_GENERATION_RESPONSE = 3;
     PLAYER_UPDATE = 4;
+
+    NPC_INSTANCE = 5;
+    NPC_UPDATE = 6;
 }
 
 message ServerResponse {

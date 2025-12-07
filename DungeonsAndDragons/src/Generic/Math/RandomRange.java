@@ -1,4 +1,4 @@
-package Generic;
+package Generic.Math;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 

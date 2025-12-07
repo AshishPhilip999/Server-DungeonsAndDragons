@@ -5,8 +5,9 @@ import java.awt.image.BufferedImage;
 import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
-import java.util.Random;
+import java.util.*;
 
+import DnD.NPCs.NPC;
 import DnD.Terrain.TileTypeOuterClass.TileType;
 
 public class ForrestBiome {
@@ -21,6 +22,9 @@ public class ForrestBiome {
 
     private static final int RIVER_THICKNESS = 20;
     private static final int RIVER_LENGTH = 300; // how long the river can flow
+
+    // Entity Details.
+    public static List<NPC> npcs = new ArrayList<>();
 
     public static TileType[][] generateBiome() throws IOException {
         return generate();

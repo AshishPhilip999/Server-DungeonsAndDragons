@@ -10,11 +10,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import DnD.NPCs.Animals.Cat;
+import DnD.NPCs.NPCDataOuterClass.NPCData;
 import DnD.Player.PlayerOuterClass.Player;
 import DnD.service.ClientOuterClass.Client;
 import DnD.service.ClientRequestOuterClass.ClientRequest;
 import DnD.service.ClientRequestOuterClass.ClientRequestType;
+import DnD.service.ServerResponseOuterClass.ServerResponse;
+import DnD.service.ServerResponseOuterClass.ServerResponseType;
+import Generic.Math.Vector2;
 import Service.ServiceHandler;
+import Service.SuccessfulService;
+import DnD.NPCs.NPCDataOuterClass.NPCData;
+import com.google.protobuf.*;
 
 public class ServerListener {
     public static Map<UUID, OutputStream> clientConnections;
@@ -107,7 +115,30 @@ public class ServerListener {
                 // System.out.println("[Server Listener] Received Client Update request");
                 Client clientUpdateData = Client.parseFrom(request.getRequestData());
                 ServiceHandler.handleClientUpdateRequest(clientUpdateData);
+                break;
+            
+            case NPC_INSTANCE:
+                System.out.println("[Server Listener] Received NPC Instance request");
+                Client clientUpdateDataForNPC = Client.parseFrom(request.getRequestData());
+                Cat cat = new Cat(10);
+                String catID = UUID.randomUUID().toString();
+                NPCData npcData = NPCData.newBuilder()
+                .setHealth(10)
+                .setPosX(-5.0f)
+                .setPosY(0.0f)
+                .setNpcID(catID)
+                .build();
 
+                cat.npcID = catID;
+                byte[] catData = npcData.toByteArray();
+
+                ServerResponse serverResponse = ServerResponse.newBuilder()
+                                        .setResponse(ServerResponseType.NPC_INSTANCE)
+                                        .setResponseData(ByteString.copyFrom(catData))
+                                        .build();
+                ServerResponder.sendResponseToAllClients(serverResponse);
+                cat.move(new Vector2(0.2f, 0));
+                break;
             default:
                 break;
         }

@@ -39,6 +39,14 @@ public final class ServerResponseOuterClass {
      * <code>PLAYER_UPDATE = 4;</code>
      */
     PLAYER_UPDATE(4),
+    /**
+     * <code>NPC_INSTANCE = 5;</code>
+     */
+    NPC_INSTANCE(5),
+    /**
+     * <code>NPC_UPDATE = 6;</code>
+     */
+    NPC_UPDATE(6),
     UNRECOGNIZED(-1),
     ;
 
@@ -62,6 +70,14 @@ public final class ServerResponseOuterClass {
      * <code>PLAYER_UPDATE = 4;</code>
      */
     public static final int PLAYER_UPDATE_VALUE = 4;
+    /**
+     * <code>NPC_INSTANCE = 5;</code>
+     */
+    public static final int NPC_INSTANCE_VALUE = 5;
+    /**
+     * <code>NPC_UPDATE = 6;</code>
+     */
+    public static final int NPC_UPDATE_VALUE = 6;
 
 
     public final int getNumber() {
@@ -93,6 +109,8 @@ public final class ServerResponseOuterClass {
         case 2: return CLIENT_DISCONNECTED;
         case 3: return TILE_GENERATION_RESPONSE;
         case 4: return PLAYER_UPDATE;
+        case 5: return NPC_INSTANCE;
+        case 6: return NPC_UPDATE;
         default: return null;
       }
     }
@@ -757,11 +775,12 @@ public final class ServerResponseOuterClass {
       "\n\024ServerResponse.proto\022\013DnD.service\"Y\n\016S" +
       "erverResponse\0221\n\010response\030\001 \001(\0162\037.DnD.se" +
       "rvice.ServerResponseType\022\024\n\014responseData" +
-      "\030\002 \001(\014*\216\001\n\022ServerResponseType\022\026\n\022CONNECT" +
+      "\030\002 \001(\014*\260\001\n\022ServerResponseType\022\026\n\022CONNECT" +
       "ION_SUCCESS\020\000\022\026\n\022CONNECTION_FAILURE\020\001\022\027\n" +
       "\023CLIENT_DISCONNECTED\020\002\022\034\n\030TILE_GENERATIO" +
-      "N_RESPONSE\020\003\022\021\n\rPLAYER_UPDATE\020\004B\'\n\013DnD.s" +
-      "erviceB\030ServerResponseOuterClassb\006proto3"
+      "N_RESPONSE\020\003\022\021\n\rPLAYER_UPDATE\020\004\022\020\n\014NPC_I" +
+      "NSTANCE\020\005\022\016\n\nNPC_UPDATE\020\006B\'\n\013DnD.service" +
+      "B\030ServerResponseOuterClassb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
