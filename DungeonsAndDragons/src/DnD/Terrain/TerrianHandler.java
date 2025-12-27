@@ -10,6 +10,7 @@ import DnD.Terrain.TileOuterClass.Tile;
 import DnD.Terrain.TileOuterClass.TileOrBuilder;
 import DnD.Terrain.TileTypeOuterClass.TileType;
 import Generic.Math.RandomRange;
+import Generic.Math.Vector2;
 import MapGeneration.ForrestBiome;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -23,6 +24,47 @@ public class TerrianHandler {
     public static Map<Float, Map<Float, Terrain>> terrainMapX = new HashMap<>();
 
     public boolean needToGetTerrain() {
+
+        return false;
+    }
+
+    public static boolean isTileEmpty(Vector2 tilePos) {
+        Vector2 terrainPos = new Vector2();
+        Float[] posXY = getCurrentTerrainPos(tilePos.posX, tilePos.posY);
+
+        terrainPos.posX = posXY[0];
+        terrainPos.posY = posXY[1];
+        if (terrainMapX.isEmpty()) {
+            System.out.println("[TerrainHandler:: isTileEmpty] TerrainMapX is empty in TP- x:" + terrainPos.posX + ", y:"+ terrainPos.posY + 
+            " for TiP- x:" + tilePos.posX + ", y:" + tilePos.posY);
+            return false;
+        }
+
+        Map<Float, Terrain> terrainMapY = terrainMapX.get(terrainPos.posX);
+
+        if (terrainMapY == null) {
+             System.out.println("[TerrainHandler:: isTileEmpty] TerrainMapY is empty in TP- x:" + terrainPos.posX + ", y:"+ terrainPos.posY + 
+            " for TiP- x:" + tilePos.posX + ", y:" + tilePos.posY);
+            return false;
+        }
+
+        Terrain terrain = terrainMapY.get(terrainPos.posY);
+        if (terrain == null) {
+             System.out.println("[TerrainHandler:: isTileEmpty] Terrain is empty in TP- x:" + terrainPos.posX + ", y:"+ terrainPos.posY + 
+            " for TiP- x:" + tilePos.posX + ", y:" + tilePos.posY);
+            return false;
+        }
+
+        Tile tile = terrain.getTilePosDataMapMap().get(tilePos.getIntKey());
+        if (tile == null) {
+             System.out.println("[TerrainHandler:: isTileEmpty] Tile is empty in TP- x:" + terrainPos.posX + ", y:"+ terrainPos.posY + 
+            " for TiP- x:" + tilePos.posX + ", y:" + tilePos.posY);
+            return false;
+        }
+
+        if (tile.getType() == TileType.STANDARD_GRASS || tile.getType() == TileType.LIGHT_PATCH_GRASS || tile.getType() == TileType.DARK_PATCH_GRASS) {
+            return true;
+        }
 
         return false;
     }
@@ -291,7 +333,12 @@ public class TerrianHandler {
                         + "[Terrain Handler] x:" + posX + ", y:" + posY);
 
                 Tile currTile = newTile.build();
-                newTerrain.addTileData(currTile);
+                // newTerrain.addTileData(currTile);
+                Vector2 tilePosition = new Vector2(posX, posY);
+                int key = tilePosition.getIntKey();
+                System.out.println("PosKey: " + key);
+                System.out.println("TileType: " + currTile.getType());
+                newTerrain.putTilePosDataMap(key, currTile);
 
                 posX += defaultTileSize;
             }

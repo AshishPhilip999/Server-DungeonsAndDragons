@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import DnD.NPCs.NPCHandler;
 import DnD.NPCs.Animals.Cat;
 import DnD.NPCs.NPCDataOuterClass.NPCData;
 import DnD.Player.PlayerOuterClass.Player;
@@ -116,16 +117,16 @@ public class ServerListener {
                 Client clientUpdateData = Client.parseFrom(request.getRequestData());
                 ServiceHandler.handleClientUpdateRequest(clientUpdateData);
                 break;
-            
+
             case NPC_INSTANCE:
                 System.out.println("[Server Listener] Received NPC Instance request");
                 Client clientUpdateDataForNPC = Client.parseFrom(request.getRequestData());
-                Cat cat = new Cat(10);
+                Cat cat = new Cat(new Vector2(0.0f, 0.0f));
                 String catID = UUID.randomUUID().toString();
                 NPCData npcData = NPCData.newBuilder()
-                .setHealth(10)
-                .setPosX(-5.0f)
-                .setPosY(0.0f)
+                .setHealth(cat.getTotalHealth())
+                .setPosX(cat.getPosition().posX)
+                .setPosY(cat.getPosition().posY)
                 .setNpcID(catID)
                 .build();
 
@@ -137,7 +138,9 @@ public class ServerListener {
                                         .setResponseData(ByteString.copyFrom(catData))
                                         .build();
                 ServerResponder.sendResponseToAllClients(serverResponse);
-                cat.move(new Vector2(0.2f, 0));
+                NPCHandler catHandler = new NPCHandler();
+                // catHandler.move(cat, new Vector2(0.2f, 0));
+                catHandler.moveToDestination(cat);
                 break;
             default:
                 break;

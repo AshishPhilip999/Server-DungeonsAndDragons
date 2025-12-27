@@ -37,28 +37,62 @@ public final class TerrainOuterClass {
     int getTerrainSize();
 
     /**
-     * <code>repeated .Dnd.Terrain.Tile tileData = 4;</code>
+     * <code>repeated .Dnd.Terrain.Tile tileData = 4 [deprecated = true];</code>
      */
-    java.util.List<DnD.Terrain.TileOuterClass.Tile> 
+    @java.lang.Deprecated java.util.List<DnD.Terrain.TileOuterClass.Tile> 
         getTileDataList();
     /**
-     * <code>repeated .Dnd.Terrain.Tile tileData = 4;</code>
+     * <code>repeated .Dnd.Terrain.Tile tileData = 4 [deprecated = true];</code>
      */
-    DnD.Terrain.TileOuterClass.Tile getTileData(int index);
+    @java.lang.Deprecated DnD.Terrain.TileOuterClass.Tile getTileData(int index);
     /**
-     * <code>repeated .Dnd.Terrain.Tile tileData = 4;</code>
+     * <code>repeated .Dnd.Terrain.Tile tileData = 4 [deprecated = true];</code>
      */
-    int getTileDataCount();
+    @java.lang.Deprecated int getTileDataCount();
     /**
-     * <code>repeated .Dnd.Terrain.Tile tileData = 4;</code>
+     * <code>repeated .Dnd.Terrain.Tile tileData = 4 [deprecated = true];</code>
      */
-    java.util.List<? extends DnD.Terrain.TileOuterClass.TileOrBuilder> 
+    @java.lang.Deprecated java.util.List<? extends DnD.Terrain.TileOuterClass.TileOrBuilder> 
         getTileDataOrBuilderList();
     /**
-     * <code>repeated .Dnd.Terrain.Tile tileData = 4;</code>
+     * <code>repeated .Dnd.Terrain.Tile tileData = 4 [deprecated = true];</code>
      */
-    DnD.Terrain.TileOuterClass.TileOrBuilder getTileDataOrBuilder(
+    @java.lang.Deprecated DnD.Terrain.TileOuterClass.TileOrBuilder getTileDataOrBuilder(
         int index);
+
+    /**
+     * <code>map&lt;int32, .Dnd.Terrain.Tile&gt; tilePosDataMap = 5;</code>
+     */
+    int getTilePosDataMapCount();
+    /**
+     * <code>map&lt;int32, .Dnd.Terrain.Tile&gt; tilePosDataMap = 5;</code>
+     */
+    boolean containsTilePosDataMap(
+        int key);
+    /**
+     * Use {@link #getTilePosDataMapMap()} instead.
+     */
+    @java.lang.Deprecated
+    java.util.Map<java.lang.Integer, DnD.Terrain.TileOuterClass.Tile>
+    getTilePosDataMap();
+    /**
+     * <code>map&lt;int32, .Dnd.Terrain.Tile&gt; tilePosDataMap = 5;</code>
+     */
+    java.util.Map<java.lang.Integer, DnD.Terrain.TileOuterClass.Tile>
+    getTilePosDataMapMap();
+    /**
+     * <code>map&lt;int32, .Dnd.Terrain.Tile&gt; tilePosDataMap = 5;</code>
+     */
+
+    DnD.Terrain.TileOuterClass.Tile getTilePosDataMapOrDefault(
+        int key,
+        DnD.Terrain.TileOuterClass.Tile defaultValue);
+    /**
+     * <code>map&lt;int32, .Dnd.Terrain.Tile&gt; tilePosDataMap = 5;</code>
+     */
+
+    DnD.Terrain.TileOuterClass.Tile getTilePosDataMapOrThrow(
+        int key);
   }
   /**
    * Protobuf type {@code Dnd.Terrain.Terrain}
@@ -131,6 +165,19 @@ public final class TerrainOuterClass {
                   input.readMessage(DnD.Terrain.TileOuterClass.Tile.parser(), extensionRegistry));
               break;
             }
+            case 42: {
+              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
+                tilePosDataMap_ = com.google.protobuf.MapField.newMapField(
+                    TilePosDataMapDefaultEntryHolder.defaultEntry);
+                mutable_bitField0_ |= 0x00000002;
+              }
+              com.google.protobuf.MapEntry<java.lang.Integer, DnD.Terrain.TileOuterClass.Tile>
+              tilePosDataMap__ = input.readMessage(
+                  TilePosDataMapDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              tilePosDataMap_.getMutableMap().put(
+                  tilePosDataMap__.getKey(), tilePosDataMap__.getValue());
+              break;
+            }
             default: {
               if (!parseUnknownField(
                   input, unknownFields, extensionRegistry, tag)) {
@@ -158,6 +205,18 @@ public final class TerrainOuterClass {
       return DnD.Terrain.TerrainOuterClass.internal_static_Dnd_Terrain_Terrain_descriptor;
     }
 
+    @SuppressWarnings({"rawtypes"})
+    @java.lang.Override
+    protected com.google.protobuf.MapField internalGetMapField(
+        int number) {
+      switch (number) {
+        case 5:
+          return internalGetTilePosDataMap();
+        default:
+          throw new RuntimeException(
+              "Invalid map field number: " + number);
+      }
+    }
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
@@ -199,36 +258,112 @@ public final class TerrainOuterClass {
     public static final int TILEDATA_FIELD_NUMBER = 4;
     private java.util.List<DnD.Terrain.TileOuterClass.Tile> tileData_;
     /**
-     * <code>repeated .Dnd.Terrain.Tile tileData = 4;</code>
+     * <code>repeated .Dnd.Terrain.Tile tileData = 4 [deprecated = true];</code>
      */
-    public java.util.List<DnD.Terrain.TileOuterClass.Tile> getTileDataList() {
+    @java.lang.Deprecated public java.util.List<DnD.Terrain.TileOuterClass.Tile> getTileDataList() {
       return tileData_;
     }
     /**
-     * <code>repeated .Dnd.Terrain.Tile tileData = 4;</code>
+     * <code>repeated .Dnd.Terrain.Tile tileData = 4 [deprecated = true];</code>
      */
-    public java.util.List<? extends DnD.Terrain.TileOuterClass.TileOrBuilder> 
+    @java.lang.Deprecated public java.util.List<? extends DnD.Terrain.TileOuterClass.TileOrBuilder> 
         getTileDataOrBuilderList() {
       return tileData_;
     }
     /**
-     * <code>repeated .Dnd.Terrain.Tile tileData = 4;</code>
+     * <code>repeated .Dnd.Terrain.Tile tileData = 4 [deprecated = true];</code>
      */
-    public int getTileDataCount() {
+    @java.lang.Deprecated public int getTileDataCount() {
       return tileData_.size();
     }
     /**
-     * <code>repeated .Dnd.Terrain.Tile tileData = 4;</code>
+     * <code>repeated .Dnd.Terrain.Tile tileData = 4 [deprecated = true];</code>
      */
-    public DnD.Terrain.TileOuterClass.Tile getTileData(int index) {
+    @java.lang.Deprecated public DnD.Terrain.TileOuterClass.Tile getTileData(int index) {
       return tileData_.get(index);
     }
     /**
-     * <code>repeated .Dnd.Terrain.Tile tileData = 4;</code>
+     * <code>repeated .Dnd.Terrain.Tile tileData = 4 [deprecated = true];</code>
      */
-    public DnD.Terrain.TileOuterClass.TileOrBuilder getTileDataOrBuilder(
+    @java.lang.Deprecated public DnD.Terrain.TileOuterClass.TileOrBuilder getTileDataOrBuilder(
         int index) {
       return tileData_.get(index);
+    }
+
+    public static final int TILEPOSDATAMAP_FIELD_NUMBER = 5;
+    private static final class TilePosDataMapDefaultEntryHolder {
+      static final com.google.protobuf.MapEntry<
+          java.lang.Integer, DnD.Terrain.TileOuterClass.Tile> defaultEntry =
+              com.google.protobuf.MapEntry
+              .<java.lang.Integer, DnD.Terrain.TileOuterClass.Tile>newDefaultInstance(
+                  DnD.Terrain.TerrainOuterClass.internal_static_Dnd_Terrain_Terrain_TilePosDataMapEntry_descriptor, 
+                  com.google.protobuf.WireFormat.FieldType.INT32,
+                  0,
+                  com.google.protobuf.WireFormat.FieldType.MESSAGE,
+                  DnD.Terrain.TileOuterClass.Tile.getDefaultInstance());
+    }
+    private com.google.protobuf.MapField<
+        java.lang.Integer, DnD.Terrain.TileOuterClass.Tile> tilePosDataMap_;
+    private com.google.protobuf.MapField<java.lang.Integer, DnD.Terrain.TileOuterClass.Tile>
+    internalGetTilePosDataMap() {
+      if (tilePosDataMap_ == null) {
+        return com.google.protobuf.MapField.emptyMapField(
+            TilePosDataMapDefaultEntryHolder.defaultEntry);
+      }
+      return tilePosDataMap_;
+    }
+
+    public int getTilePosDataMapCount() {
+      return internalGetTilePosDataMap().getMap().size();
+    }
+    /**
+     * <code>map&lt;int32, .Dnd.Terrain.Tile&gt; tilePosDataMap = 5;</code>
+     */
+
+    public boolean containsTilePosDataMap(
+        int key) {
+      
+      return internalGetTilePosDataMap().getMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getTilePosDataMapMap()} instead.
+     */
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.Integer, DnD.Terrain.TileOuterClass.Tile> getTilePosDataMap() {
+      return getTilePosDataMapMap();
+    }
+    /**
+     * <code>map&lt;int32, .Dnd.Terrain.Tile&gt; tilePosDataMap = 5;</code>
+     */
+
+    public java.util.Map<java.lang.Integer, DnD.Terrain.TileOuterClass.Tile> getTilePosDataMapMap() {
+      return internalGetTilePosDataMap().getMap();
+    }
+    /**
+     * <code>map&lt;int32, .Dnd.Terrain.Tile&gt; tilePosDataMap = 5;</code>
+     */
+
+    public DnD.Terrain.TileOuterClass.Tile getTilePosDataMapOrDefault(
+        int key,
+        DnD.Terrain.TileOuterClass.Tile defaultValue) {
+      
+      java.util.Map<java.lang.Integer, DnD.Terrain.TileOuterClass.Tile> map =
+          internalGetTilePosDataMap().getMap();
+      return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    /**
+     * <code>map&lt;int32, .Dnd.Terrain.Tile&gt; tilePosDataMap = 5;</code>
+     */
+
+    public DnD.Terrain.TileOuterClass.Tile getTilePosDataMapOrThrow(
+        int key) {
+      
+      java.util.Map<java.lang.Integer, DnD.Terrain.TileOuterClass.Tile> map =
+          internalGetTilePosDataMap().getMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return map.get(key);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -257,6 +392,12 @@ public final class TerrainOuterClass {
       for (int i = 0; i < tileData_.size(); i++) {
         output.writeMessage(4, tileData_.get(i));
       }
+      com.google.protobuf.GeneratedMessageV3
+        .serializeIntegerMapTo(
+          output,
+          internalGetTilePosDataMap(),
+          TilePosDataMapDefaultEntryHolder.defaultEntry,
+          5);
       unknownFields.writeTo(output);
     }
 
@@ -281,6 +422,16 @@ public final class TerrainOuterClass {
       for (int i = 0; i < tileData_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, tileData_.get(i));
+      }
+      for (java.util.Map.Entry<java.lang.Integer, DnD.Terrain.TileOuterClass.Tile> entry
+           : internalGetTilePosDataMap().getMap().entrySet()) {
+        com.google.protobuf.MapEntry<java.lang.Integer, DnD.Terrain.TileOuterClass.Tile>
+        tilePosDataMap__ = TilePosDataMapDefaultEntryHolder.defaultEntry.newBuilderForType()
+            .setKey(entry.getKey())
+            .setValue(entry.getValue())
+            .build();
+        size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(5, tilePosDataMap__);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -307,6 +458,8 @@ public final class TerrainOuterClass {
           != other.getTerrainSize()) return false;
       if (!getTileDataList()
           .equals(other.getTileDataList())) return false;
+      if (!internalGetTilePosDataMap().equals(
+          other.internalGetTilePosDataMap())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -329,6 +482,10 @@ public final class TerrainOuterClass {
       if (getTileDataCount() > 0) {
         hash = (37 * hash) + TILEDATA_FIELD_NUMBER;
         hash = (53 * hash) + getTileDataList().hashCode();
+      }
+      if (!internalGetTilePosDataMap().getMap().isEmpty()) {
+        hash = (37 * hash) + TILEPOSDATAMAP_FIELD_NUMBER;
+        hash = (53 * hash) + internalGetTilePosDataMap().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -437,6 +594,28 @@ public final class TerrainOuterClass {
         return DnD.Terrain.TerrainOuterClass.internal_static_Dnd_Terrain_Terrain_descriptor;
       }
 
+      @SuppressWarnings({"rawtypes"})
+      protected com.google.protobuf.MapField internalGetMapField(
+          int number) {
+        switch (number) {
+          case 5:
+            return internalGetTilePosDataMap();
+          default:
+            throw new RuntimeException(
+                "Invalid map field number: " + number);
+        }
+      }
+      @SuppressWarnings({"rawtypes"})
+      protected com.google.protobuf.MapField internalGetMutableMapField(
+          int number) {
+        switch (number) {
+          case 5:
+            return internalGetMutableTilePosDataMap();
+          default:
+            throw new RuntimeException(
+                "Invalid map field number: " + number);
+        }
+      }
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
@@ -476,6 +655,7 @@ public final class TerrainOuterClass {
         } else {
           tileDataBuilder_.clear();
         }
+        internalGetMutableTilePosDataMap().clear();
         return this;
       }
 
@@ -515,6 +695,8 @@ public final class TerrainOuterClass {
         } else {
           result.tileData_ = tileDataBuilder_.build();
         }
+        result.tilePosDataMap_ = internalGetTilePosDataMap();
+        result.tilePosDataMap_.makeImmutable();
         onBuilt();
         return result;
       }
@@ -598,6 +780,8 @@ public final class TerrainOuterClass {
             }
           }
         }
+        internalGetMutableTilePosDataMap().mergeFrom(
+            other.internalGetTilePosDataMap());
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
@@ -731,9 +915,9 @@ public final class TerrainOuterClass {
           DnD.Terrain.TileOuterClass.Tile, DnD.Terrain.TileOuterClass.Tile.Builder, DnD.Terrain.TileOuterClass.TileOrBuilder> tileDataBuilder_;
 
       /**
-       * <code>repeated .Dnd.Terrain.Tile tileData = 4;</code>
+       * <code>repeated .Dnd.Terrain.Tile tileData = 4 [deprecated = true];</code>
        */
-      public java.util.List<DnD.Terrain.TileOuterClass.Tile> getTileDataList() {
+      @java.lang.Deprecated public java.util.List<DnD.Terrain.TileOuterClass.Tile> getTileDataList() {
         if (tileDataBuilder_ == null) {
           return java.util.Collections.unmodifiableList(tileData_);
         } else {
@@ -741,9 +925,9 @@ public final class TerrainOuterClass {
         }
       }
       /**
-       * <code>repeated .Dnd.Terrain.Tile tileData = 4;</code>
+       * <code>repeated .Dnd.Terrain.Tile tileData = 4 [deprecated = true];</code>
        */
-      public int getTileDataCount() {
+      @java.lang.Deprecated public int getTileDataCount() {
         if (tileDataBuilder_ == null) {
           return tileData_.size();
         } else {
@@ -751,9 +935,9 @@ public final class TerrainOuterClass {
         }
       }
       /**
-       * <code>repeated .Dnd.Terrain.Tile tileData = 4;</code>
+       * <code>repeated .Dnd.Terrain.Tile tileData = 4 [deprecated = true];</code>
        */
-      public DnD.Terrain.TileOuterClass.Tile getTileData(int index) {
+      @java.lang.Deprecated public DnD.Terrain.TileOuterClass.Tile getTileData(int index) {
         if (tileDataBuilder_ == null) {
           return tileData_.get(index);
         } else {
@@ -761,9 +945,9 @@ public final class TerrainOuterClass {
         }
       }
       /**
-       * <code>repeated .Dnd.Terrain.Tile tileData = 4;</code>
+       * <code>repeated .Dnd.Terrain.Tile tileData = 4 [deprecated = true];</code>
        */
-      public Builder setTileData(
+      @java.lang.Deprecated public Builder setTileData(
           int index, DnD.Terrain.TileOuterClass.Tile value) {
         if (tileDataBuilder_ == null) {
           if (value == null) {
@@ -778,9 +962,9 @@ public final class TerrainOuterClass {
         return this;
       }
       /**
-       * <code>repeated .Dnd.Terrain.Tile tileData = 4;</code>
+       * <code>repeated .Dnd.Terrain.Tile tileData = 4 [deprecated = true];</code>
        */
-      public Builder setTileData(
+      @java.lang.Deprecated public Builder setTileData(
           int index, DnD.Terrain.TileOuterClass.Tile.Builder builderForValue) {
         if (tileDataBuilder_ == null) {
           ensureTileDataIsMutable();
@@ -792,9 +976,9 @@ public final class TerrainOuterClass {
         return this;
       }
       /**
-       * <code>repeated .Dnd.Terrain.Tile tileData = 4;</code>
+       * <code>repeated .Dnd.Terrain.Tile tileData = 4 [deprecated = true];</code>
        */
-      public Builder addTileData(DnD.Terrain.TileOuterClass.Tile value) {
+      @java.lang.Deprecated public Builder addTileData(DnD.Terrain.TileOuterClass.Tile value) {
         if (tileDataBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -808,9 +992,9 @@ public final class TerrainOuterClass {
         return this;
       }
       /**
-       * <code>repeated .Dnd.Terrain.Tile tileData = 4;</code>
+       * <code>repeated .Dnd.Terrain.Tile tileData = 4 [deprecated = true];</code>
        */
-      public Builder addTileData(
+      @java.lang.Deprecated public Builder addTileData(
           int index, DnD.Terrain.TileOuterClass.Tile value) {
         if (tileDataBuilder_ == null) {
           if (value == null) {
@@ -825,9 +1009,9 @@ public final class TerrainOuterClass {
         return this;
       }
       /**
-       * <code>repeated .Dnd.Terrain.Tile tileData = 4;</code>
+       * <code>repeated .Dnd.Terrain.Tile tileData = 4 [deprecated = true];</code>
        */
-      public Builder addTileData(
+      @java.lang.Deprecated public Builder addTileData(
           DnD.Terrain.TileOuterClass.Tile.Builder builderForValue) {
         if (tileDataBuilder_ == null) {
           ensureTileDataIsMutable();
@@ -839,9 +1023,9 @@ public final class TerrainOuterClass {
         return this;
       }
       /**
-       * <code>repeated .Dnd.Terrain.Tile tileData = 4;</code>
+       * <code>repeated .Dnd.Terrain.Tile tileData = 4 [deprecated = true];</code>
        */
-      public Builder addTileData(
+      @java.lang.Deprecated public Builder addTileData(
           int index, DnD.Terrain.TileOuterClass.Tile.Builder builderForValue) {
         if (tileDataBuilder_ == null) {
           ensureTileDataIsMutable();
@@ -853,9 +1037,9 @@ public final class TerrainOuterClass {
         return this;
       }
       /**
-       * <code>repeated .Dnd.Terrain.Tile tileData = 4;</code>
+       * <code>repeated .Dnd.Terrain.Tile tileData = 4 [deprecated = true];</code>
        */
-      public Builder addAllTileData(
+      @java.lang.Deprecated public Builder addAllTileData(
           java.lang.Iterable<? extends DnD.Terrain.TileOuterClass.Tile> values) {
         if (tileDataBuilder_ == null) {
           ensureTileDataIsMutable();
@@ -868,9 +1052,9 @@ public final class TerrainOuterClass {
         return this;
       }
       /**
-       * <code>repeated .Dnd.Terrain.Tile tileData = 4;</code>
+       * <code>repeated .Dnd.Terrain.Tile tileData = 4 [deprecated = true];</code>
        */
-      public Builder clearTileData() {
+      @java.lang.Deprecated public Builder clearTileData() {
         if (tileDataBuilder_ == null) {
           tileData_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000001);
@@ -881,9 +1065,9 @@ public final class TerrainOuterClass {
         return this;
       }
       /**
-       * <code>repeated .Dnd.Terrain.Tile tileData = 4;</code>
+       * <code>repeated .Dnd.Terrain.Tile tileData = 4 [deprecated = true];</code>
        */
-      public Builder removeTileData(int index) {
+      @java.lang.Deprecated public Builder removeTileData(int index) {
         if (tileDataBuilder_ == null) {
           ensureTileDataIsMutable();
           tileData_.remove(index);
@@ -894,16 +1078,16 @@ public final class TerrainOuterClass {
         return this;
       }
       /**
-       * <code>repeated .Dnd.Terrain.Tile tileData = 4;</code>
+       * <code>repeated .Dnd.Terrain.Tile tileData = 4 [deprecated = true];</code>
        */
-      public DnD.Terrain.TileOuterClass.Tile.Builder getTileDataBuilder(
+      @java.lang.Deprecated public DnD.Terrain.TileOuterClass.Tile.Builder getTileDataBuilder(
           int index) {
         return getTileDataFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .Dnd.Terrain.Tile tileData = 4;</code>
+       * <code>repeated .Dnd.Terrain.Tile tileData = 4 [deprecated = true];</code>
        */
-      public DnD.Terrain.TileOuterClass.TileOrBuilder getTileDataOrBuilder(
+      @java.lang.Deprecated public DnD.Terrain.TileOuterClass.TileOrBuilder getTileDataOrBuilder(
           int index) {
         if (tileDataBuilder_ == null) {
           return tileData_.get(index);  } else {
@@ -911,9 +1095,9 @@ public final class TerrainOuterClass {
         }
       }
       /**
-       * <code>repeated .Dnd.Terrain.Tile tileData = 4;</code>
+       * <code>repeated .Dnd.Terrain.Tile tileData = 4 [deprecated = true];</code>
        */
-      public java.util.List<? extends DnD.Terrain.TileOuterClass.TileOrBuilder> 
+      @java.lang.Deprecated public java.util.List<? extends DnD.Terrain.TileOuterClass.TileOrBuilder> 
            getTileDataOrBuilderList() {
         if (tileDataBuilder_ != null) {
           return tileDataBuilder_.getMessageOrBuilderList();
@@ -922,24 +1106,24 @@ public final class TerrainOuterClass {
         }
       }
       /**
-       * <code>repeated .Dnd.Terrain.Tile tileData = 4;</code>
+       * <code>repeated .Dnd.Terrain.Tile tileData = 4 [deprecated = true];</code>
        */
-      public DnD.Terrain.TileOuterClass.Tile.Builder addTileDataBuilder() {
+      @java.lang.Deprecated public DnD.Terrain.TileOuterClass.Tile.Builder addTileDataBuilder() {
         return getTileDataFieldBuilder().addBuilder(
             DnD.Terrain.TileOuterClass.Tile.getDefaultInstance());
       }
       /**
-       * <code>repeated .Dnd.Terrain.Tile tileData = 4;</code>
+       * <code>repeated .Dnd.Terrain.Tile tileData = 4 [deprecated = true];</code>
        */
-      public DnD.Terrain.TileOuterClass.Tile.Builder addTileDataBuilder(
+      @java.lang.Deprecated public DnD.Terrain.TileOuterClass.Tile.Builder addTileDataBuilder(
           int index) {
         return getTileDataFieldBuilder().addBuilder(
             index, DnD.Terrain.TileOuterClass.Tile.getDefaultInstance());
       }
       /**
-       * <code>repeated .Dnd.Terrain.Tile tileData = 4;</code>
+       * <code>repeated .Dnd.Terrain.Tile tileData = 4 [deprecated = true];</code>
        */
-      public java.util.List<DnD.Terrain.TileOuterClass.Tile.Builder> 
+      @java.lang.Deprecated public java.util.List<DnD.Terrain.TileOuterClass.Tile.Builder> 
            getTileDataBuilderList() {
         return getTileDataFieldBuilder().getBuilderList();
       }
@@ -956,6 +1140,129 @@ public final class TerrainOuterClass {
           tileData_ = null;
         }
         return tileDataBuilder_;
+      }
+
+      private com.google.protobuf.MapField<
+          java.lang.Integer, DnD.Terrain.TileOuterClass.Tile> tilePosDataMap_;
+      private com.google.protobuf.MapField<java.lang.Integer, DnD.Terrain.TileOuterClass.Tile>
+      internalGetTilePosDataMap() {
+        if (tilePosDataMap_ == null) {
+          return com.google.protobuf.MapField.emptyMapField(
+              TilePosDataMapDefaultEntryHolder.defaultEntry);
+        }
+        return tilePosDataMap_;
+      }
+      private com.google.protobuf.MapField<java.lang.Integer, DnD.Terrain.TileOuterClass.Tile>
+      internalGetMutableTilePosDataMap() {
+        onChanged();;
+        if (tilePosDataMap_ == null) {
+          tilePosDataMap_ = com.google.protobuf.MapField.newMapField(
+              TilePosDataMapDefaultEntryHolder.defaultEntry);
+        }
+        if (!tilePosDataMap_.isMutable()) {
+          tilePosDataMap_ = tilePosDataMap_.copy();
+        }
+        return tilePosDataMap_;
+      }
+
+      public int getTilePosDataMapCount() {
+        return internalGetTilePosDataMap().getMap().size();
+      }
+      /**
+       * <code>map&lt;int32, .Dnd.Terrain.Tile&gt; tilePosDataMap = 5;</code>
+       */
+
+      public boolean containsTilePosDataMap(
+          int key) {
+        
+        return internalGetTilePosDataMap().getMap().containsKey(key);
+      }
+      /**
+       * Use {@link #getTilePosDataMapMap()} instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.Integer, DnD.Terrain.TileOuterClass.Tile> getTilePosDataMap() {
+        return getTilePosDataMapMap();
+      }
+      /**
+       * <code>map&lt;int32, .Dnd.Terrain.Tile&gt; tilePosDataMap = 5;</code>
+       */
+
+      public java.util.Map<java.lang.Integer, DnD.Terrain.TileOuterClass.Tile> getTilePosDataMapMap() {
+        return internalGetTilePosDataMap().getMap();
+      }
+      /**
+       * <code>map&lt;int32, .Dnd.Terrain.Tile&gt; tilePosDataMap = 5;</code>
+       */
+
+      public DnD.Terrain.TileOuterClass.Tile getTilePosDataMapOrDefault(
+          int key,
+          DnD.Terrain.TileOuterClass.Tile defaultValue) {
+        
+        java.util.Map<java.lang.Integer, DnD.Terrain.TileOuterClass.Tile> map =
+            internalGetTilePosDataMap().getMap();
+        return map.containsKey(key) ? map.get(key) : defaultValue;
+      }
+      /**
+       * <code>map&lt;int32, .Dnd.Terrain.Tile&gt; tilePosDataMap = 5;</code>
+       */
+
+      public DnD.Terrain.TileOuterClass.Tile getTilePosDataMapOrThrow(
+          int key) {
+        
+        java.util.Map<java.lang.Integer, DnD.Terrain.TileOuterClass.Tile> map =
+            internalGetTilePosDataMap().getMap();
+        if (!map.containsKey(key)) {
+          throw new java.lang.IllegalArgumentException();
+        }
+        return map.get(key);
+      }
+
+      public Builder clearTilePosDataMap() {
+        internalGetMutableTilePosDataMap().getMutableMap()
+            .clear();
+        return this;
+      }
+      /**
+       * <code>map&lt;int32, .Dnd.Terrain.Tile&gt; tilePosDataMap = 5;</code>
+       */
+
+      public Builder removeTilePosDataMap(
+          int key) {
+        
+        internalGetMutableTilePosDataMap().getMutableMap()
+            .remove(key);
+        return this;
+      }
+      /**
+       * Use alternate mutation accessors instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.Integer, DnD.Terrain.TileOuterClass.Tile>
+      getMutableTilePosDataMap() {
+        return internalGetMutableTilePosDataMap().getMutableMap();
+      }
+      /**
+       * <code>map&lt;int32, .Dnd.Terrain.Tile&gt; tilePosDataMap = 5;</code>
+       */
+      public Builder putTilePosDataMap(
+          int key,
+          DnD.Terrain.TileOuterClass.Tile value) {
+        
+        if (value == null) { throw new java.lang.NullPointerException(); }
+        internalGetMutableTilePosDataMap().getMutableMap()
+            .put(key, value);
+        return this;
+      }
+      /**
+       * <code>map&lt;int32, .Dnd.Terrain.Tile&gt; tilePosDataMap = 5;</code>
+       */
+
+      public Builder putAllTilePosDataMap(
+          java.util.Map<java.lang.Integer, DnD.Terrain.TileOuterClass.Tile> values) {
+        internalGetMutableTilePosDataMap().getMutableMap()
+            .putAll(values);
+        return this;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -1015,6 +1322,11 @@ public final class TerrainOuterClass {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_Dnd_Terrain_Terrain_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_Dnd_Terrain_Terrain_TilePosDataMapEntry_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_Dnd_Terrain_Terrain_TilePosDataMapEntry_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1025,10 +1337,14 @@ public final class TerrainOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\rTerrain.proto\022\013Dnd.Terrain\032\nTile.proto" +
-      "\"_\n\007Terrain\022\014\n\004posX\030\001 \001(\002\022\014\n\004posY\030\002 \001(\002\022" +
-      "\023\n\013terrainSize\030\003 \001(\005\022#\n\010tileData\030\004 \003(\0132\021" +
-      ".Dnd.Terrain.TileB \n\013DnD.TerrainB\021Terrai" +
-      "nOuterClassb\006proto3"
+      "\"\357\001\n\007Terrain\022\014\n\004posX\030\001 \001(\002\022\014\n\004posY\030\002 \001(\002" +
+      "\022\023\n\013terrainSize\030\003 \001(\005\022\'\n\010tileData\030\004 \003(\0132" +
+      "\021.Dnd.Terrain.TileB\002\030\001\022@\n\016tilePosDataMap" +
+      "\030\005 \003(\0132(.Dnd.Terrain.Terrain.TilePosData" +
+      "MapEntry\032H\n\023TilePosDataMapEntry\022\013\n\003key\030\001" +
+      " \001(\005\022 \n\005value\030\002 \001(\0132\021.Dnd.Terrain.Tile:\002" +
+      "8\001B \n\013DnD.TerrainB\021TerrainOuterClassb\006pr" +
+      "oto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -1040,7 +1356,13 @@ public final class TerrainOuterClass {
     internal_static_Dnd_Terrain_Terrain_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Dnd_Terrain_Terrain_descriptor,
-        new java.lang.String[] { "PosX", "PosY", "TerrainSize", "TileData", });
+        new java.lang.String[] { "PosX", "PosY", "TerrainSize", "TileData", "TilePosDataMap", });
+    internal_static_Dnd_Terrain_Terrain_TilePosDataMapEntry_descriptor =
+      internal_static_Dnd_Terrain_Terrain_descriptor.getNestedTypes().get(0);
+    internal_static_Dnd_Terrain_Terrain_TilePosDataMapEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_Dnd_Terrain_Terrain_TilePosDataMapEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
     DnD.Terrain.TileOuterClass.getDescriptor();
   }
 

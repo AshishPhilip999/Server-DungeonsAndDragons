@@ -8,8 +8,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class TickHandler {
-    private final int tickRate;              // ticks per second (e.g., 20)
-    private final long tickIntervalNanos;    // time per tick in nanoseconds
+    private final int tickRate;
+    private final long tickIntervalNanos;
     private boolean running = false;
 
     private final List<Runnable> tickCallbacks = new CopyOnWriteArrayList<>();
@@ -20,7 +20,8 @@ public class TickHandler {
     }
 
     public void start() {
-        if (running) return;
+        if (running)
+            return;
         running = true;
 
         Thread tickThread = new Thread(() -> {
@@ -36,9 +37,10 @@ public class TickHandler {
                 } else {
                     long sleepNanos = tickIntervalNanos - diff;
                     try {
-                        Thread.sleep(sleepNanos / 1_000_000L, (int)(sleepNanos % 1_000_000L));
+                        Thread.sleep(
+                                sleepNanos / 1_000_000L,
+                                (int) (sleepNanos % 1_000_000L));
                     } catch (InterruptedException ignored) {
-                        System.out.println(ignored);
                     }
                 }
             }
@@ -54,6 +56,10 @@ public class TickHandler {
 
     public void onTick(Runnable callback) {
         tickCallbacks.add(callback);
+    }
+
+    public void removeTick(Runnable callback) {
+        tickCallbacks.remove(callback);
     }
 
     private void runTick() {

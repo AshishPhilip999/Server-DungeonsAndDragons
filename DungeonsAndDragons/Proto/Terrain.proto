@@ -13,5 +13,6 @@ message Terrain {
 
     int32 terrainSize = 3;
 
-    repeated Tile tileData = 4;
+    repeated Tile tileData = 4 [deprecated = true];
+    map<int32, Tile> tilePosDataMap = 5;
 }

@@ -1,5 +1,9 @@
 package Generic.DnD;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+
 import Generic.Math.Vector2;
 
 public class Entity implements Damageable {
@@ -7,10 +11,20 @@ public class Entity implements Damageable {
     protected float health;
     protected float armorHealth;
 
-    public Vector2 position;
+    protected Vector2 position;
+    protected Vector2 terrainPosition;
+
 
     public float getTotalHealth() {
         return (health + armorHealth);
+    }
+
+    public Vector2 getPosition() {
+        return position;
+    }
+
+    public Vector2 getTerrainPosition() {
+        return terrainPosition;
     }
 
     @Override
