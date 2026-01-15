@@ -13,13 +13,31 @@ import ServerHandler.ServerResponder;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.w3c.dom.Node;
+
 import com.google.protobuf.*;
+
+class PathNode {
+    int row, col;
+    int g; // cost from start
+    int f; // g + h
+
+    PathNode(int row, int col, int g, int f) {
+        this.row = row;
+        this.col = col;
+        this.g = g;
+        this.f = f;
+    }
+}
 
 public class NPCHandler {
     private TickHandler tickHandler;
@@ -135,74 +153,108 @@ public class NPCHandler {
         npc.destinationVectorMatrix = fillDestinationMatrix(currPosition, destination);
     }
 
-    private List<Vector2> findShortestPath(List<List<Vector2>> grid) {
-        // Always return a valid list
+   public List<Vector2> findShortestPath(List<List<Vector2>> grid) {
+
         List<Vector2> path = new ArrayList<>();
 
-        // Edge case: empty grid
+        // Safety checks
         if (grid == null || grid.isEmpty() || grid.get(0).isEmpty())
             return path;
 
         int rows = grid.size();
         int cols = grid.get(0).size();
 
-        Vector2 start = grid.get(0).get(0);
-        Vector2 destination = grid.get(rows - 1).get(cols - 1);
+        // Start = top-left, Destination = bottom-right
+        int startR = 0, startC = 0;
+        int endR = rows - 1, endC = cols - 1;
 
-        Queue<int[]> queue = new ArrayDeque<>();
-        boolean[][] visited = new boolean[rows][cols];
+        // If start or destination blocked → no path
+        if (!TerrianHandler.isTileEmpty(grid.get(startR).get(startC)) ||
+            !TerrianHandler.isTileEmpty(grid.get(endR).get(endC)))
+            return path;
+
+        PriorityQueue<PathNode> openSet = new PriorityQueue<>(
+                Comparator.comparingInt(n -> n.f)
+        );
+
+        boolean[][] closedSet = new boolean[rows][cols];
+        int[][] gCost = new int[rows][cols];
         int[][][] cameFrom = new int[rows][cols][2];
 
-        queue.add(new int[] { 0, 0 });
-        visited[0][0] = true;
+        for (int r = 0; r < rows; r++)
+            Arrays.fill(gCost[r], Integer.MAX_VALUE);
 
+        gCost[startR][startC] = 0;
+        int h = heuristic(startR, startC, endR, endC);
+        openSet.add(new PathNode(startR, startC, 0, h));
+
+        // 8-direction movement
         int[][] directions = {
-                { 1, 0 }, // Down
-                { -1, 0 }, // Up
-                { 0, 1 }, // Right
-                { 0, -1 } // Left
+                { 1,  0}, {-1,  0}, { 0,  1}, { 0, -1},
+                { 1,  1}, { 1, -1}, {-1,  1}, {-1, -1}
         };
 
-        while (!queue.isEmpty()) {
-            int[] current = queue.poll();
-            int r = current[0];
-            int c = current[1];
+        while (!openSet.isEmpty()) {
+            PathNode current = openSet.poll();
+            int r = current.row;
+            int c = current.col;
 
-            // Stop as soon as destination is reached
-            if (r == rows - 1 && c == cols - 1)
+            if (closedSet[r][c])
+                continue;
+
+            closedSet[r][c] = true;
+
+            // Destination reached
+            if (r == endR && c == endC)
                 break;
 
             for (int[] dir : directions) {
                 int nr = r + dir[0];
                 int nc = c + dir[1];
 
+                // Bounds check
                 if (nr < 0 || nc < 0 || nr >= rows || nc >= cols)
                     continue;
 
-                if (visited[nr][nc])
+                if (closedSet[nr][nc])
                     continue;
 
                 Vector2 nextTile = grid.get(nr).get(nc);
-
                 if (!TerrianHandler.isTileEmpty(nextTile))
-                continue;
+                    continue;
 
-                visited[nr][nc] = true;
-                cameFrom[nr][nc][0] = r;
-                cameFrom[nr][nc][1] = c;
-                queue.add(new int[] { nr, nc });
+                boolean diagonal = dir[0] != 0 && dir[1] != 0;
+
+                // 🚫 Prevent corner cutting
+                if (diagonal) {
+                    if (!TerrianHandler.isTileEmpty(grid.get(r).get(c + dir[1])) ||
+                        !TerrianHandler.isTileEmpty(grid.get(r + dir[0]).get(c)))
+                        continue;
+                }
+
+                int moveCost = diagonal ? 14 : 10;
+                int tentativeG = gCost[r][c] + moveCost;
+
+                if (tentativeG < gCost[nr][nc]) {
+                    gCost[nr][nc] = tentativeG;
+                    cameFrom[nr][nc][0] = r;
+                    cameFrom[nr][nc][1] = c;
+
+                    int f = tentativeG + heuristic(nr, nc, endR, endC);
+                    openSet.add(new PathNode(nr, nc, tentativeG, f));
+                }
             }
         }
 
-        // 🔴 NO PATH CASE
-        if (!visited[rows - 1][cols - 1])
-            return path; // EMPTY list
+        // 🔴 No path found
+        if (gCost[endR][endC] == Integer.MAX_VALUE)
+            return path;
 
-        // 🟢 PATH EXISTS — reconstruct it
-        int cr = rows - 1;
-        int cc = cols - 1;
+        // 🟢 Reconstruct path
+        int cr = endR;
+        int cc = endC;
 
-        while (!(cr == 0 && cc == 0)) {
+        while (!(cr == startR && cc == startC)) {
             path.add(grid.get(cr).get(cc));
             int pr = cameFrom[cr][cc][0];
             int pc = cameFrom[cr][cc][1];
@@ -210,10 +262,20 @@ public class NPCHandler {
             cc = pc;
         }
 
-        path.add(start);
+        path.add(grid.get(startR).get(startC));
         Collections.reverse(path);
         return path;
     }
+
+    // =======================
+    // HEURISTIC (Octile)
+    // =======================
+    private static int heuristic(int r1, int c1, int r2, int c2) {
+        int dx = Math.abs(r1 - r2);
+        int dy = Math.abs(c1 - c2);
+        return 10 * (dx + dy) + (14 - 20) * Math.min(dx, dy);
+    }
+
 
     private List<List<Vector2>> fillDestinationMatrix(Vector2 currPosition, Vector2 destination) {
         List<List<Vector2>> destinationMatrix = new ArrayList<>();

@@ -12,7 +12,7 @@ import DnD.Terrain.TileTypeOuterClass.TileType;
 
 public class ForrestBiome {
     private static final int MAP_SIZE = 100;
-    private static final float TREE_THRESHOLD = 0.47f;
+    private static final float TREE_THRESHOLD = 0.8f;
     private static final float ROCK_CHANCE = 0.02f;
     private static final float GIANT_ROCK_CHANCE = 0.003f;
     private static final int GIANT_ROCK_SIZE = 3;
@@ -53,17 +53,17 @@ public class ForrestBiome {
             }
         }
 
-        // Step 3: Place wooden cabins
-        for (int y = CABIN_CLEAR_SIZE; y < MAP_SIZE - CABIN_CLEAR_SIZE; y++) {
-            for (int x = CABIN_CLEAR_SIZE; x < MAP_SIZE - CABIN_CLEAR_SIZE; x++) {
-                if (rand.nextFloat() < CABIN_CHANCE) {
-                    placeCabin(tileMap, x, y);
-                }
-            }
-        }
+        // // Step 3: Place wooden cabins
+        // for (int y = CABIN_CLEAR_SIZE; y < MAP_SIZE - CABIN_CLEAR_SIZE; y++) {
+        //     for (int x = CABIN_CLEAR_SIZE; x < MAP_SIZE - CABIN_CLEAR_SIZE; x++) {
+        //         if (rand.nextFloat() < CABIN_CHANCE) {
+        //             placeCabin(tileMap, x, y);
+        //         }
+        //     }
+        // }
 
         // Step 4: Carve river stream
-        carveRiver(tileMap, rand);
+        // carveRiver(tileMap, rand);
 
         // Step 5: Fill remaining tiles
         for (int y = 0; y < MAP_SIZE; y++) {
@@ -90,8 +90,8 @@ public class ForrestBiome {
                     rgb = Color.BLACK.getRGB();
                 else if (type == TileType.GIANT_ROCK)
                     rgb = Color.PINK.getRGB();
-                else if (type == TileType.WATER_BODY)
-                    rgb = Color.BLUE.getRGB();
+                // else if (type == TileType.WATER_BODY)
+                //     rgb = Color.BLUE.getRGB();
                 else if (type == TileType.WOODEN_CABIN)
                     rgb = new Color(139, 69, 19).getRGB(); // Brown
                 else
